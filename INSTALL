@@ -18,6 +18,30 @@ Whoosh crontab to update index
 
     $ python project/manage.py migrate
 
-Dependencies
-------------
-Memcache with PyLibMCCache bindings
+################
+# Dependencies #
+################
+- Postgres
+
+- Memcache with PyLibMCCache bindings
+
+- Nginx
+    - apt-get install nginx
+    - symlink nginx sites-enabled to /srv/python-environments/konnen/nginx/nginx.conf
+
+- Git
+
+- Virtualenv (optional)
+
+- Supervisor (optional)
+    - gunicorn.conf
+    - celerybeat.conf
+    - celeryd.conf
+
+
+##############################
+# Python Global Dependencies #
+##############################
+- PIL
+    - apt-get install python-imaging
+
