@@ -1,1 +1,22 @@
-Install Placeholder
+Quick start
+-----------
+    $ pip install -r pip-requirements.txt
+
+Dependencies
+------------
+Memcache with PyLibMCCache bindings
+
+
+Setup
+------------
+Create settings_dev_private.py and settings_production_private.py files
+per instructions in settings_default.py file.
+
+Symlink settings_current.py to either settings_dev.py or settings_production.py
+    $ ln -s /srv/python-environments/konnen/project/settings_production.py /srv/python-environments/konnen/project/settings_current.py
+
+Whoosh search engine needs access to custom_haystack/whoosh/*
+    $ chown -R www-data:root custom_haystack/whoosh
+
+Whoosh crontab to update index
+    33 * * * * /srv/python-environments/konnen/bin/python /srv/python-environments/konnen/project/manage.py update_index --age=2 --remove # Update whoosh search index
