@@ -24,6 +24,25 @@ Whoosh crontab to update index
 - Postgres
 
 - Memcache with PyLibMCCache bindings
+    - apt-get install memcached
+
+    - grab latest libmemached via wget
+        - gunzip and extract with tar
+        - cd to libmemecached-x.xx
+            - ./configure --prefix=/usr
+            - make
+            - make install
+
+    - apt-get install zlib1g-dev
+
+    - pylibmc installation
+        - note - install this globally not inside virtualenv
+        - set local variables
+            - LIBMEMCACHED=/usr/include/libmemcached
+            - ZLIB=/usr/include/zlib.h
+        - pip install pylibmc
+
+    - etc/memcached.conf
 
 - Nginx
     - apt-get install nginx
