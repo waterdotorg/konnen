@@ -57,6 +57,12 @@ Whoosh crontab to update index
     - celerybeat.conf
     - celeryd.conf
 
+- Celery needs a broker
+    - Hello RabbitMQ
+    - rabbitmqctl add_user username password
+    - rabbitmqctl add_vhost vhostname
+    - rabbitmqctl set_permissions -p vhostname username ".*" ".*" ".*"
+
 
 ##############################
 # Python Global Dependencies #
