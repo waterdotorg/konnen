@@ -1,0 +1,21 @@
+/* the humans responsible */
+/* humanstxt.org */
+
+
+/* TEAM */
+  CCO: Mike McCamon
+  Twitter: @mccamon
+
+  DEV: Vince Carney
+  Twitter: @vincecarney
+
+  DESIGN: Annie DeGraff
+  Twitter: @anniedegraff
+
+/* THANKS */
+  Open source dev
+
+/* SITE */
+  Language: English
+  Components: Python, Postgres, Django, jQuery, Boilerplate
+  IDE: PyCharm
