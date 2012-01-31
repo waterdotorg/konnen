@@ -1,6 +1,7 @@
-"To Know"
-
 INSTALL
 -------
-
 See install doc for complete instructions
+
+Quick start
+-----------
+$ pip install -r pip-requirements.txt
