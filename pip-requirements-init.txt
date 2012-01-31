@@ -1,0 +1,14 @@
+Django
+Markdown
+South
+Whoosh
+django-celery
+-e git://github.com/robhudson/django-countries.git#egg=django_countries
+django-debug-toolbar
+-e git://github.com/mikl/django-password-required.git#egg=django_password_required
+easy-thumbnails
+gunicorn
+simplejson
+django-haystack
+django-mobile
+requests
