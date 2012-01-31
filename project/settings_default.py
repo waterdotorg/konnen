@@ -28,6 +28,13 @@ SECRET_KEY = ''
 
 DEFAULT_FROM_EMAIL = ''
 SERVER_EMAIL = ''
+
+# Celery
+BROKER_HOST = ""
+BROKER_PORT =
+BROKER_USER = ""
+BROKER_PASSWORD = ""
+BROKER_VHOST = ""
 """
 
 # Local time zone for this installation. Choices can be found here:
