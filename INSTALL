@@ -1,1 +1,4 @@
-Install Placeholder
+Quick start
+-----------
+
+$ pip install -r pip-requirements.txt
