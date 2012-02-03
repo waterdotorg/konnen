@@ -1,0 +1,13 @@
+{% extends "layouts/lay2col.html" %}
+{% load thumbnail %}
+{% load markup %}
+
+{% block main_upper %}
+    <h1 class="title">{{ location.title }}</h1>
+    <div class="number">{{ location.number }}</div>
+    <div class="image"><img src="{% thumbnail location.image 200x200 crop='smart' %}" /></div>
+    <div class="content">{{ location.content|markdown }}</div>
+{% endblock %}
+
+{% block main_col1 %}{% endblock %}
+{% block main_col3 %}{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block body_class %}lay3col{% endblock %}
+
+{% block main %}
+    <div class="main-col1">{% block main_col1 %}{% endblock %}</div>
+    <div class="main-col2">{% block main_col2 %}{% endblock %}</div>
+    <div class="main-col3">{% block main_col3 %}{% endblock %}</div>
+{% endblock %}

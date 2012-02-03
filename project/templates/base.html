@@ -1,0 +1,166 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>{% block title %}Konnen{% endblock %}</title>
+
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+
+	{% block styles %}
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
+        <!--[if lt IE 8 ]><link rel="stylesheet" href="{{ STATIC_URL }}css/ie-lt-8.css"><![endif]-->
+    {% endblock %}
+
+	<script src="{{ STATIC_URL }}js/libs/modernizr-2.0.6.min.js"></script>
+
+    {% block head_extra %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+
+{% block header_upper %}
+    {% if request.session.flavour %}
+        <div id="header-upper-wrap">
+            <div id="header-upper" class="container">
+                <div id="header-upper-inner" class="container-inner">
+                    <div class="flavour-toggle"><a href="?flavour=full">Full Site</a> | <a href="?flavour=mobile">Lite Site</a></div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block header_wrap %}
+<div id="header-wrap">
+    <div id="header" class="container">
+        <div id="header-inner" class="container-inner">
+            {% block header %}
+                <div class="col1">
+                    {% block header_col1 %}<h1 id="logo"><a href="{% url homepage %}"><span>Konnen</span></a></h1>{% endblock %}
+                </div>
+                <div class="col2">{% block header_col2 %}{% endblock %}</div>
+                <div class="col3">{% block header_col3 %}{% endblock %}</div>
+            {% endblock %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% if messages %}
+    <div id="messages-wrap">
+        <div id="messages" class="container">
+            <div id="messages-inner" class="container-inner">
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+{% block nav_bar %}
+    <div id="nav-bar-wrap">
+        <div id="nav-bar" class="container">
+            <div id="nav-bar-inner"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block main_upper_wrap %}
+<div id="main-upper-wrap">
+    <div id="main-upper" role="main" class="container">
+        <div id="main-upper-inner" class="container-inner">
+            {% block main_upper %}{% endblock %}
+        </div>
+	</div>
+</div>
+{% endblock %}
+
+<div id="main-wrap">
+    <div id="main" role="main" class="container">
+        <div id="main-inner" class="container-inner">
+            {% block main %}{% endblock %}
+        </div>
+	</div>
+</div>
+
+{% block footer_wrap %}
+<div id="footer-wrap">
+    <div id="footer" class="container">
+        <div id="footer-inner" class="container-inner">
+            {% block footer %}{% endblock %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer_base_wrap %}
+<div id="footer-base-wrap">
+    <div id="footer-base" class="container">
+        <div id="footer-base-inner" class="container-inner"></div>
+    </div>
+</div>
+{% endblock %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="{{ STATIC_URL }}js/libs/jquery-1.6.2.min.js"><\/script>')</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+
+<!-- scripts concatenated and minified via ant build script-->
+<script src="{{ STATIC_URL }}js/plugins.js"></script>
+<script src="{{ STATIC_URL }}js/script.js"></script>
+<!-- end scripts-->
+
+<!--[if lt IE 7 ]>
+	<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
+	<script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>
+<![endif]-->
+
+<script type="text/javascript">
+    $(document).ajaxSend(function(event, xhr, settings) {
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie != '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = jQuery.trim(cookies[i]);
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        function sameOrigin(url) {
+            // url could be relative or scheme relative or absolute
+            var host = document.location.host; // host + port
+            var protocol = document.location.protocol;
+            var sr_origin = '//' + host;
+            var origin = protocol + sr_origin;
+            // Allow absolute or scheme relative URLs to same origin
+            return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
+                (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
+                // or any other URL that isn't scheme relative or absolute i.e relative.
+                !(/^(\/\/|http:|https:).*/.test(url));
+        }
+        function safeMethod(method) {
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+
+        if (!safeMethod(settings.type) && sameOrigin(settings.url)) {
+            xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+        }
+    });
+</script>
+
+{% block footer_js %}{% endblock %}
+</body>
+</html>

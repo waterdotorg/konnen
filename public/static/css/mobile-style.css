@@ -1,0 +1,12 @@
+/* Containers */
+.container { width: 100%; }
+.container-inner { padding: 0 6px 0 6px; }
+
+/* Layouts */
+.lay2col #main .col1 { float: none; margin-right: 0; width: 100%; }
+.lay2col #main .col2 { float: none; width: 100%; }
+
+/* Header */
+#header-wrap { background-image: none; }
+#header-wrap #header-inner { height: auto; }
+#header-wrap #m-logo { margin: 2px 0 2px 0; }
