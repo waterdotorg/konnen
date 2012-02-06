@@ -143,6 +143,8 @@ INSTALLED_APPS = (
     'django_mobile',
     'countries',
     'haystack',
+    'custom',
+    'custom_user',
 )
 
 AUTHENTICATION_BACKENDS = (

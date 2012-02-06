@@ -18,6 +18,8 @@ Whoosh crontab to update index
 
     $ python project/manage.py migrate
 
+    $ python project/manage.py loaddata init_groups_perms.json
+
 ################
 # Dependencies #
 ################
