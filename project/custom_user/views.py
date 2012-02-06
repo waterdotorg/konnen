@@ -1,6 +1,7 @@
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.template.context import RequestContext
 
 from custom_user.forms import SettingsAccountForm

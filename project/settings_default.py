@@ -200,6 +200,8 @@ LOGGING = {
     }
 }
 
+AUTH_PROFILE_MODULE = 'custom_user.Profile'
+
 # Haystack
 HAYSTACK_SITECONF = 'custom_haystack.search_sites'
 HAYSTACK_SEARCH_ENGINE = 'whoosh'
