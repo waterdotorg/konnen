@@ -1,0 +1,48 @@
+{% extends "lay1col.html" %}
+{% load i18n %}
+{% load thumbnail %}
+
+{% block title %}{% trans "Settings - Account" %}{% endblock %}
+
+{% block body_class %}{{ block.super }} settings{% endblock %}
+
+{% block main_col1 %}
+    <div class="settings-form">
+        <form enctype="multipart/form-data" method="POST" action="{% url settings_account %}">{% csrf_token %}
+            <p>
+                {{ form.first_name.errors }}
+                {{ form.last_name.errors }}
+                <label for="id_first_name">Name</label>
+                {{ form.first_name }} {{ form.last_name }}
+            </p>
+            <p>
+                {{ form.email.errors }}
+                <label for="id_email">Email</label>
+                {{ form.email }}
+            </p>
+            <p>
+                {{ form.mobile.errors }}
+                <label for="id_mobile">Mobile</label>
+                {{ form.mobile }}
+            </p>
+            <p>
+                {{ form.content.errors }}
+                <label for="id_content">About</label>
+                {{ form.content }}
+            </p>
+            <p id="profile-image">
+                {{ form.image.errors }}
+                <label for="id_image">Image</label>
+                {{ form.image }}
+                <span class="help-text">Maximum size of 4mb.</span>
+                {% if profile.image %}
+                    <img src="{% thumbnail profile.image 50x50 crop='smart' %}" />
+                    <a href="{% url settings_remove_profile_image %}">Delete image &raquo;</a>
+                {% endif %}
+            </p>
+            <p class="submit-settings-wrapper">
+                <input id="submit-settings" type="submit" value="Submit" />
+            </p>
+        </form>
+    </div>
+{% endblock %}
