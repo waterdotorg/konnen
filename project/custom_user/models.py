@@ -1,3 +1,7 @@
+import os
+import shutil
+
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -16,3 +20,11 @@ class Profile(models.Model):
 
     def __unicode__(self):
             return u'%s' % self.user.get_full_name()
+
+    def remove_profile_images(self):
+        if self.image:
+            user_profile_pic_path = settings.MEDIA_ROOT + '/profile-images/' + str(self.user.id)
+            if os.path.isdir(user_profile_pic_path):
+                    shutil.rmtree(user_profile_pic_path)
+            self.image = ''
+            self.save()
