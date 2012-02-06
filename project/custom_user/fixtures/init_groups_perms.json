@@ -15,13 +15,6 @@
   },
   {
     "model": "auth.group",
-    "pk": 2,
-    "fields": {
-      "name": "sys_reporter"
-    }
-  },
-  {
-    "model": "auth.group",
     "pk": 3,
     "fields": {
       "name": "sys_admin"
