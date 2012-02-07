@@ -145,6 +145,7 @@ INSTALLED_APPS = (
     'haystack',
     'custom',
     'custom_user',
+    'registration',
 )
 
 AUTHENTICATION_BACKENDS = (
@@ -206,3 +207,6 @@ AUTH_PROFILE_MODULE = 'custom_user.Profile'
 HAYSTACK_SITECONF = 'custom_haystack.search_sites'
 HAYSTACK_SEARCH_ENGINE = 'whoosh'
 HAYSTACK_WHOOSH_PATH = path.join(PROJECT_ROOT, "custom_haystack/whoosh/site_index")
+
+# Registration settings
+ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window
