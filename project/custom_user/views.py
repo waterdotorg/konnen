@@ -8,14 +8,22 @@ from custom_user.forms import SettingsAccountForm
 
 @login_required()
 def settings_account(request):
+    profile = request.user.get_profile()
+
     if request.method == 'POST':
         data = request.POST
         files = request.FILES
+        settings_account_form = SettingsAccountForm(data, files, user=request.user)
     else:
-        data = {}
-        files = {}
-    settings_account_form = SettingsAccountForm(request.user, data, files)
-    profile = request.user.get_profile()
+        initial = {
+            'email': request.user.email,
+            'first_name': request.user.first_name,
+            'last_name': request.user.last_name,
+            'mobile': profile.mobile,
+            'content': profile.content,
+        }
+        settings_account_form = SettingsAccountForm(user=request.user, initial=initial)
+
     if request.method == 'POST' and settings_account_form.is_valid():
         settings_account_form.apply_to_user(files)
         messages.add_message(request, messages.SUCCESS, 'Account settings have been updated.')
