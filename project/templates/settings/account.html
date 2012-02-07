@@ -10,6 +10,11 @@
     <div class="settings-form">
         <form enctype="multipart/form-data" method="POST" action="{% url settings_account %}">{% csrf_token %}
             <p>
+                {{ form.username.errors }}
+                <label for="id_username">Username</label>
+                {{ form.username }}
+            </p>
+            <p>
                 {{ form.first_name.errors }}
                 <label for="id_first_name">First Name</label>
                 {{ form.first_name }}

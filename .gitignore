@@ -8,6 +8,7 @@ src/
 .idea/
 settings_production_private.py
 settings_dev_private.py
+settings_current.py
 
 # Django #
 ##########
