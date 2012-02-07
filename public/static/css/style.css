@@ -234,7 +234,7 @@ table { width: 100%; }
 
 /* Forms */
 form .help-text { color: #8a8a8a; display:block; font-size: 85%; }
-form .form-submit-button { background-color: #a9b52f; border: 0 none; -moz-border-radius:8px; -webkit-border-radius:8px; -opera-border-radius:8px; -khtml-border-radius:8px; border-radius:8px; color: #FFFFFF; font-weight: bold; padding: 6px 10px; }
+form .form-submit-button { background-color: #a9b52f; border: 0 none; -moz-border-radius:8px; -webkit-border-radius:8px; -opera-border-radius:8px; -khtml-border-radius:8px; border-radius:8px; color: #FFFFFF; font-size: 140%; font-weight: bold; padding: 6px 10px; }
 form .form-submit-button:hover { background-color: #9da731; }
 form .cancel-form { color: #9f9f9f; padding-left: 10px; }
 label { color: #000000; display: block; font-weight: bold; text-transform: uppercase; }
