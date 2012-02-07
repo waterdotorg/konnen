@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Join" %}{% endblock %}
+
+{% block body_class %}account{% endblock %}
+
+{% block main %}
+    <h2>Join</h2>
+    <div id="reg-login"><p>Already registered? <a href="{% url auth_login %}">Log in &raquo;</a></p></div>
+    <div class="col1">
+        <div class="account-form">
+            <form method="POST" action="{% url registration_register %}">{% csrf_token %}
+                {{ form.as_p }}
+                <input type="hidden" name="next" value="{{ next }}" />
+                <p>
+                    <input class="form-submit-button" type="submit" value="Join" />
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <div class="col2"></div>
+{% endblock %}

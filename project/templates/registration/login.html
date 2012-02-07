@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Log in" %}{% endblock %}
+
+{% block body_class %}account{% endblock %}
+
+{% block main %}
+    <h2>Sign In</h2>
+    <div id="register"><p>Need an account? <a href="{% url registration_register %}"> Join &raquo;</a></p></div>
+    <div class="col1">
+        <div class="account-form">
+            <form method="POST" action="{% url auth_login %}">{% csrf_token %}
+                {{ form.as_p }}
+                <input type="hidden" name="next" value="{{ next }}" />
+                <p>
+                    <input class="form-submit-button" type="submit" value="Sign In" />
+                </p>
+            </form>
+        </div>
+        <p id="forgot-password"><a href="{% url auth_password_reset %}">Forgot your password?</a></p>
+    </div>
+    <div class="col2"></div>
+{% endblock %}
