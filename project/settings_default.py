@@ -210,3 +210,5 @@ HAYSTACK_WHOOSH_PATH = path.join(PROJECT_ROOT, "custom_haystack/whoosh/site_inde
 
 # Registration settings
 ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window
+
+LOGIN_REDIRECT_URL = '/dashboard/'
