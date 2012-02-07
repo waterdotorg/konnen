@@ -1,4 +1,4 @@
-{% extends "lay1col.html" %}
+{% extends "layouts/lay1col.html" %}
 {% load i18n %}
 {% load thumbnail %}
 
@@ -11,9 +11,13 @@
         <form enctype="multipart/form-data" method="POST" action="{% url settings_account %}">{% csrf_token %}
             <p>
                 {{ form.first_name.errors }}
+                <label for="id_first_name">First Name</label>
+                {{ form.first_name }}
+            </p>
+            <p>
                 {{ form.last_name.errors }}
-                <label for="id_first_name">Name</label>
-                {{ form.first_name }} {{ form.last_name }}
+                <label for="id_last_name">Last Name</label>
+                {{ form.last_name }}
             </p>
             <p>
                 {{ form.email.errors }}

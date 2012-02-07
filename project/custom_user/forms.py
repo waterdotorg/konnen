@@ -9,24 +9,12 @@ class SettingsAccountForm(forms.Form):
     last_name = forms.CharField(max_length=100, required=False)
     email = forms.EmailField(max_length=255, required=False)
     mobile = forms.CharField(max_length=20, required=False)
-    content = forms.CharField(widget=forms.Textarea)
+    content = forms.CharField(widget=forms.Textarea, required=False)
     image = forms.ImageField(label='Image', max_length=200, required=False)
 
-    def __init__(self, user, data, files, *args, **kwargs):
-        profile = user.get_profile()
-        defaults = {
-            'email': user.email,
-            'first_name': user.first_name,
-            'last_name': user.last_name,
-            'mobile': profile.mobile,
-            'content': profile.content,
-        }
-
-        data_dict = dict(zip(data.keys(), data.values()))
-        data_is_empty = not bool(data_dict)
-        self.user = user
-        defaults = defaults if data_is_empty else data
-        return super(SettingsAccountForm, self).__init__(defaults, files, *args, **kwargs)
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        return super(SettingsAccountForm, self).__init__(*args, **kwargs)
 
     def clean_username(self, *args, **kwargs):
         existing_users = User.objects.filter(username=self.cleaned_data['username'])
