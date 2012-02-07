@@ -40,6 +40,7 @@ class SettingsAccountForm(forms.Form):
 
     def apply_to_user(self, files):
         user = self.user
+        user.username = self.cleaned_data['username']
         user.email = self.cleaned_data['email']
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
