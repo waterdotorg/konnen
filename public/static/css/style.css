@@ -231,6 +231,9 @@ a { text-decoration: none; }
 
 /* Tables */
 table { width: 100%; }
+table th { border-bottom: 1px solid rgba(0, 0, 0, 0.05); padding: 5px 10px 5px 10px; text-align: left; white-space: nowrap; }
+table tr.odd { background-color: #f1f1f1; }
+table td { border-bottom: 1px solid rgba(0, 0, 0, 0.05); padding: 15px 10px; vertical-align: middle; }
 
 /* Forms */
 form .help-text { color: #8a8a8a; display:block; font-size: 85%; }
@@ -343,6 +346,19 @@ ul.tabs li.active a { background-color:#FFFFFF; border-color: #E5E5E5; border-st
 /* Flavour */
 .flavour-toggle { text-align: center; }
 .flavour-toggle a { color: #f8f8f8; text-decoration: underline; }
+
+/* Locations Browse */
+#location-browse-table td .location-image-wrapper {
+    background-color: #FFFFFF;
+    -moz-border-radius:2px; -webkit-border-radius:2px; -opera-border-radius:2px; -khtml-border-radius:2px; border-radius:2px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+    float: left;
+    margin-right: 10px;
+    padding: 4px;
+}
+#location-browse-table td img {
+    -moz-border-radius:2px; -webkit-border-radius:2px; -opera-border-radius:2px; -khtml-border-radius:2px; border-radius:2px;
+}
 
 /* Misc */
 .tooltip_target { display:none; }
@@ -1552,3 +1568,18 @@ button.ui-button::-moz-focus-inner { border: 0; padding: 0; } /* reset extra pad
 	filter: none;
 	-ms-filter: none;
 }
+
+/* jQuery Notify UI Widget 1.5 by Eric Hynds */
+.ui-notify { width:350px; position:fixed; top:10px; right:10px; }
+.ui-notify-message { padding:10px; margin-bottom:15px; -moz-border-radius:8px; -webkit-border-radius:8px; border-radius:8px }
+.ui-notify-message h1 { font-size:14px; margin:0; padding:0 }
+.ui-notify-message p { margin:3px 0; padding:0; line-height:18px }
+.ui-notify-message:last-child { margin-bottom:0 }
+.ui-notify-message-style { background:#000; background:rgba(0,0,0,0.8); -moz-box-shadow: 0 0 6px #000; -webkit-box-shadow: 0 0 6px #000; box-shadow: 0 0 6px #000; }
+.ui-notify-message-style h1 { color:#fff; font-weight:bold }
+.ui-notify-message-style p { color:#fff }
+.ui-notify-close { color:#fff; text-decoration:underline }
+.ui-notify-click { cursor:pointer }
+.ui-notify-cross { margin-top:-4px; float:right; cursor:pointer; text-decoration:none; font-size:12px; font-weight:bold; text-shadow:0 1px 1px #fff; padding:2px }
+.ui-notify-cross:hover { color:#ffffab }
+.ui-notify-cross:active { position:relative; top:1px }

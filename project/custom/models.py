@@ -5,6 +5,10 @@ from django.db import models
 
 from countries.models import Country
 
+class LocationActiveManager(models.Manager):
+    def get_query_set(self):
+        return super(LocationActiveManager, self).get_query_set().filter(status=Location.ACTIVE_STATUS)
+
 class Location(models.Model):
     PENDING_STATUS = 0
     ACTIVE_STATUS = 1
@@ -32,6 +36,9 @@ class Location(models.Model):
     published_date = models.DateTimeField(default=datetime.datetime.now())
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
+
+    objects = models.Manager() # Default manager.
+    active_objects = LocationActiveManager()
 
     def __unicode__(self):
             return u'%s' % self.title
