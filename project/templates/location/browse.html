@@ -1,0 +1,143 @@
+{% extends "layouts/lay1col.html" %}
+{% load markup %}
+{% load sorting_tags %}
+{% load thumbnail %}
+
+{% block body_class %}{{ block.super }} location-browse{% endblock %}
+
+{% autosort locations %}
+
+{% block main_col1 %}
+    <table id="location-browse-table" class="tablesorter">
+        <thead>
+            <tr>
+                <th></th>
+                <th>{% anchor title Name %}</th>
+                <th>{% anchor uid ID %}</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for location in locations %}
+                <tr id="{{ location.id }}" class="location {% cycle 'odd' 'even' %}">
+                    <td class="location-image">
+                        {% if location.image %}
+                            <div class="location-image-wrapper">
+                                <a href="{{ location.get_absolute_url }}">
+                                    <img src="{% thumbnail location.image 100x72 crop='smart' %}" />
+                                </a>
+                            </div>
+                        {% endif %}
+                    </td>
+                    <td class="location-title"><a href="{{ location.get_absolute_url }}">{{ location.title }}</a></td>
+                    <td class="location-uid">{{ location.uid }}</td>
+                    <td class="location-email-subscribe">
+                        <select class="email-subscribe" name="email_subscription">
+                            <option value="none"{% if location.is_subscribed and location.email_subscription == "none" %} selected="selected"{% endif %}>None</option>
+                            <option value="immediate"{% if location.is_subscribed and location.email_subscription == "immediate" %} selected="selected"{% endif %}>Immediate</option>
+                            <option value="daily"{% if location.is_subscribed and location.email_subscription == "daily" %} selected="selected"{% endif %}>Daily</option>
+                            <option value="weekly"{% if location.is_subscribed and location.email_subscription == "weekly" %} selected="selected"{% endif %}>Weekly</option>
+                        </select>
+                    </td>
+                    <td class="location-phone-subscribe">
+                        <input type="checkbox" class="phone_subscription"
+                               name="phone_subscription"{% if location.is_subscribed and location.phone_subscription %} checked="checked"{% endif %}> SMS Alert
+                    </td>
+                    <td class="location-subscription-toggle">
+                        <a {% if not location.is_subscribed %}style="display:none;" {% endif %}class="location-subscription {% if not location.is_subscribed %}un{% endif %}subscribed" href="#">
+                            Unsubscribe
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block footer_js %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // Initial notify plugin
+            $("#notify-wrapper").notify();
+
+            function location_subscribe_ajax(submitted_data) {
+                $.ajax({
+                    url: "/location/subscribe/",
+                    type: "POST",
+                    data: submitted_data,
+                    dataType: 'json',
+                    cache: false,
+                    success: function(data, textStatus, jqXHR) {
+                        if (data['success']) {
+                            $("#notify-wrapper").notify("create",
+                                "notify-basic-template",
+                                {
+                                    text: 'Location settings updated successfully.'
+                                }
+                            );
+                        }
+                        else {
+                            var err_message = '';
+                            $.each(data['errors'], function(key, value) {
+                                if (key && value) { err_message += key + ": " + value + "\n"; }
+                            });
+                            $("#notify-wrapper").notify("create",
+                                "notify-basic-template",
+                                {
+                                    title: 'Error',
+                                    text: err_message
+                                },
+                                {
+                                    expires: false
+                                }
+                            );
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        alert('Error ' + errorThrown);
+                    }
+                });
+            }
+
+            $(".email-subscribe").change(function(event) {
+                var submitted_data = {
+                    user_id : "{{ request.user.id }}",
+                    location_id : $(this).closest("tr").attr("id"),
+                    email_subscription : $(this).val(),
+                    phone_subscription : $(this).closest("td").siblings(".location-phone-subscribe").children(".phone_subscription").is(':checked'),
+                    subscribe : true
+                }
+                var timeoutID = setTimeout(function() {location_subscribe_ajax(submitted_data)}, 500);
+                $(this).closest("td").siblings(".location-subscription-toggle").children('.location-subscription').show();
+            });
+            $(".phone_subscription").change(function(event) {
+                var submitted_data = {
+                    user_id : "{{ request.user.id }}",
+                    location_id : $(this).closest("tr").attr("id"),
+                    email_subscription : $(this).closest("td").siblings(".location-email-subscribe").children(".email-subscribe").val(),
+                    phone_subscription : $(this).is(':checked'),
+                    subscribe : true
+                }
+                var timeoutID = setTimeout(function() {location_subscribe_ajax(submitted_data)}, 500);
+                $(this).closest("td").siblings(".location-subscription-toggle").children('.location-subscription').show();
+            });
+
+            $(".location-subscription-toggle").on("click", "a.location-subscription", function(event) {
+                event.preventDefault();
+                var submitted_data = {
+                    user_id : "{{ request.user.id }}",
+                    location_id : $(this).closest("tr").attr("id"),
+                    email_subscription : 'none',
+                    phone_subscription : false,
+                    subscribe : false
+                }
+                if (submitted_data.subscribe == false) {
+                    var timeoutID = setTimeout(function() {location_subscribe_ajax(submitted_data)}, 500);
+                }
+                $(this).fadeToggle();
+            });
+        });
+    </script>
+{% endblock %}

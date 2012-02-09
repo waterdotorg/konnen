@@ -114,6 +114,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django_sorting.middleware.SortingMiddleware',
     'django_mobile.middleware.MobileDetectionMiddleware',
     'django_mobile.middleware.SetFlavourMiddleware',
 )
@@ -146,6 +147,7 @@ INSTALLED_APPS = (
     'custom',
     'custom_user',
     'registration',
+    'django_sorting',
 )
 
 AUTHENTICATION_BACKENDS = (
