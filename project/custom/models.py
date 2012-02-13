@@ -7,7 +7,10 @@ from countries.models import Country
 
 class LocationActiveManager(models.Manager):
     def get_query_set(self):
-        return super(LocationActiveManager, self).get_query_set().filter(status=Location.ACTIVE_STATUS)
+        return super(LocationActiveManager, self).get_query_set().filter(
+            status=Location.ACTIVE_STATUS,
+            published_date__lte=datetime.datetime.now(),
+        )
 
 class Location(models.Model):
     PENDING_STATUS = 0
@@ -41,7 +44,7 @@ class Location(models.Model):
     active_objects = LocationActiveManager()
 
     def __unicode__(self):
-            return u'%s' % self.title
+        return u'%s' % self.title
 
     @models.permalink
     def get_absolute_url(self):
@@ -71,4 +74,41 @@ class LocationSubscription(models.Model):
     unique_together = ("user", "location")
 
     def __unicode__(self):
-                return u'%s : %s' % (self.user.get_full_name(), self.location)
+        return u'%s : %s' % (self.user.get_full_name(), self.location)
+
+class LocationPostActiveManager(models.Manager):
+    def get_query_set(self):
+        return super(LocationPostActiveManager, self).get_query_set().filter(
+            status=LocationPost.ACTIVE_STATUS,
+            published_date__lte=datetime.datetime.now(),
+        )
+
+class LocationPost(models.Model):
+    PENDING_STATUS = 0
+    ACTIVE_STATUS = 1
+    COMPLETE_STATUS = 2
+    CANCELLED_STATUS = 3
+    HIDDEN_STATUS = 4
+
+    STATUS_CHOICES = (
+        (PENDING_STATUS, 'Pending'),
+        (ACTIVE_STATUS, 'Active'),
+        (COMPLETE_STATUS, 'Complete'),
+        (CANCELLED_STATUS, 'Cancelled'),
+        (HIDDEN_STATUS, 'Hidden'),
+    )
+
+    user = models.ForeignKey(User)
+    location = models.ForeignKey(Location)
+    title = models.CharField(max_length=256)
+    content = models.TextField()
+    status = models.SmallIntegerField(choices=STATUS_CHOICES, default=ACTIVE_STATUS)
+    published_date = models.DateTimeField(default=datetime.datetime.now())
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
+
+    objects = models.Manager() # Default manager.
+    active_objects = LocationPostActiveManager()
+
+    def __unicode__(self):
+        return u'%s' % self.title

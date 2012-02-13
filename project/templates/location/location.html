@@ -1,4 +1,5 @@
 {% extends "layouts/lay2col.html" %}
+{% load custom_filters %}
 {% load thumbnail %}
 {% load markup %}
 
@@ -6,10 +7,119 @@
 
 {% block main_upper %}
     <h1 class="title">{{ location.title }}</h1>
-    <div class="number">{{ location.number }}</div>
-    <div class="image"><img src="{% thumbnail location.image 200x200 crop='smart' %}" /></div>
+    <div class="location-subscription-toggle">
+        <a id="location-subscription" href="#">
+            {% if user_is_subscribed %}Unsubscribe{% else %}Subscribe{% endif %}
+        </a>
+    </div>
+    <div class="number">{{ location.uid }}</div>
+    <div class="image"><img src="{% thumbnail location.image 355x200 crop='smart' %}" /></div>
     <div class="content">{{ location.content|markdown }}</div>
 {% endblock %}
 
-{% block main_col1 %}{% endblock %}
-{% block main_col3 %}{% endblock %}
+{% block main_col1 %}
+    <div class="posts-wrapper">
+        <p>Updates</p>
+        <table>
+            <tbody>
+                {% for location_post in location_posts %}
+                    <tr class="post {% cycle 'odd' 'even' %}">
+                        <td>
+                            <a href="{{ location_post.user.get_profile.get_absolute_url }}">{{ location_post.user.get_profile.mobile }}</a><br />
+                            {{ location_post.content|markdown }}
+                        </td>
+                        <td class="published-date">{{ location_post.published_date|custom_timesince }} ago</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+{% block main_col3 %}
+    <div class="subscriptions-wrapper">
+        <p>Subscribers ({{ location_subscriptions.count }}) ** = Digest</p>
+        <table>
+            <tbody>
+            {% for location_subscription in location_subscriptions %}
+                <tr class="subscription {% cycle 'odd' 'even' %}">
+                    <td>
+                        {% if location_subscription.email_subscription %}
+                            {% if location_subscription.email_subscription == location_subscription.EMAIL_DAILY_FREQ or location_subscription.email_subscription == location_subscription.EMAIL_WEEKLY_FREQ %}
+                                **
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if location_subscription.phone_subscription %}
+                            +{{ location_subscription.user.get_profile.mobile|phone2numeric }}
+                        {% else %}
+                            {% if location_subscription.email_subscription %}
+                                {{ location_subscription.user.email }}
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{% block footer_js %}
+     <script type="text/javascript">
+         $(document).ready(function() {
+             // Initial notify plugin
+             $("#notify-wrapper").notify();
+
+             function location_subscribe_ajax(submitted_data) {
+                 $.ajax({
+                     url: "/location/subscribe/",
+                     type: "POST",
+                     data: submitted_data,
+                     dataType: 'json',
+                     cache: false,
+                     success: function(data, textStatus, jqXHR) {
+                         if (data['success']) {
+                             if ($("#location-subscription").text().indexOf("Unsubscribe") == -1) {
+                                  $("#location-subscription").text("Unsubscribe");
+                              } else {
+                                  $("#location-subscription").text("Subscribe");
+                              }
+                         }
+                         else {
+                             var err_message = '';
+                             $.each(data['errors'], function(key, value) {
+                                 if (key && value) { err_message += key + ": " + value + "\n"; }
+                             });
+                             $("#notify-wrapper").notify("create",
+                                 "notify-basic-template",
+                                 {
+                                     title: 'Error',
+                                     text: err_message
+                                 },
+                                 {
+                                     expires: false
+                                 }
+                             );
+                         }
+                     },
+                     error: function(jqXHR, textStatus, errorThrown) {
+                         alert('Error ' + errorThrown);
+                     }
+                 });
+             }
+
+             $("#location-subscription").on("click", function(event) {
+                 event.preventDefault();
+                 var submitted_data = {
+                     user_id : "{{ request.user.id }}",
+                     location_id : "{{ location.id }}",
+                     email_subscription : "{{ location_subscription_email_default_value }}",
+                     phone_subscription : true,
+                     subscribe : $(this).text().indexOf("Unsubscribe") == -1
+                 }
+                 var timeoutID = setTimeout(function() {location_subscribe_ajax(submitted_data)}, 500);
+             });
+         });
+     </script>
+{% endblock %}

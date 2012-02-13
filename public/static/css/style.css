@@ -213,6 +213,7 @@ td { vertical-align: top; }
 /* Elements */
 body, button, input, select, textarea { color: #353535; }
 body { background-color: #EEEEEE; font-family: Helvetica,sans-serif; font-size: 16px; line-height: 1.420; }
+h1, h2, h3, h4, h5, h6 { margin: 0; }
 p { margin: 0 0 0.6em 0; }
 a { text-decoration: none; }
 
@@ -285,7 +286,7 @@ form .optional { color: #888888; text-transform: none; }
 
 /* Main Upper */
 #main-upper-wrap { background-color: #DDDDDF; border-bottom: 2px solid #F8F8F8; }
-#main-upper-wrap h1 { font-size: 1.4em; font-weight: normal; margin-top: 0; text-transform: uppercase; }
+#main-upper-wrap h1 { font-size: 1.4em; font-weight: normal; text-transform: uppercase; }
 #main-upper-wrap .col1, #main-upper-wrap .col2, #main-upper-wrap .col3, #main-upper-wrap .col4 { float: left; width: 234px; }
 #main-upper-wrap .col1, #main-upper-wrap .col2, #main-upper-wrap .col3 { font-size: 0.85em; margin-right: 15px; }
 #main-upper-wrap .intro-image { text-align: center; }
@@ -294,8 +295,7 @@ form .optional { color: #888888; text-transform: none; }
 #main-wrap #main { background-color: #F8F8F8; }
 #main-wrap #main #main-inner.container-inner { padding-top: 0; }
 #main-wrap #main #main-inner .main-col1, #main-wrap #main #main-inner .main-col2, #main-wrap #main #main-inner .main-col3 { padding-top: 20px; }
-#main-wrap h1, #main-wrap h2 { margin-top: 0; }
-#main-wrap h1.title { color: #cf3337; font-size: 2em; line-height: 1; margin: 0 0 0.4em 0;  text-transform: uppercase; }
+#main-wrap h1.title { color: #cf3337; font-size: 2em; line-height: 1;  text-transform: uppercase; }
 
 /* Left Column */
 .main-col1 { background: url("../image/bg_grad_f8f8f8.gif") no-repeat top right; }

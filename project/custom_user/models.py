@@ -31,6 +31,11 @@ class Profile(models.Model):
             self.image = ''
             self.save()
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('member_account', (), {'username': self.user.username,})
+
+
 @receiver(user_logged_in)
 def user_logged_in_signal(sender, request, user, **kwargs):
     try:
