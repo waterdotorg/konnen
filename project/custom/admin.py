@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from custom.models import Location, LocationSubscription
+from custom.models import Location, LocationSubscription, LocationPost
 
 class LocationAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
@@ -9,5 +9,12 @@ class LocationAdmin(admin.ModelAdmin):
     ordering = ('-published_date',)
     date_hierarchy = 'published_date'
 
+class LocationPostAdmin(admin.ModelAdmin):
+    list_display = ('title', 'location', 'published_date')
+    search_fields = ('title', 'content')
+    ordering = ('-published_date',)
+    date_hierarchy = 'published_date'
+
 admin.site.register(Location, LocationAdmin)
 admin.site.register(LocationSubscription)
+admin.site.register(LocationPost, LocationPostAdmin)

@@ -1,0 +1,53 @@
+{% extends "layouts/lay2col.html" %}
+{% load custom_filters %}
+{% load thumbnail %}
+{% load markup %}
+
+{% block body_class %}{{ block.super }} member{% endblock %}
+
+{% block main_upper %}
+    <h1 class="title">
+        {% if user.get_full_name %}{{ user.get_full_name }}{% else %}{{ user.username }}{% endif %}
+        {{ profile.mobile }}
+    </h1>
+    <div class="image"><img src="{% thumbnail profile.image 355x200 crop='smart' %}" /></div>
+    <div class="content">{{ profile.content|markdown }}</div>
+{% endblock %}
+
+{% block main_col1 %}
+     <div class="posts-wrapper">
+         <p>Updates</p>
+         <table>
+             <tbody>
+                 {% for location_post in location_posts %}
+                     <tr class="post {% cycle 'odd' 'even' %}">
+                         <td>
+                             {{ location_post.content|markdown }}
+                         </td>
+                         <td class="published-date">{{ location_post.published_date|custom_timesince }} ago</td>
+                     </tr>
+                 {% endfor %}
+             </tbody>
+         </table>
+     </div>
+ {% endblock %}
+
+{% block main_col3 %}
+    {% if locations_served %}
+        <p>Locations Served</p>
+        <table>
+            <tbody>
+                {% for location in locations_served %}
+                    <tr class="location {% cycle 'odd' 'even' %}">
+                        <td>
+                            {{ location.uid }}
+                        </td>
+                        <td>
+                            <a href="{{ location.get_absolute_url }}">{{ location.title }}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

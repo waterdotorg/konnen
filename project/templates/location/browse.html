@@ -131,7 +131,7 @@
                     location_id : $(this).closest("tr").attr("id"),
                     email_subscription : 'none',
                     phone_subscription : false,
-                    subscribe : false
+                    subscribe : $(this).attr("class").indexOf("unsubscribed") != -1
                 }
                 if (submitted_data.subscribe == false) {
                     var timeoutID = setTimeout(function() {location_subscribe_ajax(submitted_data)}, 500);

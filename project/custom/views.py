@@ -1,12 +1,14 @@
 import datetime
+import hashlib
 import simplejson
 
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.core.cache import cache
+from django.http import HttpResponse, Http404
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 
 from custom.forms import LocationSubscriptionForm
-from custom.models import Location, LocationSubscription
+from custom.models import Location, LocationSubscription, LocationPost
 from django.template.context import RequestContext
 
 def homepage(request):
@@ -15,19 +17,35 @@ def homepage(request):
 
 @login_required
 def location_browse(request):
-    locations = Location.active_objects.all()
     location_subscriptions = LocationSubscription.objects.select_related().filter(user=request.user)
 
-    processed_locations = []
-    for location in locations:
-        location.is_subscribed = False
-        for location_subscription in location_subscriptions:
-            if location.id == location_subscription.location.id:
-                location.is_subscribed = True
-                location.email_subscription = location_subscription.email_subscription
-                location.phone_subscription = location_subscription.phone_subscription
-        processed_locations.append(location)
+    # Set sorting
+    sort='uid'
+    db_sort_fields = ['title', 'uid']
+    if request.GET.get('sort') and request.GET.get('sort') in db_sort_fields:
+        sort = request.GET.get('sort')
+        if request.GET.get('dir') == 'desc' or not request.GET.get('dir'):
+            sort = '-' + sort
 
+    # Do we have a cache
+    location_browse_cache_key = 'location_browse_' + str(hashlib.sha1(str(request.GET.get('sort', '')) + str(request.GET.get('dir', ''))).hexdigest())
+    location_browse_cache = cache.get(location_browse_cache_key)
+    if location_browse_cache:
+        processed_locations = location_browse_cache
+    else:
+        processed_locations = []
+        locations = Location.active_objects.all().order_by(sort)
+        for location in locations:
+            location.is_subscribed = False
+            for location_subscription in location_subscriptions:
+                if location.id == location_subscription.location.id:
+                    location.is_subscribed = True
+                    location.email_subscription = location_subscription.email_subscription
+                    location.phone_subscription = location_subscription.phone_subscription
+            processed_locations.append(location)
+
+        # Store in cache
+            cache.set(location_browse_cache_key, processed_locations, 300)
 
     return render_to_response('location/browse.html',
         {
@@ -77,11 +95,27 @@ def location_subscribe(request):
 
 @login_required
 def location(request, slug=None):
-    location = get_object_or_404(Location, slug=slug, status=Location.ACTIVE_STATUS, published_date__lte=datetime.datetime.now())
+    try:
+        location = Location.active_objects.filter(slug=slug)[0]
+    except Location.DoesNotExist:
+        raise Http404
+
+    location_subscriptions = LocationSubscription.objects.select_related().filter(location=location)
+    location_posts = LocationPost.active_objects.filter(location=location)
+
+    try:
+        LocationSubscription.objects.get(user=request.user, location=location)
+        user_is_subscribed =  True
+    except:
+        user_is_subscribed = False
 
     return render_to_response('location/location.html',
         {
             'location': location,
+            'location_subscriptions': location_subscriptions,
+            'location_posts': location_posts,
+            'user_is_subscribed': user_is_subscribed,
+            'location_subscription_email_default_value': LocationSubscription.EMAIL_DAILY_FREQ,
         },
         context_instance=RequestContext(request)
     )
