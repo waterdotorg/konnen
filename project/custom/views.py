@@ -2,6 +2,8 @@ import datetime
 import hashlib
 import simplejson
 
+from operator import attrgetter
+
 from django.contrib.auth.decorators import login_required
 from django.core.cache import cache
 from django.http import HttpResponse, Http404
@@ -27,25 +29,22 @@ def location_browse(request):
         if request.GET.get('dir') == 'desc' or not request.GET.get('dir'):
             sort = '-' + sort
 
-    # Do we have a cache
-    location_browse_cache_key = 'location_browse_' + str(hashlib.sha1(str(request.GET.get('sort', '')) + str(request.GET.get('dir', ''))).hexdigest())
-    location_browse_cache = cache.get(location_browse_cache_key)
-    if location_browse_cache:
-        processed_locations = location_browse_cache
-    else:
-        processed_locations = []
-        locations = Location.active_objects.all().order_by(sort)
-        for location in locations:
-            location.is_subscribed = False
-            for location_subscription in location_subscriptions:
-                if location.id == location_subscription.location.id:
-                    location.is_subscribed = True
-                    location.email_subscription = location_subscription.email_subscription
-                    location.phone_subscription = location_subscription.phone_subscription
-            processed_locations.append(location)
+    processed_locations = []
+    locations = Location.active_objects.all().order_by(sort)
+    for location in locations:
+        location.is_subscribed = False
+        for location_subscription in location_subscriptions:
+            if location.id == location_subscription.location.id:
+                location.is_subscribed = True
+                location.email_subscription = location_subscription.email_subscription
+                location.phone_subscription = location_subscription.phone_subscription
+        processed_locations.append(location)
 
-        # Store in cache
-            cache.set(location_browse_cache_key, processed_locations, 300)
+    reverse_sort = False
+    if request.GET.get('dir') == 'desc' or not request.GET.get('dir'):
+        reverse_sort = True
+    processed_locations = sorted(processed_locations, key=attrgetter(sort.strip('-')), reverse=reverse_sort)
+    processed_locations = sorted(processed_locations, key=attrgetter('is_subscribed'), reverse=True)
 
     return render_to_response('location/browse.html',
         {
