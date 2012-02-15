@@ -21,7 +21,7 @@
         </thead>
         <tbody>
             {% for location in locations %}
-                <tr id="{{ location.id }}" class="location {% cycle 'odd' 'even' %}">
+                <tr id="{{ location.id }}" class="location {% cycle 'odd' 'even' %}{% if location.is_subscribed %} subscribed{% endif %}">
                     <td class="location-image">
                         {% if location.image %}
                             <div class="location-image-wrapper">
@@ -135,6 +135,7 @@
                 }
                 if (submitted_data.subscribe == false) {
                     var timeoutID = setTimeout(function() {location_subscribe_ajax(submitted_data)}, 500);
+                    $(this).closest("tr").removeClass("subscribed");
                 }
                 $(this).fadeToggle();
             });

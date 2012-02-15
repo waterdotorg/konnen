@@ -12,6 +12,25 @@
             {% if user_is_subscribed %}Unsubscribe{% else %}Subscribe{% endif %}
         </a>
     </div>
+    <div id="location-subscription-form-wrapper" style="display:none;">
+        <form id="location-subscription-form" action="." method="POST">
+            <p>
+                <label>Email:</label>
+                <select class="email-subscribe" name="email_subscription">
+                    <option value="none">None</option>
+                    <option value="immediate">Immediate</option>
+                    <option value="daily" selected="selected">Daily</option>
+                    <option value="weekly">Weekly</option>
+                </select>
+            </p>
+            <p>
+                <input type="checkbox" class="phone_subscription" name="phone_subscription" checked="checked"> SMS Alert
+            </p>
+            <p>
+                <input class="form-submit-button" type="submit" value="Submit">
+            </p>
+        </form>
+    </div>
     <div class="number">{{ location.uid }}</div>
     <div class="image"><img src="{% thumbnail location.image 355x200 crop='smart' %}" /></div>
     <div class="content">{{ location.content|markdown }}</div>
@@ -118,7 +137,30 @@
                      phone_subscription : true,
                      subscribe : $(this).text().indexOf("Unsubscribe") == -1
                  }
-                 var timeoutID = setTimeout(function() {location_subscribe_ajax(submitted_data)}, 500);
+                 if ($(this).text().indexOf("Unsubscribe") != -1) {
+                     var timeoutID = setTimeout(function() {location_subscribe_ajax(submitted_data)}, 500);
+                 }
+                 else {
+                     $("#location-subscription-form-wrapper").slideToggle();
+                 }
+             });
+
+             $("#location-subscription-form").submit(function(event) {
+                 event.preventDefault();
+                 var submitted_data = {
+                     user_id : "{{ request.user.id }}",
+                     location_id : "{{ location.id }}",
+                     email_subscription : $(".email-subscribe").val(),
+                     phone_subscription : $(".phone_subscription").is(':checked'),
+                     subscribe : $(this).text().indexOf("Unsubscribe") == -1
+                 }
+                 if (submitted_data.email_subscription == 'none' && submitted_data.phone_subscription == false && submitted_data.subscribe == true) {
+                     alert('Please select Email and/or SMS alerts.');
+                 }
+                 else {
+                     var timeoutID = setTimeout(function() {location_subscribe_ajax(submitted_data)}, 500);
+                     $("#location-subscription-form-wrapper").slideToggle();
+                 }
              });
          });
      </script>
