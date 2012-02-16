@@ -1,9 +1,8 @@
-import datetime
-import hashlib
 import simplejson
 
 from operator import attrgetter
 
+from django.db.models import Avg
 from django.contrib.auth.decorators import login_required
 from django.core.cache import cache
 from django.http import HttpResponse, Http404
@@ -100,7 +99,30 @@ def location(request, slug=None):
         raise Http404
 
     location_subscriptions = LocationSubscription.objects.select_related().filter(location=location)
-    location_posts = LocationPost.active_objects.filter(location=location)
+    location_posts = LocationPost.active_objects.filter(location=location).order_by('-published_date')
+
+    water_quality_location_posts = location_posts.filter(
+        type=LocationPost.WATER_QUALITY_TYPE,
+        chlorine_level__isnull=False).order_by('-published_date')[:12]
+    try:
+        latest_water_quality_location_post = water_quality_location_posts[0]
+    except:
+        latest_water_quality_location_post = None
+    water_quality_location_posts = water_quality_location_posts.reverse()
+
+    xaxis_categories = []
+    site_wide_chlorine_averages = []
+    for water_quality_location_post in water_quality_location_posts:
+        xaxis_categories.append(water_quality_location_post.published_date)
+        site_avg = LocationPost.active_objects.filter(
+            type=LocationPost.WATER_QUALITY_TYPE,
+            chlorine_level__isnull=False,
+            published_date__year=water_quality_location_post.published_date.year,
+            published_date__month=water_quality_location_post.published_date.month,
+            published_date__day=water_quality_location_post.published_date.day
+        ).aggregate(Avg('chlorine_level'))
+        site_wide_chlorine_averages.append(site_avg['chlorine_level__avg'])
+
 
     try:
         LocationSubscription.objects.get(user=request.user, location=location)
@@ -115,6 +137,10 @@ def location(request, slug=None):
             'location_posts': location_posts,
             'user_is_subscribed': user_is_subscribed,
             'location_subscription_email_default_value': LocationSubscription.EMAIL_DAILY_FREQ,
+            'water_quality_location_posts': water_quality_location_posts,
+            'xaxis_categories': xaxis_categories,
+            'site_wide_chlorine_averages': site_wide_chlorine_averages,
+            'latest_water_quality_location_post': latest_water_quality_location_post,
         },
         context_instance=RequestContext(request)
     )

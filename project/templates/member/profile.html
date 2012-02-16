@@ -23,6 +23,9 @@
                      <tr class="post {% cycle 'odd' 'even' %}">
                          <td>
                              {{ location_post.content|markdown }}
+                             {% if location_post.chlorine_level %}
+                                <div class="chlorine-level">Chlorine level: {{ location_post.chlorine_level }}%</div>
+                             {% endif %}
                          </td>
                          <td class="published-date">{{ location_post.published_date|custom_timesince }} ago</td>
                      </tr>
