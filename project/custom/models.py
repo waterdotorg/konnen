@@ -98,10 +98,18 @@ class LocationPost(models.Model):
         (HIDDEN_STATUS, 'Hidden'),
     )
 
+    WATER_QUALITY_TYPE = 'water_quality'
+
+    TYPE_CHOICES = (
+        (WATER_QUALITY_TYPE, 'Water Quality'),
+    )
+
     user = models.ForeignKey(User)
     location = models.ForeignKey(Location)
-    title = models.CharField(max_length=256)
-    content = models.TextField()
+    type = models.CharField(max_length=100, choices=TYPE_CHOICES, default=WATER_QUALITY_TYPE)
+    title = models.CharField(max_length=256, blank=True)
+    content = models.TextField(blank=True)
+    chlorine_level = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     status = models.SmallIntegerField(choices=STATUS_CHOICES, default=ACTIVE_STATUS)
     published_date = models.DateTimeField(default=datetime.datetime.now())
     created_date = models.DateTimeField(auto_now_add=True)

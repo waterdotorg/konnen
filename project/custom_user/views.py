@@ -50,7 +50,7 @@ def settings_remove_profile_image(request):
 def member_account(request, username):
     user = get_object_or_404(User, username=username)
     profile = Profile.objects.get(user=user)
-    location_posts = LocationPost.active_objects.select_related().filter(user=user)
+    location_posts = LocationPost.active_objects.select_related().filter(user=user).order_by('-published_date')
     locations_served = []
     for location_post in location_posts:
         if location_post.location not in locations_served:
