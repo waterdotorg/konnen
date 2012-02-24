@@ -211,8 +211,9 @@ td { vertical-align: top; }
    Author:  Vince Carney
    ========================================================================== */
 /* Elements */
+html { height: 100% }
 body, button, input, select, textarea { color: #353535; }
-body { background-color: #EEEEEE; font-family: Helvetica,sans-serif; font-size: 16px; line-height: 1.420; }
+body { background-color: #EEEEEE; font-family: Helvetica,sans-serif; font-size: 16px; height: 100%; line-height: 1.420; margin: 0; padding: 0; }
 h1, h2, h3, h4, h5, h6 { margin: 0; }
 p { margin: 0 0 0.6em 0; }
 a { text-decoration: none; }
@@ -292,7 +293,9 @@ form .optional { color: #888888; text-transform: none; }
 #main-upper-wrap .intro-image { text-align: center; }
 
 /* Main */
-#main-wrap #main { background-color: #F8F8F8; }
+#main-wrap { height: 100%; width: 100%; }
+#main-wrap #main { background-color: #F8F8F8; height: 100%; }
+#main-wrap #main-inner  { height: 100%; }
 #main-wrap #main #main-inner.container-inner { padding-top: 0; }
 #main-wrap #main #main-inner .main-col1, #main-wrap #main #main-inner .main-col2, #main-wrap #main #main-inner .main-col3 { padding-top: 20px; }
 #main-wrap h1.title { color: #cf3337; font-size: 2em; line-height: 1;  text-transform: uppercase; }
@@ -346,6 +349,10 @@ ul.tabs li.active a { background-color:#FFFFFF; border-color: #E5E5E5; border-st
 /* Flavour */
 .flavour-toggle { text-align: center; }
 .flavour-toggle a { color: #f8f8f8; text-decoration: underline; }
+
+/* Homepage */
+.homepage #map_canvas { height: 100% }
+.homepage .main-col1  { height: 100%; width: 100%; }
 
 /* Locations Browse */
 #location-browse-table tr.subscribed td { background-color: #DEF5FF; border-bottom: 2px solid #FFFFFF; }

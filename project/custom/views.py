@@ -1,9 +1,12 @@
 import simplejson
 
+from decimal import Decimal
 from operator import attrgetter
 
 from django.db.models import Avg
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from django.contrib.sites.models import get_current_site
 from django.core.cache import cache
 from django.http import HttpResponse, Http404
 from django.shortcuts import render_to_response, redirect, get_object_or_404
@@ -13,8 +16,43 @@ from custom.models import Location, LocationSubscription, LocationPost
 from django.template.context import RequestContext
 
 def homepage(request):
-    #TODO: build homepage
-    return
+    locations = Location.active_objects.filter(latitude__isnull=False, longitude__isnull=False)
+    current_site = get_current_site(request)
+
+    return render_to_response('homepage.html',
+        {
+            'google_maps_api_key': settings.GOOGLE_MAPS_API_KEY,
+            'locations': locations,
+            'current_site': current_site,
+        },
+        context_instance=RequestContext(request)
+    )
+
+def homepage_kml(request):
+    user_is_authenticated = False
+    if request.GET.get('auth', False) and request.GET.get('auth') == 'True':
+        user_is_authenticated = True
+
+    locations = Location.active_objects.filter(latitude__isnull=False, longitude__isnull=False).extra(
+        select={
+            'chlorine_level': """SELECT custom_locationpost.chlorine_level
+                              FROM custom_locationpost
+                              WHERE custom_location.id = custom_locationpost.location_id
+                              AND custom_locationpost.chlorine_level IS NOT NULL
+                              ORDER BY published_date DESC LIMIT 1"""
+        },
+    )
+    current_site = get_current_site(request)
+
+    return render_to_response('homepage_kml.kml',
+        {
+            'locations': locations,
+            'current_site': current_site,
+            'user_is_authenticated': user_is_authenticated,
+        },
+        context_instance=RequestContext(request),
+        mimetype='application/vnd.google-earth.kml+xml',
+    )
 
 @login_required
 def location_browse(request):

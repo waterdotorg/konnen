@@ -1,0 +1,41 @@
+{% extends "layouts/lay1col.html" %}
+{% load markup %}
+{% load thumbnail %}
+
+{% block body_class %}{{ block.super }} homepage{% endblock %}
+    
+{% block main_upper %}
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum molestie semper nulla et ornare. Phasellus
+        porta lobortis est, eget faucibus nunc rutrum vitae. Vivamus iaculis aliquet metus, sed molestie mauris mattis
+        non.
+    </p>
+{% endblock %}    
+
+{% block main_col1 %}
+    <div id="map_canvas" style="width: 100%; height: 600px;"></div>
+    <p>Test</p>
+{% endblock %}
+
+{% block footer_js %}
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key={{ google_maps_api_key }}&sensor=false"></script>
+    <script type="text/javascript">
+        function initialize_gmap() {
+            var myOptions = {
+                center: new google.maps.LatLng(18.585607, -72.305665),
+                zoom: 12,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+            return map;
+        }
+
+        $(document).ready(function() {
+            var gmap = initialize_gmap();
+            var kmlLayer = new google.maps.KmlLayer("http://{{ current_site.domain }}{% url homepage_kml %}?auth={{ request.user.is_authenticated }}",
+                { preserveViewport: true }
+            );
+            kmlLayer.setMap(gmap);
+        });
+    </script>
+{% endblock %}

@@ -35,6 +35,9 @@ BROKER_PORT =
 BROKER_USER = ""
 BROKER_PASSWORD = ""
 BROKER_VHOST = ""
+
+# Google Maps
+GOOGLE_MAPS_API_KEY = ""
 """
 
 # Local time zone for this installation. Choices can be found here:
