@@ -7,6 +7,14 @@ from django.db import models
 
 from countries.models import Country
 
+class Community(models.Model):
+    title = models.CharField(max_length=100)
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return u'%s' % self.title
+
 class LocationActiveManager(models.Manager):
     def get_query_set(self):
         return super(LocationActiveManager, self).get_query_set().filter(
@@ -36,6 +44,7 @@ class Location(models.Model):
     content = models.TextField(blank=True, null=True)
     latitude = models.DecimalField(max_digits=26, decimal_places=20, blank=True, null=True)
     longitude = models.DecimalField(max_digits=26, decimal_places=20, blank=True, null=True)
+    community = models.ForeignKey(Community, blank=True, null=True)
     country = models.ForeignKey(Country, blank=True, null=True)
     status = models.SmallIntegerField(choices=STATUS_CHOICES, default=ACTIVE_STATUS)
     published_date = models.DateTimeField(default=datetime.datetime.now())
