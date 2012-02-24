@@ -1,6 +1,7 @@
 from django.contrib import admin
 
-from custom.models import Location, LocationSubscription, LocationPost
+from custom.models import Location, LocationSubscription, LocationPost, \
+    WaterSourceType
 
 class LocationAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
@@ -15,6 +16,12 @@ class LocationPostAdmin(admin.ModelAdmin):
     ordering = ('-published_date',)
     date_hierarchy = 'published_date'
 
+class WaterSourceTypeAdmin(admin.ModelAdmin):
+    list_display = ('title', 'created_date')
+    search_fields = ('title',)
+    ordering = ('title')
+
 admin.site.register(Location, LocationAdmin)
 admin.site.register(LocationSubscription)
 admin.site.register(LocationPost, LocationPostAdmin)
+admin.site.register(WaterSourceType, WaterSourceTypeAdmin)
