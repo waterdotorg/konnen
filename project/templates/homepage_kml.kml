@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+    <Document>
+    <name>Konnen KML</name>
+        <Style id="chlorineLevelFail">
+            <IconStyle>
+                <Icon>
+                    <href>http://{{ current_site.domain }}{{ STATIC_URL }}image/map-marker-icons/drinking-water-fail.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="chlorineLevelPass">
+            <IconStyle>
+                <Icon>
+                    <href>http://{{ current_site.domain }}{{ STATIC_URL }}image/map-marker-icons/drinking-water-pass.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+
+        <Folder>
+            {% for location in locations %}
+                <Placemark>
+                    <name>{{ location.title }}</name>
+                    <description><![CDATA[
+                        {% if user_is_authenticated %}
+                            <p>
+                                {% if location.uid %}{{ location.uid }}{% endif %}
+                                <strong><a href="{{ location.get_absolute_url }}">Details&raquo;</a></strong>
+                                <br />
+                                Chlorine Level: {{ location.chlorine_level }}%
+                            </p>
+                        {% endif %}
+                    ]]></description>
+                    <Point>
+                        <coordinates>{{ location.longitude }},{{ location.latitude }},0</coordinates>
+                    </Point>
+                    <styleUrl>
+                        {% if location.get_chlorine_level_status == 'pass' %}
+                            #chlorineLevelPass
+                        {% else %}
+                            #chlorineLevelFail
+                        {% endif %}
+                    </styleUrl>
+                </Placemark>
+            {% endfor %}
+        </Folder>
+    </Document>
+</kml>

@@ -1,5 +1,7 @@
 import datetime
 
+from decimal import Decimal
+
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -50,6 +52,24 @@ class Location(models.Model):
     def get_absolute_url(self):
         return ('location', (), {'slug': self.slug,})
 
+    def get_chlorine_level(self):
+        try:
+            location_post = LocationPost.active_objects.filter(
+                location=self,
+                chlorine_level__isnull=False).order_by('-published_date')[:1][0]
+        except:
+            return None
+        return location_post.chlorine_level
+
+    def get_chlorine_level_status(self, chlorine_level=None):
+        if not chlorine_level:
+            chlorine_level = self.get_chlorine_level()
+        if not chlorine_level:
+            return None
+        if chlorine_level >= Decimal('0.40') and chlorine_level <= Decimal('0.50'):
+            return 'pass'
+        else:
+            return 'fail'
 
 class LocationSubscription(models.Model):
     EMAIL_NONE_FREQ = 'none'
