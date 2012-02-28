@@ -13,6 +13,33 @@
 {% endblock %}    
 
 {% block main_col1 %}
+    <div id="map_filter">
+        <form action="." method="GET">
+            <div class="map-filter-item">
+                <p class="map-filter-title">Chlorine Levels</p>
+                <p class="checkbox-wrapper">
+                    <input class="chlorine-level-checkbox" type="checkbox" name="chlorine_level_zero" id="chlorine_level_none" checked="checked"> <span>0.0%</span>
+                </p>
+                <p class="checkbox-wrapper">
+                    <input class="chlorine-level-checkbox"  type="checkbox" name="chlorine_level_low" id="chlorine_level_low" checked="checked"> <span>&lt; 0.5%</span>
+                </p>
+                <p class="checkbox-wrapper">
+                    <input class="chlorine-level-checkbox"  type="checkbox" name="chlorine_level_pass" id="chlorine_level_pass" checked="checked"> <span>&ge; 0.5% &le; 1.9%</span>
+                </p>
+                <p class="checkbox-wrapper">
+                    <input class="chlorine-level-checkbox"  type="checkbox" name="chlorine_level_high" id="chlorine_level_high" checked="checked"> <span>&ge; 2.0%</span>
+                </p>
+            </div>
+            <div class="map-filter-item">
+                <p class="map-filter-title">Source Type</p>
+                {% for water_source_type in water_source_types %}
+                    <p class=checkbox-wrapper>
+                        <input class="source-type-checkbox" type="checkbox" name="water_source_type_{{ water_source_type.id }}" id="water_source_type_{{ water_source_type.id }}" checked="checked"> {{ water_source_type.title }}
+                    </p>
+                {% endfor %}
+            </div>
+        </form>
+    </div>
     <div id="map_canvas" style="width: 100%; height: 600px;"></div>
     <p>Test</p>
 {% endblock %}
@@ -31,11 +58,31 @@
         }
 
         $(document).ready(function() {
-            var gmap = initialize_gmap();
-            var kmlLayer = new google.maps.KmlLayer("http://{{ current_site.domain }}{% url homepage_kml %}?auth={{ request.user.is_authenticated }}",
+            gmap = initialize_gmap();
+            kmlLayer = new google.maps.KmlLayer("http://{{ current_site.domain }}{% url homepage_kml %}?auth={{ request.user.is_authenticated }}",
                 { preserveViewport: true }
             );
             kmlLayer.setMap(gmap);
+
+            kmlLayer_updated = new google.maps.KmlLayer("http://{{ current_site.domain }}{% url homepage_kml %}?auth={{ request.user.is_authenticated }}",
+                { preserveViewport: true }
+            );
+            kmlLayer_updated.setMap(null);
+
+            $(".map-filter-item input[type='checkbox']").click(function() {
+                kmlLayer.setMap(null);
+                kmlLayer_updated.setMap(null);
+
+                var checked_name_attributes = []
+                $(".map-filter-item input[type='checkbox']:checked").each(function(index) {
+                    checked_name_attributes.push(encodeURIComponent($(this).attr('name')));
+                });
+                var map_filters = checked_name_attributes.join("&");
+                kmlLayer_updated = new google.maps.KmlLayer("http://{{ current_site.domain }}{% url homepage_kml %}?auth={{ request.user.is_authenticated }}&" + map_filters,
+                    { preserveViewport: true }
+                );
+                kmlLayer_updated.setMap(gmap);
+            });
         });
     </script>
 {% endblock %}

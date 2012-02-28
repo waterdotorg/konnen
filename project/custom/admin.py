@@ -19,12 +19,12 @@ class LocationPostAdmin(admin.ModelAdmin):
 class WaterSourceTypeAdmin(admin.ModelAdmin):
     list_display = ('title', 'created_date')
     search_fields = ('title',)
-    ordering = ('title')
+    ordering = ('title',)
 
 class CommunityAdmin(admin.ModelAdmin):
     list_display = ('title', 'created_date')
     search_fields = ('title',)
-    ordering = ('title')
+    ordering = ('title',)
 
 admin.site.register(Location, LocationAdmin)
 admin.site.register(LocationSubscription)
