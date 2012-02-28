@@ -73,12 +73,15 @@ class Location(models.Model):
     def get_chlorine_level_status(self, chlorine_level=None):
         if not chlorine_level:
             chlorine_level = self.get_chlorine_level()
-        if not chlorine_level:
-            return None
-        if chlorine_level >= Decimal('0.40') and chlorine_level <= Decimal('0.50'):
+        if chlorine_level == None:
+            return 'none'
+        if chlorine_level == Decimal('0.00'):
+            return 'zero'
+        if chlorine_level > Decimal('0.00') and chlorine_level < Decimal('0.50'):
+            return 'low'
+        if chlorine_level >= Decimal('0.50') and chlorine_level < Decimal('2.00'):
             return 'pass'
-        else:
-            return 'fail'
+        return 'high'
 
 class LocationSubscription(models.Model):
     EMAIL_NONE_FREQ = 'none'

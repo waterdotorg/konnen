@@ -2,10 +2,24 @@
 <kml xmlns="http://www.opengis.net/kml/2.2">
     <Document>
     <name>Konnen KML</name>
-        <Style id="chlorineLevelFail">
+        <Style id="chlorineLevelNone">
             <IconStyle>
                 <Icon>
-                    <href>http://{{ current_site.domain }}{{ STATIC_URL }}image/map-marker-icons/drinking-water-fail.png</href>
+                    <href>http://{{ current_site.domain }}{{ STATIC_URL }}image/map-marker-icons/drinking-water-none.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="chlorineLevelZero">
+            <IconStyle>
+                <Icon>
+                    <href>http://{{ current_site.domain }}{{ STATIC_URL }}image/map-marker-icons/drinking-water-zero.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="chlorineLevelLow">
+            <IconStyle>
+                <Icon>
+                    <href>http://{{ current_site.domain }}{{ STATIC_URL }}image/map-marker-icons/drinking-water-low.png</href>
                 </Icon>
             </IconStyle>
         </Style>
@@ -13,6 +27,13 @@
             <IconStyle>
                 <Icon>
                     <href>http://{{ current_site.domain }}{{ STATIC_URL }}image/map-marker-icons/drinking-water-pass.png</href>
+                </Icon>
+            </IconStyle>
+        </Style>
+        <Style id="chlorineLevelHigh">
+            <IconStyle>
+                <Icon>
+                    <href>http://{{ current_site.domain }}{{ STATIC_URL }}image/map-marker-icons/drinking-water-high.png</href>
                 </Icon>
             </IconStyle>
         </Style>
@@ -35,10 +56,20 @@
                         <coordinates>{{ location.longitude }},{{ location.latitude }},0</coordinates>
                     </Point>
                     <styleUrl>
+                        {% if location.get_chlorine_level_status == 'none' %}
+                            #chlorineLevelNone
+                        {% endif %}
+                        {% if location.get_chlorine_level_status == 'zero' %}
+                            #chlorineLevelZero
+                        {% endif %}
+                        {% if location.get_chlorine_level_status == 'low' %}
+                            #chlorineLevelLow
+                        {% endif %}
                         {% if location.get_chlorine_level_status == 'pass' %}
                             #chlorineLevelPass
-                        {% else %}
-                            #chlorineLevelFail
+                        {% endif %}
+                        {% if location.get_chlorine_level_status == 'high' %}
+                            #chlorineLevelHigh
                         {% endif %}
                     </styleUrl>
                 </Placemark>

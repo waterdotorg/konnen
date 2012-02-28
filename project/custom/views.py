@@ -12,27 +12,57 @@ from django.http import HttpResponse, Http404
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 
 from custom.forms import LocationSubscriptionForm
-from custom.models import Location, LocationSubscription, LocationPost
+from custom.models import Location, LocationSubscription, LocationPost, WaterSourceType
 from django.template.context import RequestContext
 
 def homepage(request):
     locations = Location.active_objects.filter(latitude__isnull=False, longitude__isnull=False)
+    water_source_types = WaterSourceType.objects.all().order_by('title')
     current_site = get_current_site(request)
 
     return render_to_response('homepage.html',
         {
             'google_maps_api_key': settings.GOOGLE_MAPS_API_KEY,
             'locations': locations,
+            'water_source_types': water_source_types,
             'current_site': current_site,
         },
         context_instance=RequestContext(request)
     )
+
+def locations_chlorine_level_filter(locations, request):
+    if (
+            not 'chlorine_level_zero' in request.GET and
+            not 'chlorine_level_low' in request.GET and
+            not 'chlorine_level_pass' in request.GET and
+            not 'chlorine_level_high' in request.GET
+        ):
+        return locations
+
+    zero_locations = []
+    if 'chlorine_level_zero' in request.GET:
+        zero_locations = filter(lambda location: location.chlorine_level == Decimal('0.00'), locations)
+
+    low_locations = []
+    if 'chlorine_level_low' in request.GET:
+        low_locations = filter(lambda location: (location.chlorine_level > Decimal('0.00') and location.chlorine_level < Decimal('0.50')), locations)
+
+    pass_locations = []
+    if 'chlorine_level_pass' in request.GET:
+        pass_locations = filter(lambda location: (location.chlorine_level >= Decimal('0.50') and location.chlorine_level < Decimal('2.00')), locations)
+
+    high_locations = []
+    if 'chlorine_level_high' in request.GET:
+        high_locations = filter(lambda location: location.chlorine_level >= Decimal('2.00'), locations)
+
+    return zero_locations + low_locations + pass_locations + high_locations
 
 def homepage_kml(request):
     user_is_authenticated = False
     if request.GET.get('auth', False) and request.GET.get('auth') == 'True':
         user_is_authenticated = True
 
+    # TODO : can we do filters in sql instead of python's filter()
     locations = Location.active_objects.filter(latitude__isnull=False, longitude__isnull=False).extra(
         select={
             'chlorine_level': """SELECT custom_locationpost.chlorine_level
@@ -42,11 +72,13 @@ def homepage_kml(request):
                               ORDER BY published_date DESC LIMIT 1"""
         },
     )
+
+    locations_processed = locations_chlorine_level_filter(locations, request)
     current_site = get_current_site(request)
 
     return render_to_response('homepage_kml.kml',
         {
-            'locations': locations,
+            'locations': locations_processed,
             'current_site': current_site,
             'user_is_authenticated': user_is_authenticated,
         },
