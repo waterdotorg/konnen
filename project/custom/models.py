@@ -12,6 +12,9 @@ class Community(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        verbose_name_plural = "communities"
+
     def __unicode__(self):
         return u'%s' % self.title
 
