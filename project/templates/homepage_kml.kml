@@ -45,10 +45,9 @@
                     <description><![CDATA[
                         {% if user_is_authenticated %}
                             <p>
-                                {% if location.uid %}{{ location.uid }}{% endif %}
+                                Chlorine Level: {{ location.chlorine_level }}% <br />
+                                {% if location.uid %}Location ID: {{ location.uid }} <br />{% endif %}
                                 <strong><a href="{{ location.get_absolute_url }}">Details&raquo;</a></strong>
-                                <br />
-                                Chlorine Level: {{ location.chlorine_level }}%
                             </p>
                         {% endif %}
                     ]]></description>

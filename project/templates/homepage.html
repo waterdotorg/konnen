@@ -15,6 +15,14 @@
 {% block main_col1 %}
     <div id="map_filter">
         <form action="." method="GET">
+            {% if request.user.is_authenticated %}
+                <div class="map-filter-item">
+                    <p class="map-filter-title">Subscription</p>
+                    <p class="checkbox-wrapper">
+                        <input class="subscription-checkbox" type="checkbox" name="my_subscribed_locations" id="my_subscribed_locations"> Mine
+                    </p>
+                </div>
+            {% endif %}
             <div class="map-filter-item">
                 <p class="map-filter-title">Chlorine Levels</p>
                 <p class="checkbox-wrapper">
@@ -56,8 +64,7 @@
             </div>
         </form>
     </div>
-    <div id="map_canvas" style="width: 100%; height: 600px;"></div>
-    <p>Test</p>
+    <div class="clearfix" id="map_canvas"></div>
 {% endblock %}
 
 {% block footer_js %}
@@ -88,7 +95,7 @@
                     checked_name_attributes.push(encodeURIComponent($(this).attr('name')));
                 });
                 var map_filters = checked_name_attributes.join("&");
-                kmlLayer = new google.maps.KmlLayer("http://{{ current_site.domain }}{% url homepage_kml %}?auth={{ request.user.is_authenticated }}&" + map_filters,
+                kmlLayer = new google.maps.KmlLayer("http://{{ current_site.domain }}{% url homepage_kml %}?killcache=" + (new Date()).getTime() + "&auth={{ request.user.is_authenticated }}&ruid={{ request.user.id }}&" + map_filters,
                     { preserveViewport: true }
                 );
                 kmlLayer.setMap(gmap);

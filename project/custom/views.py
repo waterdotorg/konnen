@@ -47,11 +47,24 @@ def homepage_kml(request):
     filter_kwargs = {}
     request_get_keys = request.GET.keys()
 
+    location_ids=[]
+    if request.GET.has_key('my_subscribed_locations') and user_is_authenticated and request.GET.get('ruid'):
+        location_subscriptions = LocationSubscription.objects.filter(user=request.GET.get('ruid'))
+        for ls in location_subscriptions:
+            try:
+                location_ids.append(ls.location_id)
+            except:
+                pass
+        filter_kwargs['id__in'] = location_ids
+
     community_ids = []
     if 'community_' in (',').join(request_get_keys):
         for key in request_get_keys:
             if 'community_' in key:
-                community_ids.append(int(key.strip('community_')))
+                try:
+                    community_ids.append(int(key.strip('community_')))
+                except:
+                    pass
         filter_kwargs['community__in'] = community_ids
 
     locations = Location.active_objects.filter(
