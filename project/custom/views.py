@@ -11,15 +11,20 @@ from django.contrib.sites.models import get_current_site
 from django.core.cache import cache
 from django.http import HttpResponse, Http404
 from django.shortcuts import render_to_response, redirect, get_object_or_404
+from django.template.context import RequestContext
 
 from custom.forms import LocationSubscriptionForm
-from custom.models import Location, LocationSubscription, LocationPost, WaterSourceType, Community
-from django.template.context import RequestContext
+from custom.models import Location, LocationSubscription, LocationPost, WaterSourceType, \
+    Community, Provider
+from custom.utils import locations_chlorine_level_filter, locations_water_source_type_filter, \
+    locations_provider_filter
+
 
 def homepage(request):
     locations = Location.active_objects.filter(latitude__isnull=False, longitude__isnull=False)
     water_source_types = WaterSourceType.objects.all().order_by('title')
     communities = Community.objects.all().order_by('title')
+    providers = Provider.objects.all().order_by('title')
     current_site = get_current_site(request)
 
     return render_to_response('homepage.html',
@@ -29,56 +34,10 @@ def homepage(request):
             'water_source_types': water_source_types,
             'communities': communities,
             'current_site': current_site,
+            'providers': providers,
         },
         context_instance=RequestContext(request)
     )
-
-def locations_chlorine_level_filter(locations, request):
-    if (
-            not 'chlorine_level_zero' in request.GET and
-            not 'chlorine_level_low' in request.GET and
-            not 'chlorine_level_pass' in request.GET and
-            not 'chlorine_level_high' in request.GET
-        ):
-        return locations
-
-    zero_locations = []
-    if 'chlorine_level_zero' in request.GET:
-        zero_locations = filter(lambda location: location.chlorine_level == Decimal('0.00'), locations)
-
-    low_locations = []
-    if 'chlorine_level_low' in request.GET:
-        low_locations = filter(lambda location: (location.chlorine_level > Decimal('0.00') and location.chlorine_level < Decimal('0.50')), locations)
-
-    pass_locations = []
-    if 'chlorine_level_pass' in request.GET:
-        pass_locations = filter(lambda location: (location.chlorine_level >= Decimal('0.50') and location.chlorine_level < Decimal('2.00')), locations)
-
-    high_locations = []
-    if 'chlorine_level_high' in request.GET:
-        high_locations = filter(lambda location: location.chlorine_level >= Decimal('2.00'), locations)
-
-    return zero_locations + low_locations + pass_locations + high_locations
-
-def locations_water_source_type_filter(locations, request):
-    filtered_locations = []
-    request_get_keys = request.GET.keys()
-    water_source_type_ids = []
-
-    if not 'water_source_type' in (',').join(request_get_keys):
-        return locations
-
-    for key in request_get_keys:
-        if not 'water_source_type' in key:
-            continue
-        try:
-            water_source_type_ids.append(int(key.strip('water_source_type_')))
-        except:
-            continue
-
-    filtered_locations = filter(lambda location : location.water_source_type_id in water_source_type_ids, locations)
-
-    return filtered_locations
 
 def homepage_kml(request):
     user_is_authenticated = False
@@ -94,7 +53,6 @@ def homepage_kml(request):
             if 'community_' in key:
                 community_ids.append(int(key.strip('community_')))
         filter_kwargs['community__in'] = community_ids
-
 
     locations = Location.active_objects.filter(
         latitude__isnull=False,
@@ -112,12 +70,18 @@ def homepage_kml(request):
                               WHERE custom_location.id = custom_locationpost.location_id
                               AND custom_locationpost.chlorine_level IS NOT NULL
                               ORDER BY published_date DESC LIMIT 1""",
+            'provider_id': """SELECT custom_locationpost.provider_id
+                              FROM custom_locationpost
+                              WHERE custom_location.id = custom_locationpost.location_id
+                              AND custom_locationpost.chlorine_level IS NOT NULL
+                              ORDER BY published_date DESC LIMIT 1""",
         },
     )
 
     # TODO : can we do filters in sql instead of python's filter()
     locations_processed = locations_chlorine_level_filter(locations, request)
     locations_processed = locations_water_source_type_filter(locations_processed, request)
+    locations_processed = locations_provider_filter(locations_processed, request)
 
     current_site = get_current_site(request)
 

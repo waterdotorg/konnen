@@ -119,6 +119,14 @@ class WaterSourceType(models.Model):
     def __unicode__(self):
         return u'%s' % self.title
 
+class Provider(models.Model):
+    title = models.CharField(max_length=100)
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return u'%s' % self.title
+
 
 class LocationPostActiveManager(models.Manager):
     def get_query_set(self):
@@ -154,6 +162,7 @@ class LocationPost(models.Model):
     title = models.CharField(max_length=256, blank=True)
     content = models.TextField(blank=True)
     water_source_type = models.ForeignKey(WaterSourceType, blank=True, null=True)
+    provider = models.ForeignKey(Provider, blank=True, null=True)
     chlorine_level = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     status = models.SmallIntegerField(choices=STATUS_CHOICES, default=ACTIVE_STATUS)
     published_date = models.DateTimeField(default=datetime.datetime.now())
