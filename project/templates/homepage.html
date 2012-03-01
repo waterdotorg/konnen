@@ -46,6 +46,14 @@
                     </p>
                 {% endfor %}
             </div>
+            <div class="map-filter-item">
+                <p class="map-filter-title">Provider</p>
+                {% for provider in providers %}
+                    <p class="checkbox-wrapper">
+                        <input class="provider-checkbox" type="checkbox" name="provider_{{ provider.id }}" id="provider_{{ provider.id }}"> {{ provider.title }}
+                    </p>
+                {% endfor %}
+            </div>
         </form>
     </div>
     <div id="map_canvas" style="width: 100%; height: 600px;"></div>

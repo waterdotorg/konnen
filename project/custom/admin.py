@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from custom.models import Location, LocationSubscription, LocationPost, \
-    WaterSourceType, Community
+    WaterSourceType, Community, Provider
 
 class LocationAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
@@ -26,8 +26,14 @@ class CommunityAdmin(admin.ModelAdmin):
     search_fields = ('title',)
     ordering = ('title',)
 
+class ProviderAdmin(admin.ModelAdmin):
+    list_display = ('title', 'created_date')
+    search_fields = ('title',)
+    ordering = ('title',)
+
 admin.site.register(Location, LocationAdmin)
 admin.site.register(LocationSubscription)
 admin.site.register(LocationPost, LocationPostAdmin)
 admin.site.register(WaterSourceType, WaterSourceTypeAdmin)
 admin.site.register(Community, CommunityAdmin)
+admin.site.register(Provider, ProviderAdmin)
