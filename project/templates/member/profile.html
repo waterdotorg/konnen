@@ -22,10 +22,15 @@
                  {% for location_post in location_posts %}
                      <tr class="post {% cycle 'odd' 'even' %}">
                          <td>
-                             {{ location_post.content|markdown }}
+                             <div>
+                                <a href="{{ location_post.location.get_absolute_url }}">
+                                    {{ location_post.location.title }}
+                                </a>
+                             </div>
                              {% if location_post.chlorine_level %}
-                                <div class="chlorine-level">Chlorine level: {{ location_post.chlorine_level }}%</div>
+                                <div class="chlorine-level">Chlorine level: <strong>{{ location_post.chlorine_level }}%</strong></div>
                              {% endif %}
+                             {{ location_post.content|markdown }}
                          </td>
                          <td class="published-date">{{ location_post.published_date|custom_timesince }} ago</td>
                      </tr>
