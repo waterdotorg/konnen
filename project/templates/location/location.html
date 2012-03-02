@@ -7,39 +7,62 @@
 
 {% block main_upper %}
     <div class="location-wrapper">
-        <h1 class="title">{{ location.title }}</h1>
-        <div class="location-subscription-toggle">
-            <a id="location-subscription" href="#">
-                {% if user_is_subscribed %}Unsubscribe{% else %}Subscribe{% endif %}
-            </a>
-        </div>
-        <div id="location-subscription-form-wrapper" style="display:none;">
-            <form id="location-subscription-form" action="." method="POST">
-                <p>
-                    <label>Email:</label>
-                    <select class="email-subscribe" name="email_subscription">
-                        <option value="none">None</option>
-                        <option value="immediate">Immediate</option>
-                        <option value="daily" selected="selected">Daily</option>
-                        <option value="weekly">Weekly</option>
-                    </select>
-                </p>
-                <p>
-                    <input type="checkbox" class="phone_subscription" name="phone_subscription" checked="checked"> SMS Alert
-                </p>
-                <p>
-                    <input class="form-submit-button" type="submit" value="Submit">
-                </p>
-            </form>
-        </div>
-        <div class="number">{{ location.uid }}</div>
-        <div class="image"><img src="{% thumbnail location.image 355x200 crop='smart' %}" /></div>
-        <div class="content">{{ location.content|markdown }}</div>
-        {% if latest_water_quality_location_post %}
-            <div class="latest-chlorine-level">
-                Chlorine Level: {{ latest_water_quality_location_post.chlorine_level }}% tested on {{ latest_water_quality_location_post.published_date|date:"Y.m.d" }}
+        <div class="location-col1">
+            <div class="location-image-wrapper">
+                <div class="image">
+                    {% if location.image %}
+                        <img src="{% thumbnail location.image 355x200 crop='smart' %}" /></div>
+                    {% else %}
+                        <img src="{{ STATIC_URL }}image/location-default.png" /></div>
+                    {% endif %}
             </div>
-        {% endif %}
+        </div>
+        <div class="location-col2 clearfix">
+            <div class="subscription">
+                <div class="location-subscription-toggle">
+                    <a id="location-subscription" href="#">
+                        {% if user_is_subscribed %}Unsubscribe{% else %}Subscribe{% endif %}
+                    </a>
+                </div>
+                <div id="location-subscription-form-wrapper" style="display:none;">
+                    <form id="location-subscription-form" action="." method="POST">
+                        <p>
+                            <label>Email:</label>
+                            <select class="email-subscribe" name="email_subscription">
+                                <option value="none">None</option>
+                                <option value="immediate">Immediate</option>
+                                <option value="daily" selected="selected">Daily</option>
+                                <option value="weekly">Weekly</option>
+                            </select>
+                        </p>
+                        <p>
+                            <input type="checkbox" class="phone_subscription" name="phone_subscription" checked="checked"> SMS Alert
+                        </p>
+                        <p class="form-submit-button-wrapper">
+                            <input class="form-submit-button" type="submit" value="Submit">
+                        </p>
+                    </form>
+                </div>
+            </div>
+            <h1 class="title">{{ location.title }}</h1>
+            <table class="details">
+                <tr>
+                    <td class="label">ID:</td>
+                    <td class="value">{{ location.uid }}</td>
+                </tr>
+                {% if latest_water_quality_location_post %}
+                <tr>
+                    <td class="label">Chlorine Level:</td>
+                    <td class="value">{{ latest_water_quality_location_post.chlorine_level }}%</td>
+                </tr>
+                <tr>
+                    <td class="label">Test Date:</td>
+                    <td class="value">{{ latest_water_quality_location_post.published_date|date:"Y.m.d" }}</td>
+                </tr>
+                {% endif %}
+            </table>
+            <div class="content">{{ location.content|markdown }}</div>
+        </div>
     </div>
     <div id="water-quality-chart-container"></div>
 {% endblock %}
