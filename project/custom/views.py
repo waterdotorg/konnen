@@ -1,4 +1,4 @@
-import re
+import datetime
 import simplejson
 
 from decimal import Decimal
@@ -195,26 +195,30 @@ def location(request, slug=None):
 
     water_quality_location_posts = location_posts.filter(
         type=LocationPost.WATER_QUALITY_TYPE,
-        chlorine_level__isnull=False).order_by('-published_date')[:12]
+        chlorine_level__isnull=False,
+        published_date__gte=(datetime.date.today() - datetime.timedelta(days=14))
+    ).order_by('-published_date')
     try:
         latest_water_quality_location_post = water_quality_location_posts[0]
     except:
         latest_water_quality_location_post = None
     water_quality_location_posts = water_quality_location_posts.reverse()
 
-    xaxis_categories = []
     site_wide_chlorine_averages = []
-    for water_quality_location_post in water_quality_location_posts:
-        xaxis_categories.append(water_quality_location_post.published_date)
+    for x in range(14):
+        x_date = datetime.date.today() - datetime.timedelta(days=x)
         site_avg = LocationPost.active_objects.filter(
             type=LocationPost.WATER_QUALITY_TYPE,
             chlorine_level__isnull=False,
-            published_date__year=water_quality_location_post.published_date.year,
-            published_date__month=water_quality_location_post.published_date.month,
-            published_date__day=water_quality_location_post.published_date.day
+            published_date__year=x_date.year,
+            published_date__month=x_date.month,
+            published_date__day=x_date.day
         ).aggregate(Avg('chlorine_level'))
-        site_wide_chlorine_averages.append(site_avg['chlorine_level__avg'])
-
+        avg = 0.0
+        if site_avg['chlorine_level__avg']:
+            avg = site_avg['chlorine_level__avg']
+        site_wide_chlorine_averages.append({'date': x_date, 'avg': avg})
+    site_wide_chlorine_averages.reverse()
 
     try:
         LocationSubscription.objects.get(user=request.user, location=location)
@@ -230,7 +234,6 @@ def location(request, slug=None):
             'user_is_subscribed': user_is_subscribed,
             'location_subscription_email_default_value': LocationSubscription.EMAIL_DAILY_FREQ,
             'water_quality_location_posts': water_quality_location_posts,
-            'xaxis_categories': xaxis_categories,
             'site_wide_chlorine_averages': site_wide_chlorine_averages,
             'latest_water_quality_location_post': latest_water_quality_location_post,
         },

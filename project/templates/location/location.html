@@ -199,65 +199,102 @@
              });
 
              {% if water_quality_location_posts %}
-             // Highcharts Location Chlorine Levels
-             chart = new Highcharts.Chart({
-                chart: {
-                  renderTo: 'water-quality-chart-container',
-                  defaultSeriesType: 'line',
-                  marginRight: 130,
-                  marginBottom: 35
-                },
-                title: {
-                  text: 'Water Quality Report',
-                  x: -20 //center
-                },
-                subtitle: {
-                  text: 'Chlorine Levels',
-                  x: -20
-                },
-                xAxis: {
-                  title: {
-                    text: 'Date'
-                  },
-                  categories: [{% for xaxis_category in xaxis_categories %}'{{ xaxis_category|date:"Y.m.d" }}',{% endfor %}]
-                },
-                yAxis: {
-                  title: {
-                     text: 'Chlorine Level (%)',
-                     y: -20
-                  },
-                  plotLines: [{
-                     value: 0,
-                     width: 1,
-                     color: '#808080'
-                  }]
-                },
-                tooltip: {
-                  formatter: function() {
-                            return this.series.name +'<br/>'+
-                        this.x +': <strong>'+ this.y +'%</strong>';
-                  }
-                },
-                legend: {
-                  layout: 'vertical',
-                  align: 'right',
-                  verticalAlign: 'top',
-                  x: -10,
-                  y: 100,
-                  borderWidth: 0
-                },
-                credits: {
-                  enabled: false
-                },
-                series: [{
-                  name: 'Daily',
-                  data: [{% for water_quality_location_post in water_quality_location_posts %}{{ water_quality_location_post.chlorine_level }}, {% endfor %}]
-                }, {
-                  name: 'Site Avg.',
-                  data: [{% for avg in site_wide_chlorine_averages %}{{ avg }},{% endfor %}]
-                }]
-             });
-         {% endif %}
+                // Highcharts Location Chlorine Levels
+                var chart;
+                chart = new Highcharts.Chart({
+                    chart: {
+                        renderTo: 'water-quality-chart-container',
+                        marginRight: 130,
+                        marginBottom: 35,
+                        zoomType: 'xy'
+                    },
+                    title: {
+                        text: 'Water Quality Report',
+                        x: -20 //center
+                    },
+                    subtitle: {
+                        text: 'Chlorine Levels',
+                        x: -20
+                    },
+                    xAxis: {
+                        type: 'datetime',
+                        dateTimeLabelFormats: { // don't display the dummy year
+                            month: '%e. %b',
+                            year: '%b'
+                        },
+                        title: {
+                            text: 'Date'
+                        }
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Chlorine Level (%)',
+                        y: -20
+                    }
+                    },
+                    tooltip: {
+                        formatter: function() {
+                            return ''+
+                            Highcharts.dateFormat('%Y.%m.%d', this.x) +': <strong>'+ this.y +'%</strong>';
+                    }
+                    },
+                    legend: {
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'top',
+                        x: -10,
+                        y: 100,
+                        borderWidth: 0
+                    },
+                    plotOptions: {
+                        scatter: {
+                            marker: {
+                                radius: 5,
+                                states: {
+                                    hover: {
+                                        enabled: true,
+                                        lineColor: 'rgb(100,100,100)'
+                                    }
+                                }
+                            },
+                            states: {
+                                hover: {
+                                    marker: {
+                                        enabled: false
+                                    }
+                                }
+                            }
+                        },
+                        line: {
+                            dashStyle: 'ShortDash'
+                        }
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    series: [{
+                        name: 'Daily',
+                        type: 'scatter',
+                        marker: {
+                            radius: 5
+                        },
+                        data: [
+                            {% for water_quality_location_post in water_quality_location_posts %}
+                                [Date.UTC({{ water_quality_location_post.published_date|date:"Y" }},{{ water_quality_location_post.published_date|date:"m" }},{{ water_quality_location_post.published_date|date:"d" }}), {{ water_quality_location_post.chlorine_level }}]{% if not forloop.last %},{% endif %}
+                            {% endfor %}
+                        ]
+                    },
+                    {
+                        name: 'Global Avg.',
+                        type: 'line',
+                        data: [
+                            {% for site_data in site_wide_chlorine_averages %}
+                                [Date.UTC({{ site_data.date|date:"Y" }}, {{ site_data.date|date:"m"}}, {{ site_data.date|date:"d" }}), {{ site_data.avg }}]{% if not forloop.last %},{% endif %}
+                            {% endfor %}
+                        ]
+                    }]
+                });
+            {% endif %}
          });
      </script>
 {% endblock %}
