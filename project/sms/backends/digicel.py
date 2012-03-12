@@ -29,20 +29,21 @@ from xml.etree import ElementTree
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.encoding import force_unicode
+from django.utils.translation import ugettext_lazy as _
 
 from sms.backends.base import BaseSmsBackend
 
 DIGICEL_API_URL = 'https://smsenlot.digicelhaiti.com:8443/bulksms/BulkSMSHTTP'
 DIGICEL_RESPONSE_STATUS_CODES = {
-    0: 'Message submitted successfully',
-    -1: 'System Error',
-    50: 'Authentication Error',
-    51: 'Message is too long (must be <= 160 characters)',
-    52: 'Phone number validation error',
-    53: 'Message is null or empty',
-    54: 'Exceeded the maximum amount of destination numbers',
-    55: 'Schedule is set before current time',
-    56: 'Schedule is set for out-of-services hours'
+    0: _('Message submitted successfully'),
+    -1: _('System Error'),
+    50: _('Authentication Error'),
+    51: _('Message is too long (must be <= 160 characters)'),
+    52: _('Phone number validation error'),
+    53: _('Message is null or empty'),
+    54: _('Exceeded the maximum amount of destination numbers'),
+    55: _('Schedule is set before current time'),
+    56: _('Schedule is set for out-of-services hours')
 }
 
 class SmsBackend(BaseSmsBackend):

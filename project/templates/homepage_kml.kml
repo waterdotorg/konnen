@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+{% load i18n %}<?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2">
     <Document>
     <name>Konnen KML</name>
@@ -45,9 +45,9 @@
                     <description><![CDATA[
                         {% if user_is_authenticated %}
                             <p>
-                                Chlorine Level: {{ location.chlorine_level }}% <br />
-                                {% if location.uid %}Location ID: {{ location.uid }} <br />{% endif %}
-                                <strong><a href="{{ location.get_absolute_url }}">Details&raquo;</a></strong>
+                                {% trans "Chlorine Level:" %} {{ location.chlorine_level }}% <br />
+                                {% if location.uid %}{% trans "Location ID:" %} {{ location.uid }} <br />{% endif %}
+                                <strong><a href="{{ location.get_absolute_url }}">{% trans "Details" %}&raquo;</a></strong>
                             </p>
                         {% endif %}
                     ]]></description>

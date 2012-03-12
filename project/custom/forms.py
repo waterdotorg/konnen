@@ -1,4 +1,6 @@
 from django import forms
+from django.utils.translation import ugettext_lazy as _
+
 from custom.models import Location, LocationSubscription
 
 class LocationSubscriptionForm(forms.Form):
@@ -16,22 +18,24 @@ class LocationSubscriptionForm(forms.Form):
 
     def clean_user_id(self, *args, **kwargs):
         if self.user.id != int(self.cleaned_data['user_id']):
-            raise forms.ValidationError('Invalid request. You can only update your subscriptions.')
+            raise forms.ValidationError(_('Invalid request. You can only update your subscriptions.'))
         return self.cleaned_data['user_id']
 
     def clean_location_id(self, *args, **kwargs):
         try:
             Location.objects.get(id=self.cleaned_data['location_id'])
         except:
-            raise forms.ValidationError('Invalid location submitted.')
+            raise forms.ValidationError(_('Invalid location submitted.'))
         return self.cleaned_data['location_id']
 
     def clean_email_subscription(self, *args, **kwargs):
             if not self.user.email:
-                raise forms.ValidationError('Please add your email address on the settings page before subscribing to alerts.')
+                raise forms.ValidationError(_('Please add your email address on the settings page before '
+                                                          'subscribing to alerts.'))
             return self.cleaned_data['email_subscription']
 
     def clean_phone_subscription(self, *args, **kwargs):
         if not self.user.get_profile().mobile:
-            raise forms.ValidationError('Please add your mobile number on the settings page before subscribing to SMS alerts.')
+            raise forms.ValidationError(_('Please add your mobile number on the settings page before '
+                                                      'subscribing to SMS alerts.'))
         return self.cleaned_data['phone_subscription']

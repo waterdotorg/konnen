@@ -1,6 +1,7 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block main %}
-    <h2>Successfully logged out.</h2>
-    <p>Thanks for spending some quality time with the website today.</p>
+    <h2>{% trans "Successfully logged out." %}</h2>
+    <p>{% trans "Thanks for spending some quality time with the website today." %}</p>
 {% endblock %}
