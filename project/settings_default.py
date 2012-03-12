@@ -2,6 +2,10 @@
 from os import path
 PROJECT_ROOT = path.dirname(path.abspath(__file__))
 
+# This is defined here as a do-nothing function because we can't import
+# django.utils.translation -- that module depends on the settings.
+gettext_noop = lambda s: s
+
 ##################################################################
 # Set following variables in settings_dev_private.py and/or settings_production_private.py #
 ##################################################################
@@ -114,6 +118,7 @@ TEMPLATE_LOADERS = (
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -217,3 +222,10 @@ HAYSTACK_WHOOSH_PATH = path.join(PROJECT_ROOT, "custom_haystack/whoosh/site_inde
 ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window
 
 LOGIN_REDIRECT_URL = '/'
+
+LANGUAGES = (
+    ('en', gettext_noop('English')),
+    ('ht', gettext_noop('Haitian Creole')),
+)
+
+LANGUAGE_CODE = 'ht'
