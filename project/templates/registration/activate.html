@@ -1,6 +1,7 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block main %}
-    <h2>Activation failed</h2>
-    <p>Account activation failed for key {{ activation_key }}.</p>
+    <h2>{% trans "Activation failed" %}</h2>
+    <p>{% trans "Account activation failed for key" %} {{ activation_key }}.</p>
 {% endblock %}

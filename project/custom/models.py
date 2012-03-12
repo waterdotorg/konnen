@@ -4,6 +4,7 @@ from decimal import Decimal
 
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
 from countries.models import Country
 
@@ -13,7 +14,7 @@ class Community(models.Model):
     updated_date = models.DateTimeField(auto_now=True)
 
     class Meta:
-        verbose_name_plural = "communities"
+        verbose_name_plural = _("communities")
 
     def __unicode__(self):
         return u'%s' % self.title
@@ -33,11 +34,11 @@ class Location(models.Model):
     HIDDEN_STATUS = 4
 
     STATUS_CHOICES = (
-        (PENDING_STATUS, 'Pending'),
-        (ACTIVE_STATUS, 'Active'),
-        (COMPLETE_STATUS, 'Complete'),
-        (CANCELLED_STATUS, 'Cancelled'),
-        (HIDDEN_STATUS, 'Hidden'),
+        (PENDING_STATUS, _('Pending')),
+        (ACTIVE_STATUS, _('Active')),
+        (COMPLETE_STATUS, _('Complete')),
+        (CANCELLED_STATUS, _('Cancelled')),
+        (HIDDEN_STATUS, _('Hidden')),
     )
 
     title = models.CharField(max_length=256)
@@ -93,10 +94,10 @@ class LocationSubscription(models.Model):
     EMAIL_WEEKLY_FREQ = 'weekly'
 
     EMAIL_FREQ_CHOICES = (
-        (EMAIL_NONE_FREQ, 'None'),
-        (EMAIL_IMMEDIATE_FREQ, 'Immediate'),
-        (EMAIL_DAILY_FREQ, 'Daily'),
-        (EMAIL_WEEKLY_FREQ, 'Weekly'),
+        (EMAIL_NONE_FREQ, _('None')),
+        (EMAIL_IMMEDIATE_FREQ, _('Immediate')),
+        (EMAIL_DAILY_FREQ, _('Daily')),
+        (EMAIL_WEEKLY_FREQ, _('Weekly')),
     )
 
     user = models.ForeignKey(User)
@@ -143,17 +144,17 @@ class LocationPost(models.Model):
     HIDDEN_STATUS = 4
 
     STATUS_CHOICES = (
-        (PENDING_STATUS, 'Pending'),
-        (ACTIVE_STATUS, 'Active'),
-        (COMPLETE_STATUS, 'Complete'),
-        (CANCELLED_STATUS, 'Cancelled'),
-        (HIDDEN_STATUS, 'Hidden'),
+        (PENDING_STATUS, _('Pending')),
+        (ACTIVE_STATUS, _('Active')),
+        (COMPLETE_STATUS, _('Complete')),
+        (CANCELLED_STATUS, _('Cancelled')),
+        (HIDDEN_STATUS, _('Hidden')),
     )
 
     WATER_QUALITY_TYPE = 'water_quality'
 
     TYPE_CHOICES = (
-        (WATER_QUALITY_TYPE, 'Water Quality'),
+        (WATER_QUALITY_TYPE, _('Water Quality')),
     )
 
     user = models.ForeignKey(User)
