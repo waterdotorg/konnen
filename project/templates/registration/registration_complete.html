@@ -1,6 +1,7 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block main %}
-    <h2>Thanks, for signing up!</h2>
-    <p>We're sending you an email with instructions to activate your account.</p>
+    <h2>{% trans "Thanks, for signing up!" %}</h2>
+    <p>{% trans "We're sending you an email with instructions to activate your account." %}</p>
 {% endblock %}

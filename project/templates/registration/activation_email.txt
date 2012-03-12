@@ -1,5 +1,9 @@
-Thanks for joining {{ site.domain }}. Please click on the link below
+{% load i18n %}
+
+{% blocktrans with site_domain=site.domain %}
+Thanks for joining {{ site_domain }}. Please click on the link below
 (or copy and paste it into your browser) to activate your account:
+{% endblocktrans %}
 
 
 http://{{ site.domain }}{% url registration_activate activation_key=activation_key %}

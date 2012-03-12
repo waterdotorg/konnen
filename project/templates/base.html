@@ -1,3 +1,4 @@
+{% load i18n %}
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js ie7 oldie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"> <![endif]-->
@@ -27,7 +28,7 @@
         <div id="header-upper-wrap">
             <div id="header-upper" class="container">
                 <div id="header-upper-inner" class="container-inner">
-                    <div class="flavour-toggle"><a href="?flavour=full">Full Site</a> | <a href="?flavour=mobile">Lite Site</a></div>
+                    <div class="flavour-toggle"><a href="?flavour=full">{% trans "Full Site" %}</a> | <a href="?flavour=mobile">{% trans "Lite Site" %}</a></div>
                 </div>
             </div>
         </div>

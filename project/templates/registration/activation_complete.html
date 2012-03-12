@@ -1,6 +1,7 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block main %}
-    <h2>Account Activation Completed!</h2>
-    <p>Your account is now active. <a href="{% url auth_login %}">Log in &raquo;</a></p>
+    <h2>{% trans "Account Activation Completed!" %}</h2>
+    <p>{% trans "Your account is now active." %} <a href="{% url auth_login %}">{% trans "Log in" %} &raquo;</a></p>
 {% endblock %}

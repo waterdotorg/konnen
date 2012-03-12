@@ -1,4 +1,5 @@
 {% extends "layouts/lay1col.html" %}
+{% load i18n %}
 {% load markup %}
 {% load sorting_tags %}
 {% load thumbnail %}
@@ -14,8 +15,8 @@
                 <th></th>
                 <th>{% anchor title Name %}</th>
                 <th>{% anchor uid ID %}</th>
-                <th>Email</th>
-                <th>Mobile</th>
+                <th>{% trans "Email" %}</th>
+                <th>{% trans "Mobile" %}</th>
                 <th></th>
             </tr>
         </thead>
@@ -35,19 +36,19 @@
                     <td class="location-uid">{{ location.uid }}</td>
                     <td class="location-email-subscribe">
                         <select class="email-subscribe" name="email_subscription">
-                            <option value="none"{% if location.is_subscribed and location.email_subscription == "none" %} selected="selected"{% endif %}>None</option>
-                            <option value="immediate"{% if location.is_subscribed and location.email_subscription == "immediate" %} selected="selected"{% endif %}>Immediate</option>
-                            <option value="daily"{% if location.is_subscribed and location.email_subscription == "daily" %} selected="selected"{% endif %}>Daily</option>
-                            <option value="weekly"{% if location.is_subscribed and location.email_subscription == "weekly" %} selected="selected"{% endif %}>Weekly</option>
+                            <option value="none"{% if location.is_subscribed and location.email_subscription == "none" %} selected="selected"{% endif %}>{% trans "None" %}</option>
+                            <option value="immediate"{% if location.is_subscribed and location.email_subscription == "immediate" %} selected="selected"{% endif %}>{% trans "Immediate" %}</option>
+                            <option value="daily"{% if location.is_subscribed and location.email_subscription == "daily" %} selected="selected"{% endif %}>{% trans "Daily" %}</option>
+                            <option value="weekly"{% if location.is_subscribed and location.email_subscription == "weekly" %} selected="selected"{% endif %}>{% trans "Weekly" %}</option>
                         </select>
                     </td>
                     <td class="location-phone-subscribe">
                         <input type="checkbox" class="phone_subscription"
-                               name="phone_subscription"{% if location.is_subscribed and location.phone_subscription %} checked="checked"{% endif %}> SMS Alert
+                               name="phone_subscription"{% if location.is_subscribed and location.phone_subscription %} checked="checked"{% endif %}> {% trans "SMS Alert" %}
                     </td>
                     <td class="location-subscription-toggle">
                         <a {% if not location.is_subscribed %}style="display:none;" {% endif %}class="location-subscription {% if not location.is_subscribed %}un{% endif %}subscribed" href="#">
-                            Unsubscribe
+                            {% trans "Unsubscribe" %}
                         </a>
                     </td>
                 </tr>
@@ -74,7 +75,7 @@
                             $("#notify-wrapper").notify("create",
                                 "notify-basic-template",
                                 {
-                                    text: 'Location settings updated successfully.'
+                                    text: "{% trans 'Location settings updated successfully.' %}"
                                 }
                             );
                         }

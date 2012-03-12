@@ -1,13 +1,14 @@
 {% extends "layouts/lay2col.html" %}
+{% load i18n %}
 
-{% block title %}Page Not Found{% endblock %}
+{% block title %}{% trans "Page Not Found" %}{% endblock %}
 
 {% block body_class %}{{ block.super }} page-not-found{% endblock %}
 
 {% block main_col1 %}
-    <h1 class="title">Page Not Found</h1>
+    <h1 class="title">{% trans "Page Not Found" %}</h1>
     <p>
-        Sorry, but the page you were trying to view does not exist. It looks like this was the result of either a
-        mistyped address or an out-of-date link.
+        {% trans "Sorry, but the page you were trying to view does not exist. It looks like this was the result of either a
+        mistyped address or an out-of-date link." %}
     </p>
 {% endblock %}
