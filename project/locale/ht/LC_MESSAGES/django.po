@@ -1,0 +1,504 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-03-12 19:29+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: custom/forms.py:21
+msgid "Invalid request. You can only update your subscriptions."
+msgstr "Envalid demann. Ou kapab sèlman mete ajou abonnements ou."
+
+#: custom/forms.py:28
+msgid "Invalid location submitted."
+msgstr ""
+
+#: custom/forms.py:33
+msgid ""
+"Please add your email address on the settings page before subscribing to "
+"alerts."
+msgstr ""
+
+#: custom/forms.py:39
+msgid ""
+"Please add your mobile number on the settings page before subscribing to SMS "
+"alerts."
+msgstr ""
+
+#: custom/models.py:17
+msgid "communities"
+msgstr ""
+
+#: custom/models.py:37 custom/models.py:147
+msgid "Pending"
+msgstr ""
+
+#: custom/models.py:38 custom/models.py:148
+msgid "Active"
+msgstr ""
+
+#: custom/models.py:39 custom/models.py:149
+msgid "Complete"
+msgstr ""
+
+#: custom/models.py:40 custom/models.py:150
+msgid "Cancelled"
+msgstr ""
+
+#: custom/models.py:41 custom/models.py:151
+msgid "Hidden"
+msgstr ""
+
+#: custom/models.py:97 templates/location/browse.html:39
+#: templates/location/location.html:33
+msgid "None"
+msgstr ""
+
+#: custom/models.py:98 templates/location/browse.html:40
+#: templates/location/location.html:34
+msgid "Immediate"
+msgstr "Imedyat"
+
+#: custom/models.py:99 templates/location/browse.html:41
+#: templates/location/location.html:35 templates/location/location.html:277
+msgid "Daily"
+msgstr ""
+
+#: custom/models.py:100 templates/location/browse.html:42
+#: templates/location/location.html:36
+msgid "Weekly"
+msgstr ""
+
+#: custom/models.py:157
+msgid "Water Quality"
+msgstr ""
+
+#: custom/templatetags/custom_filters.py:17
+#, python-format
+msgid "%d year"
+msgid_plural "%d years"
+msgstr[0] ""
+msgstr[1] ""
+
+#: custom/templatetags/custom_filters.py:21
+#, python-format
+msgid "%d week"
+msgid_plural "%d weeks"
+msgstr[0] ""
+msgstr[1] ""
+
+#: custom/templatetags/custom_filters.py:24
+#, python-format
+msgid "%d day"
+msgid_plural "%d days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: custom/templatetags/custom_filters.py:28
+#, python-format
+msgid "%d hour"
+msgid_plural "%d hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: custom/templatetags/custom_filters.py:32
+#, python-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: custom/templatetags/custom_filters.py:34
+msgid "a few seconds"
+msgstr ""
+
+#: custom_user/forms.py:23
+#, python-format
+msgid "The username %s is already registered."
+msgstr ""
+
+#: custom_user/forms.py:26
+msgid ""
+"Username field may only contain alpha-numeric characters, hypens or "
+"underscores."
+msgstr ""
+
+#: custom_user/forms.py:32
+#, python-format
+msgid "The email %s is already registered."
+msgstr ""
+
+#: custom_user/forms.py:39
+msgid "Image file size is over the allowed maximum."
+msgstr ""
+
+#: custom_user/views.py:34
+msgid "Account settings have been updated."
+msgstr ""
+
+#: sms/backends/digicel.py:38
+msgid "Message submitted successfully"
+msgstr ""
+
+#: sms/backends/digicel.py:39
+msgid "System Error"
+msgstr ""
+
+#: sms/backends/digicel.py:40
+msgid "Authentication Error"
+msgstr ""
+
+#: sms/backends/digicel.py:41
+msgid "Message is too long (must be <= 160 characters)"
+msgstr ""
+
+#: sms/backends/digicel.py:42
+msgid "Phone number validation error"
+msgstr ""
+
+#: sms/backends/digicel.py:43
+msgid "Message is null or empty"
+msgstr ""
+
+#: sms/backends/digicel.py:44
+msgid "Exceeded the maximum amount of destination numbers"
+msgstr ""
+
+#: sms/backends/digicel.py:45
+msgid "Schedule is set before current time"
+msgstr ""
+
+#: sms/backends/digicel.py:46
+msgid "Schedule is set for out-of-services hours"
+msgstr ""
+
+#: templates/404.html:4 templates/404.html.py:9
+msgid "Page Not Found"
+msgstr ""
+
+#: templates/base.html:31
+msgid "Full Site"
+msgstr ""
+
+#: templates/base.html:31
+msgid "Lite Site"
+msgstr ""
+
+#: templates/homepage.html:23
+msgid "Mine"
+msgstr ""
+
+#: templates/homepage.html:28 templates/location/location.html:217
+msgid "Chlorine Levels"
+msgstr ""
+
+#: templates/homepage.html:43
+msgid "Source Type"
+msgstr ""
+
+#: templates/homepage.html:59
+msgid "Provider"
+msgstr ""
+
+#: templates/location/browse.html:18 templates/settings/account.html:29
+msgid "Email"
+msgstr ""
+
+#: templates/location/browse.html:19 templates/settings/account.html:34
+msgid "Mobile"
+msgstr ""
+
+#: templates/location/browse.html:47 templates/location/location.html:40
+msgid "SMS Alert"
+msgstr ""
+
+#: templates/location/browse.html:51 templates/location/location.html:25
+#: templates/location/location.html:138 templates/location/location.html:139
+#: templates/location/location.html:174 templates/location/location.html:176
+#: templates/location/location.html:191
+msgid "Unsubscribe"
+msgstr ""
+
+#: templates/location/browse.html:78
+msgid "Location settings updated successfully."
+msgstr ""
+
+#: templates/location/location.html:25 templates/location/location.html:141
+msgid "Subscribe"
+msgstr "Abònman"
+
+#: templates/location/location.html:31
+msgid "Email:"
+msgstr ""
+
+#: templates/location/location.html:43 templates/settings/account.html:53
+msgid "Submit"
+msgstr ""
+
+#: templates/location/location.html:51
+msgid "ID:"
+msgstr ""
+
+#: templates/location/location.html:56
+msgid "Chlorine Level:"
+msgstr ""
+
+#: templates/location/location.html:60
+msgid "Test Date:"
+msgstr ""
+
+#: templates/location/location.html:73 templates/member/profile.html:20
+msgid "Updates"
+msgstr ""
+
+#: templates/location/location.html:82 templates/member/profile.html:32
+msgid "Chlorine level:"
+msgstr ""
+
+#: templates/location/location.html:85 templates/member/profile.html:36
+msgid "ago"
+msgstr ""
+
+#: templates/location/location.html:94
+msgid "Subscribers"
+msgstr ""
+
+#: templates/location/location.html:94
+msgid "Digest"
+msgstr ""
+
+#: templates/location/location.html:152 templates/location/location.html:162
+msgid "Error"
+msgstr ""
+
+#: templates/location/location.html:194
+msgid "Please select Email and/or SMS alerts."
+msgstr ""
+
+#: templates/location/location.html:213
+msgid "Water Quality Report"
+msgstr ""
+
+#: templates/location/location.html:227
+msgid "Date"
+msgstr ""
+
+#: templates/location/location.html:232
+msgid "Chlorine Level (%)"
+msgstr ""
+
+#: templates/location/location.html:289
+msgid "Global Avg."
+msgstr ""
+
+#: templates/member/profile.html:46
+msgid "Locations Served"
+msgstr ""
+
+#: templates/registration/activate.html:5
+msgid "Activation failed"
+msgstr ""
+
+#: templates/registration/activate.html:6
+msgid "Account activation failed for key"
+msgstr ""
+
+#: templates/registration/activation_complete.html:5
+msgid "Account Activation Completed!"
+msgstr ""
+
+#: templates/registration/activation_complete.html:6
+msgid "Your account is now active."
+msgstr ""
+
+#: templates/registration/activation_complete.html:6
+#: templates/registration/login.html:4
+#: templates/registration/password_reset_complete.html:9
+#: templates/registration/registration_form.html:10
+msgid "Log in"
+msgstr ""
+
+#: templates/registration/login.html:9 templates/registration/login.html:17
+msgid "Sign In"
+msgstr ""
+
+#: templates/registration/login.html:10
+msgid "Need an account?"
+msgstr ""
+
+#: templates/registration/login.html:10
+#: templates/registration/registration_form.html:4
+#: templates/registration/registration_form.html:9
+#: templates/registration/registration_form.html:17
+msgid "Join"
+msgstr ""
+
+#: templates/registration/login.html:21
+msgid "Forgot your password?"
+msgstr ""
+
+#: templates/registration/logout.html:5
+msgid "Successfully logged out."
+msgstr ""
+
+#: templates/registration/logout.html:6
+msgid "Thanks for spending some quality time with the website today."
+msgstr ""
+
+#: templates/registration/password_reset_complete.html:4
+#: templates/registration/password_reset_complete.html:7
+msgid "Password reset complete"
+msgstr ""
+
+#: templates/registration/password_reset_complete.html:8
+msgid "Your password has been set.  You may go ahead and log in now."
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:4
+#: templates/registration/password_reset_form.html:4
+msgid "Password reset"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:8
+msgid "Enter new password"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:9
+msgid ""
+"Please enter your new password twice so we can verify you typed it in "
+"correctly."
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:12
+msgid "New password:"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:14
+msgid "Confirm password:"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:15
+msgid "Change my password"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:18
+msgid "Password reset unsuccessful"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:19
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used. Please request a new password reset."
+msgstr ""
+
+#: templates/registration/password_reset_done.html:4
+#: templates/registration/password_reset_done.html:6
+msgid "Password reset successful"
+msgstr ""
+
+#: templates/registration/password_reset_done.html:7
+msgid ""
+"We've e-mailed you instructions for setting your password to the e-mail "
+"address you submitted. You should be receiving it shortly."
+msgstr ""
+
+#: templates/registration/password_reset_email.html:2
+#, python-format
+msgid ""
+"You're receiving this e-mail because you requested a password reset for your "
+"user account at %(site_name)s."
+msgstr ""
+
+#: templates/registration/password_reset_email.html:4
+msgid "Please go to the following page and choose a new password:"
+msgstr ""
+
+#: templates/registration/password_reset_email.html:8
+msgid "Your username, in case you've forgotten:"
+msgstr ""
+
+#: templates/registration/password_reset_email.html:10
+msgid "Thanks for using our site!"
+msgstr ""
+
+#: templates/registration/password_reset_email.html:12
+#, python-format
+msgid "The %(site_name)s team"
+msgstr ""
+
+#: templates/registration/password_reset_form.html:8
+msgid ""
+"Forgotten your password? Enter your e-mail address below, and we'll e-mail "
+"instructions for setting a new one."
+msgstr ""
+
+#: templates/registration/password_reset_form.html:12
+msgid "E-mail address:"
+msgstr ""
+
+#: templates/registration/password_reset_form.html:12
+msgid "Reset my password"
+msgstr ""
+
+#: templates/registration/registration_closed.html:5
+msgid "Registration Closed"
+msgstr ""
+
+#: templates/registration/registration_closed.html:6
+msgid "Registration is currently closed."
+msgstr ""
+
+#: templates/registration/registration_complete.html:5
+msgid "Thanks, for signing up!"
+msgstr ""
+
+#: templates/registration/registration_complete.html:6
+msgid "We're sending you an email with instructions to activate your account."
+msgstr ""
+
+#: templates/registration/registration_form.html:10
+msgid "Already registered?"
+msgstr ""
+
+#: templates/settings/account.html:5
+msgid "Settings - Account"
+msgstr ""
+
+#: templates/settings/account.html:14
+msgid "Username"
+msgstr ""
+
+#: templates/settings/account.html:19
+msgid "First Name"
+msgstr ""
+
+#: templates/settings/account.html:24
+msgid "Last Name"
+msgstr ""
+
+#: templates/settings/account.html:39
+msgid "About"
+msgstr ""
+
+#: templates/settings/account.html:44
+msgid "Image"
+msgstr ""
+
+#: templates/settings/account.html:46
+msgid "Maximum size of 4mb."
+msgstr ""
+
+#: templates/settings/account.html:49
+msgid "Delete image"
+msgstr ""
