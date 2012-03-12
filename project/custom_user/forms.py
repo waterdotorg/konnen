@@ -2,6 +2,7 @@ import re
 
 from django import forms
 from django.contrib.auth.models import User
+from django.utils.translation import ugettext_lazy as _
 
 class SettingsAccountForm(forms.Form):
     username = forms.CharField(max_length=30)
@@ -19,23 +20,23 @@ class SettingsAccountForm(forms.Form):
     def clean_username(self, *args, **kwargs):
         existing_users = User.objects.filter(username=self.cleaned_data['username'])
         if existing_users and existing_users[0].pk != self.user.pk:
-            raise forms.ValidationError('The username %s is already registered.' % self.cleaned_data['username'])
+            raise forms.ValidationError(_('The username %s is already registered.') % self.cleaned_data['username'])
         regex_username = re.search(r'[a-zA-Z0-9\-_\+\$@\.]+', self.cleaned_data['username'])
         if (self.cleaned_data['username'] != regex_username.group(0)):
-            raise forms.ValidationError('Username field may only contain alpha-numeric characters, hypens or underscores.')
+            raise forms.ValidationError(_('Username field may only contain alpha-numeric characters, hypens or underscores.'))
         return self.cleaned_data['username']
 
     def clean_email(self, *args, **kwargs):
         existing_users = User.objects.filter(email=self.cleaned_data['email']).exclude(pk=self.user.pk)
         if existing_users and self.cleaned_data['email']:
-            raise forms.ValidationError('The email %s is already registered.' % self.cleaned_data['email'])
+            raise forms.ValidationError(_('The email %s is already registered.') % self.cleaned_data['email'])
         return self.cleaned_data['email']
 
     def clean_image(self, *args, **kwargs):
         data = self.cleaned_data['image']
         # Limit uploaded images to 4096k
         if data and data.size > 4194304:
-            raise forms.ValidationError('Image file size is over the allowed maximum.')
+            raise forms.ValidationError(_('Image file size is over the allowed maximum.'))
         return self.cleaned_data['image']
 
     def apply_to_user(self, files):

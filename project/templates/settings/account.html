@@ -11,46 +11,46 @@
         <form enctype="multipart/form-data" method="POST" action="{% url settings_account %}">{% csrf_token %}
             <p>
                 {{ form.username.errors }}
-                <label for="id_username">Username</label>
+                <label for="id_username">{% trans "Username" %}</label>
                 {{ form.username }}
             </p>
             <p>
                 {{ form.first_name.errors }}
-                <label for="id_first_name">First Name</label>
+                <label for="id_first_name">{% trans "First Name" %}</label>
                 {{ form.first_name }}
             </p>
             <p>
                 {{ form.last_name.errors }}
-                <label for="id_last_name">Last Name</label>
+                <label for="id_last_name">{% trans "Last Name" %}</label>
                 {{ form.last_name }}
             </p>
             <p>
                 {{ form.email.errors }}
-                <label for="id_email">Email</label>
+                <label for="id_email">{% trans "Email" %}</label>
                 {{ form.email }}
             </p>
             <p>
                 {{ form.mobile.errors }}
-                <label for="id_mobile">Mobile</label>
+                <label for="id_mobile">{% trans "Mobile" %}</label>
                 {{ form.mobile }}
             </p>
             <p>
                 {{ form.content.errors }}
-                <label for="id_content">About</label>
+                <label for="id_content">{% trans "About" %}</label>
                 {{ form.content }}
             </p>
             <p id="profile-image">
                 {{ form.image.errors }}
-                <label for="id_image">Image</label>
+                <label for="id_image">{% trans "Image" %}</label>
                 {{ form.image }}
-                <span class="help-text">Maximum size of 4mb.</span>
+                <span class="help-text">{% trans "Maximum size of 4mb." %}</span>
                 {% if profile.image %}
                     <img src="{% thumbnail profile.image 50x50 crop='smart' %}" />
-                    <a href="{% url settings_remove_profile_image %}">Delete image &raquo;</a>
+                    <a href="{% url settings_remove_profile_image %}">{% trans "Delete image" %} &raquo;</a>
                 {% endif %}
             </p>
             <p class="submit-settings-wrapper">
-                <input id="submit-settings" class="form-submit-button" type="submit" value="Submit" />
+                <input id="submit-settings" class="form-submit-button" type="submit" value="{% trans 'Submit' %}" />
             </p>
         </form>
     </div>

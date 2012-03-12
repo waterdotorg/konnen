@@ -6,15 +6,15 @@
 {% block body_class %}account{% endblock %}
 
 {% block main %}
-    <h2>Join</h2>
-    <div id="reg-login"><p>Already registered? <a href="{% url auth_login %}">Log in &raquo;</a></p></div>
+    <h2>{% trans "Join" %}</h2>
+    <div id="reg-login"><p>{% trans "Already registered?" %} <a href="{% url auth_login %}">{% trans "Log in" %} &raquo;</a></p></div>
     <div class="col1">
         <div class="account-form">
             <form method="POST" action="{% url registration_register %}">{% csrf_token %}
                 {{ form.as_p }}
                 <input type="hidden" name="next" value="{{ next }}" />
                 <p>
-                    <input class="form-submit-button" type="submit" value="Join" />
+                    <input class="form-submit-button" type="submit" value="{% trans 'Join' %}" />
                 </p>
             </form>
         </div>

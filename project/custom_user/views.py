@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.template.context import RequestContext
+from django.utils.translation import ugettext_lazy as _
 
 from custom.models import LocationPost
 from custom_user.forms import SettingsAccountForm
@@ -30,7 +31,7 @@ def settings_account(request):
 
     if request.method == 'POST' and settings_account_form.is_valid():
         settings_account_form.apply_to_user(files)
-        messages.add_message(request, messages.SUCCESS, 'Account settings have been updated.')
+        messages.add_message(request, messages.SUCCESS, _('Account settings have been updated.'))
         return redirect('settings_account')
     return render_to_response('settings/account.html',
         {

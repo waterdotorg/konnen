@@ -1,5 +1,6 @@
 {% extends "layouts/lay2col.html" %}
 {% load custom_filters %}
+{% load i18n %}
 {% load thumbnail %}
 {% load markup %}
 
@@ -16,7 +17,7 @@
 
 {% block main_col1 %}
      <div class="posts-wrapper">
-         <p>Updates</p>
+         <p>{% trans "Updates" %}</p>
          <table>
              <tbody>
                  {% for location_post in location_posts %}
@@ -28,11 +29,11 @@
                                 </a>
                              </div>
                              {% if location_post.chlorine_level %}
-                                <div class="chlorine-level">Chlorine level: <strong>{{ location_post.chlorine_level }}%</strong></div>
+                                <div class="chlorine-level">{% trans "Chlorine level:" %} <strong>{{ location_post.chlorine_level }}%</strong></div>
                              {% endif %}
                              {{ location_post.content|markdown }}
                          </td>
-                         <td class="published-date">{{ location_post.published_date|custom_timesince }} ago</td>
+                         <td class="published-date">{{ location_post.published_date|custom_timesince }} {% trans "ago" %}</td>
                      </tr>
                  {% endfor %}
              </tbody>
@@ -42,7 +43,7 @@
 
 {% block main_col3 %}
     {% if locations_served %}
-        <p>Locations Served</p>
+        <p>{% trans "Locations Served" %}</p>
         <table>
             <tbody>
                 {% for location in locations_served %}

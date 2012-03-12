@@ -1,4 +1,5 @@
 {% extends "layouts/lay2col.html" %}
+{% load i18n %}
 {% load custom_filters %}
 {% load thumbnail %}
 {% load markup %}
@@ -21,25 +22,25 @@
             <div class="subscription">
                 <div class="location-subscription-toggle">
                     <a id="location-subscription" href="#">
-                        {% if user_is_subscribed %}Unsubscribe{% else %}Subscribe{% endif %}
+                        {% if user_is_subscribed %}{% trans "Unsubscribe" %}{% else %}{% trans "Subscribe" %}{% endif %}
                     </a>
                 </div>
                 <div id="location-subscription-form-wrapper" style="display:none;">
                     <form id="location-subscription-form" action="." method="POST">
                         <p>
-                            <label>Email:</label>
+                            <label>{% trans "Email:" %}</label>
                             <select class="email-subscribe" name="email_subscription">
-                                <option value="none">None</option>
-                                <option value="immediate">Immediate</option>
-                                <option value="daily" selected="selected">Daily</option>
-                                <option value="weekly">Weekly</option>
+                                <option value="none">{% trans "None" %}</option>
+                                <option value="immediate">{% trans "Immediate" %}</option>
+                                <option value="daily" selected="selected">{% trans "Daily" %}</option>
+                                <option value="weekly">{% trans "Weekly" %}</option>
                             </select>
                         </p>
                         <p>
-                            <input type="checkbox" class="phone_subscription" name="phone_subscription" checked="checked"> SMS Alert
+                            <input type="checkbox" class="phone_subscription" name="phone_subscription" checked="checked"> {% trans "SMS Alert" %}
                         </p>
                         <p class="form-submit-button-wrapper">
-                            <input class="form-submit-button" type="submit" value="Submit">
+                            <input class="form-submit-button" type="submit" value="{% trans 'Submit' %}">
                         </p>
                     </form>
                 </div>
@@ -47,16 +48,16 @@
             <h1 class="title">{{ location.title }}</h1>
             <table class="details">
                 <tr>
-                    <td class="label">ID:</td>
+                    <td class="label">{% trans "ID:" %}</td>
                     <td class="value">{{ location.uid }}</td>
                 </tr>
                 {% if latest_water_quality_location_post %}
                 <tr>
-                    <td class="label">Chlorine Level:</td>
+                    <td class="label">{% trans "Chlorine Level:" %}</td>
                     <td class="value">{{ latest_water_quality_location_post.chlorine_level }}%</td>
                 </tr>
                 <tr>
-                    <td class="label">Test Date:</td>
+                    <td class="label">{% trans "Test Date:" %}</td>
                     <td class="value">{{ latest_water_quality_location_post.published_date|date:"Y.m.d" }}</td>
                 </tr>
                 {% endif %}
@@ -69,7 +70,7 @@
 
 {% block main_col1 %}
     <div class="posts-wrapper">
-        <p>Updates</p>
+        <p>{% trans "Updates" %}</p>
         <table>
             <tbody>
                 {% for location_post in location_posts %}
@@ -78,10 +79,10 @@
                             <a href="{{ location_post.user.get_profile.get_absolute_url }}">{{ location_post.user.get_profile.mobile }}</a><br />
                             {{ location_post.content|markdown }}
                             {% if location_post.chlorine_level %}
-                                <div class="chlorine-level">Chlorine level: {{ location_post.chlorine_level }}%</div>
+                                <div class="chlorine-level">{% trans "Chlorine level:" %} {{ location_post.chlorine_level }}%</div>
                              {% endif %}
                         </td>
-                        <td class="published-date">{{ location_post.published_date|custom_timesince }} ago</td>
+                        <td class="published-date">{{ location_post.published_date|custom_timesince }} {% trans "ago" %}</td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -90,7 +91,7 @@
 {% endblock %}
 {% block main_col3 %}
     <div class="subscriptions-wrapper">
-        <p>Subscribers ({{ location_subscriptions.count }}) ** = Digest</p>
+        <p>{% trans "Subscribers" %} ({{ location_subscriptions.count }}) ** = {% trans "Digest" %}</p>
         <table>
             <tbody>
             {% for location_subscription in location_subscriptions %}
@@ -134,10 +135,10 @@
                      cache: false,
                      success: function(data, textStatus, jqXHR) {
                          if (data['success']) {
-                             if ($("#location-subscription").text().indexOf("Unsubscribe") == -1) {
-                                  $("#location-subscription").text("Unsubscribe");
+                             if ($("#location-subscription").text().indexOf("{% trans 'Unsubscribe' %}") == -1) {
+                                  $("#location-subscription").text("{% trans 'Unsubscribe' %}");
                               } else {
-                                  $("#location-subscription").text("Subscribe");
+                                  $("#location-subscription").text("{% trans 'Subscribe' %}");
                               }
                          }
                          else {
@@ -148,7 +149,7 @@
                              $("#notify-wrapper").notify("create",
                                  "notify-basic-template",
                                  {
-                                     title: 'Error',
+                                     title: '{% trans "Error" %}',
                                      text: err_message
                                  },
                                  {
@@ -158,7 +159,7 @@
                          }
                      },
                      error: function(jqXHR, textStatus, errorThrown) {
-                         alert('Error ' + errorThrown);
+                         alert('{% trans "Error" %} ' + errorThrown);
                      }
                  });
              }
@@ -170,9 +171,9 @@
                      location_id : "{{ location.id }}",
                      email_subscription : "{{ location_subscription_email_default_value }}",
                      phone_subscription : true,
-                     subscribe : $(this).text().indexOf("Unsubscribe") == -1
+                     subscribe : $(this).text().indexOf("{% trans 'Unsubscribe' %}") == -1
                  }
-                 if ($(this).text().indexOf("Unsubscribe") != -1) {
+                 if ($(this).text().indexOf("{% trans 'Unsubscribe' %}") != -1) {
                      var timeoutID = setTimeout(function() {location_subscribe_ajax(submitted_data)}, 500);
                  }
                  else {
@@ -187,10 +188,10 @@
                      location_id : "{{ location.id }}",
                      email_subscription : $(".email-subscribe").val(),
                      phone_subscription : $(".phone_subscription").is(':checked'),
-                     subscribe : $(this).text().indexOf("Unsubscribe") == -1
+                     subscribe : $(this).text().indexOf("{% trans 'Unsubscribe' %}") == -1
                  }
                  if (submitted_data.email_subscription == 'none' && submitted_data.phone_subscription == false && submitted_data.subscribe == true) {
-                     alert('Please select Email and/or SMS alerts.');
+                     alert('{% trans "Please select Email and/or SMS alerts." %}');
                  }
                  else {
                      var timeoutID = setTimeout(function() {location_subscribe_ajax(submitted_data)}, 500);
@@ -209,11 +210,11 @@
                         zoomType: 'xy'
                     },
                     title: {
-                        text: 'Water Quality Report',
+                        text: '{% trans "Water Quality Report" %}',
                         x: -20 //center
                     },
                     subtitle: {
-                        text: 'Chlorine Levels',
+                        text: '{% trans "Chlorine Levels" %}',
                         x: -20
                     },
                     xAxis: {
@@ -223,12 +224,12 @@
                             year: '%b'
                         },
                         title: {
-                            text: 'Date'
+                            text: '{% trans "Date" %}'
                         }
                     },
                     yAxis: {
                         title: {
-                            text: 'Chlorine Level (%)',
+                            text: '{% trans "Chlorine Level (%)" %}',
                         y: -20
                     }
                     },
@@ -273,7 +274,7 @@
                         enabled: false
                     },
                     series: [{
-                        name: 'Daily',
+                        name: '{% trans "Daily" %}',
                         type: 'scatter',
                         marker: {
                             radius: 5
@@ -285,7 +286,7 @@
                         ]
                     },
                     {
-                        name: 'Global Avg.',
+                        name: '{% trans "Global Avg." %}',
                         type: 'line',
                         data: [
                             {% for site_data in site_wide_chlorine_averages %}

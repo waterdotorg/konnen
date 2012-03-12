@@ -1,4 +1,5 @@
 {% extends "layouts/lay1col.html" %}
+{% load i18n %}
 {% load markup %}
 {% load thumbnail %}
 
@@ -19,12 +20,12 @@
                 <div class="map-filter-item">
                     <p class="map-filter-title">Subscription</p>
                     <p class="checkbox-wrapper">
-                        <input class="subscription-checkbox" type="checkbox" name="my_subscribed_locations" id="my_subscribed_locations"> Mine
+                        <input class="subscription-checkbox" type="checkbox" name="my_subscribed_locations" id="my_subscribed_locations"> {% trans "Mine" %}
                     </p>
                 </div>
             {% endif %}
             <div class="map-filter-item">
-                <p class="map-filter-title">Chlorine Levels</p>
+                <p class="map-filter-title">{% trans "Chlorine Levels" %}</p>
                 <p class="checkbox-wrapper">
                     <input class="chlorine-level-checkbox" type="checkbox" name="chlorine_level_zero" id="chlorine_level_none"> <span>0.0%</span>
                 </p>
@@ -39,7 +40,7 @@
                 </p>
             </div>
             <div class="map-filter-item">
-                <p class="map-filter-title">Source Type</p>
+                <p class="map-filter-title">{% trans "Source Type" %}</p>
                 {% for water_source_type in water_source_types %}
                     <p class=checkbox-wrapper>
                         <input class="source-type-checkbox" type="checkbox" name="water_source_type_{{ water_source_type.id }}" id="water_source_type_{{ water_source_type.id }}"> {{ water_source_type.title }}
@@ -55,7 +56,7 @@
                 {% endfor %}
             </div>
             <div class="map-filter-item">
-                <p class="map-filter-title">Provider</p>
+                <p class="map-filter-title">{% trans "Provider" %}</p>
                 {% for provider in providers %}
                     <p class="checkbox-wrapper">
                         <input class="provider-checkbox" type="checkbox" name="provider_{{ provider.id }}" id="provider_{{ provider.id }}"> {{ provider.title }}
