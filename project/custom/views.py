@@ -17,7 +17,7 @@ from custom.forms import LocationSubscriptionForm
 from custom.models import Location, LocationSubscription, LocationPost, WaterSourceType, \
     Community, Provider
 from custom.utils import locations_chlorine_level_filter, locations_water_source_type_filter, \
-    locations_provider_filter
+    locations_provider_filter, locations_set_chlorine_status
 
 
 def homepage(request):
@@ -95,6 +95,7 @@ def homepage_kml(request):
     locations_processed = locations_chlorine_level_filter(locations, request)
     locations_processed = locations_water_source_type_filter(locations_processed, request)
     locations_processed = locations_provider_filter(locations_processed, request)
+    locations_processed = locations_set_chlorine_status(locations_processed)
 
     current_site = get_current_site(request)
 
