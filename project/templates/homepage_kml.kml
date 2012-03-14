@@ -55,19 +55,19 @@
                         <coordinates>{{ location.longitude }},{{ location.latitude }},0</coordinates>
                     </Point>
                     <styleUrl>
-                        {% if location.get_chlorine_level_status == 'none' %}
+                        {% if location.chlorine_level_status == 'none' %}
                             #chlorineLevelNone
                         {% endif %}
-                        {% if location.get_chlorine_level_status == 'zero' %}
+                        {% if location.chlorine_level_status == 'zero' %}
                             #chlorineLevelZero
                         {% endif %}
-                        {% if location.get_chlorine_level_status == 'low' %}
+                        {% if location.chlorine_level_status == 'low' %}
                             #chlorineLevelLow
                         {% endif %}
-                        {% if location.get_chlorine_level_status == 'pass' %}
+                        {% if location.chlorine_level_status == 'pass' %}
                             #chlorineLevelPass
                         {% endif %}
-                        {% if location.get_chlorine_level_status == 'high' %}
+                        {% if location.chlorine_level_status == 'high' %}
                             #chlorineLevelHigh
                         {% endif %}
                     </styleUrl>

@@ -1,5 +1,12 @@
 from decimal import Decimal
 
+def locations_set_chlorine_status(locations):
+    locations_processed = []
+    for location in locations:
+        location.chlorine_level_status = location.get_chlorine_level_status(location.chlorine_level)
+        locations_processed.append(location)
+    return locations_processed
+
 def locations_chlorine_level_filter(locations, request):
     if (
             not 'chlorine_level_zero' in request.GET and
