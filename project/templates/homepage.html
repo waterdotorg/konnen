@@ -1,6 +1,7 @@
 {% extends "layouts/lay1col.html" %}
 {% load i18n %}
 {% load markup %}
+{% load truncate_characters %}
 {% load thumbnail %}
 
 {% block body_class %}{{ block.super }} homepage{% endblock %}
@@ -51,7 +52,7 @@
                 <p class="map-filter-title">Community</p>
                 {% for community in communities %}
                     <p class="checkbox-wrapper">
-                        <input class="community-checkbox" type="checkbox" name="community_{{ community.id }}" id="community_{{ community.id }}"> {{ community.title }}
+                        <input class="community-checkbox" type="checkbox" name="community_{{ community.id }}" id="community_{{ community.id }}"> {{ community.title|title }}
                     </p>
                 {% endfor %}
             </div>
@@ -59,7 +60,7 @@
                 <p class="map-filter-title">{% trans "Provider" %}</p>
                 {% for provider in providers %}
                     <p class="checkbox-wrapper">
-                        <input class="provider-checkbox" type="checkbox" name="provider_{{ provider.id }}" id="provider_{{ provider.id }}"> {{ provider.title }}
+                        <input class="provider-checkbox" type="checkbox" name="provider_{{ provider.id }}" id="provider_{{ provider.id }}"> {{ provider.title|title|truncate_characters:18 }}
                     </p>
                 {% endfor %}
             </div>
