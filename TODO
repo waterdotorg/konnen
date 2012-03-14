@@ -18,5 +18,7 @@ Internationalization translation
     - make or update message file
         - django-admin.py makemessages ( from within /project/ directory)
 
+    get ht.po translated
+
     - compile message file
         - django-admin.py compilemessages
