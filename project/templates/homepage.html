@@ -44,7 +44,7 @@
                 <p class="map-filter-title">{% trans "Source Type" %}</p>
                 {% for water_source_type in water_source_types %}
                     <p class=checkbox-wrapper>
-                        <input class="source-type-checkbox" type="checkbox" name="water_source_type_{{ water_source_type.id }}" id="water_source_type_{{ water_source_type.id }}"> {{ water_source_type.title }}
+                        <input class="source-type-checkbox" type="checkbox" name="water_source_type_{{ water_source_type.id }}" id="water_source_type_{{ water_source_type.id }}"> {{ water_source_type.title|truncate_characters:18 }}
                     </p>
                 {% endfor %}
             </div>
@@ -52,7 +52,7 @@
                 <p class="map-filter-title">Community</p>
                 {% for community in communities %}
                     <p class="checkbox-wrapper">
-                        <input class="community-checkbox" type="checkbox" name="community_{{ community.id }}" id="community_{{ community.id }}"> {{ community.title|title }}
+                        <input class="community-checkbox" type="checkbox" name="community_{{ community.id }}" id="community_{{ community.id }}"> {{ community.title|title|truncate_characters:18 }}
                     </p>
                 {% endfor %}
             </div>
@@ -71,6 +71,8 @@
 
 {% block footer_js %}
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key={{ google_maps_api_key }}&sensor=false"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/libs/googlemaps/markerclusterer.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/libs/googlemaps/geoxml3.js"></script>
     <script type="text/javascript">
         function initialize_gmap() {
             var myOptions = {
@@ -81,26 +83,37 @@
             var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
             return map;
         }
+        function process_kml(doc) {
+            //for (var i = 0; i < doc[0].markers.length; i++) {
+            //    console.log(doc[0].markers[i].getPosition().toString());
+            //}
+            marker_clusterer = new MarkerClusterer(gmap, doc[0].markers);
+        }
 
         $(document).ready(function() {
             gmap = initialize_gmap();
-            kmlLayer = new google.maps.KmlLayer("http://{{ current_site.domain }}{% url homepage_kml %}?auth={{ request.user.is_authenticated }}",
-                { preserveViewport: true }
-            );
-            kmlLayer.setMap(gmap);
+            //kmlLayer = new google.maps.KmlLayer("http://{{ current_site.domain }}{% url homepage_kml %}?auth={{ request.user.is_authenticated }}",
+            //    { preserveViewport: true }
+            //);
+            //kmlLayer.setMap(gmap);
+
+            kmlParser = new geoXML3.parser({afterParse: process_kml});
+            kmlParser.parse("{% url homepage_kml %}?auth={{ request.user.is_authenticated }}");
 
             $(".map-filter-item input[type='checkbox']").click(function() {
-                kmlLayer.setMap(null);
+                //kmlLayer.setMap(null);
+                marker_clusterer.clearMarkers();
 
-                var checked_name_attributes = []
+                var checked_name_attributes = [];
                 $(".map-filter-item input[type='checkbox']:checked").each(function(index) {
                     checked_name_attributes.push(encodeURIComponent($(this).attr('name')));
                 });
                 var map_filters = checked_name_attributes.join("&");
-                kmlLayer = new google.maps.KmlLayer("http://{{ current_site.domain }}{% url homepage_kml %}?killcache=" + (new Date()).getTime() + "&auth={{ request.user.is_authenticated }}&ruid={{ request.user.id }}&" + map_filters,
-                    { preserveViewport: true }
-                );
-                kmlLayer.setMap(gmap);
+                //kmlLayer = new google.maps.KmlLayer("http://{{ current_site.domain }}{% url homepage_kml %}?killcache=" + (new Date()).getTime() + "&auth={{ request.user.is_authenticated }}&ruid={{ request.user.id }}&" + map_filters,
+                //    { preserveViewport: true }
+                //);
+                //kmlLayer.setMap(gmap);
+                kmlParser.parse("{% url homepage_kml %}?killcache=" + (new Date()).getTime() + "&auth={{ request.user.is_authenticated }}&ruid={{ request.user.id }}&" + map_filters);
             });
         });
     </script>
