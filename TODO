@@ -2,8 +2,6 @@ update site domain and site name via admin
 
 favicon
 
-internationalization
-
 update pip freeze requirements file
 
 Media Needed
@@ -12,7 +10,9 @@ Location default
     <img src="{{ STATIC_URL }}image/location-default.png" /></div>
     355x200
 
+
 Internationalization translation
+================================
     - locale/ht/LC_MESSAGES/django.po
 
     - make or update message file
