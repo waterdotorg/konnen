@@ -1,3 +1,4 @@
+{% load active_nav %}
 {% load i18n %}
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"> <![endif]-->
@@ -51,7 +52,22 @@
                     {% block header_col1 %}<h1 id="logo"><a href="{% url homepage %}"><span>Konnen</span></a></h1>{% endblock %}
                 </div>
                 <div class="col2">{% block header_col2 %}{% endblock %}</div>
-                <div class="col3">{% block header_col3 %}{% endblock %}</div>
+                <div class="col3">
+                    {% block header_col3 %}
+                        <ul id="menu-nav">
+                            <li><a class="{% active_nav request 'homepage' %}" href="{% url homepage %}">Home</a></li>
+                            {% if request.user.is_authenticated %}
+                                <li><a class="{% active_nav request 'settings' %}" href="{% url settings %}">Settings</a></li>
+                            {% else %}
+                                <li><a class="{% active_nav request 'auth_login' %}" href="{% url auth_login %}">Log In</a></li>
+                                <li><a class="{% active_nav request 'registration_register' %}" href="{% url registration_register %}">Join</a></li>
+                            {% endif %}
+                            {% if request.user.is_authenticated %}
+                                <li><a class="{% active_nav request 'auth_logout' %}" href="{% url auth_logout %}">Log Out</a></li>
+                            {% endif %}
+                        </ul>
+                    {% endblock %}
+                </div>
             {% endblock %}
         </div>
     </div>

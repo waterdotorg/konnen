@@ -276,6 +276,10 @@ form .optional { color: #888888; text-transform: none; }
 #header-wrap .col2 { float: left; left: 250px; position: relative; top: 20px; }
 #header-wrap .col2 .header-button { float:left; margin-right: 20px; }
 #header-wrap .col3 { float: right; position: relative; top: 30px; }
+#header-wrap #menu-nav { display: inline; float: left; margin: 0; overflow: visible; padding: 0 0 0 8px; }
+#header-wrap #menu-nav li { display: inline; float: left; list-style-type: none; white-space: nowrap; }
+#header-wrap #menu-nav li a { background: url("../image/menu-nav-bg.gif"); border: 1px solid #D4D4D4; color: #686868; display: block; font-weight: bold; margin-left: 10px; padding: 5px 10px 5px 10px; }
+#header-wrap #menu-nav li a.active { background: url("../image/menu-nav-selected-bg.gif"); color: #F8F8F8; }
 
 /* Messages */
 .messages { padding: 0; }

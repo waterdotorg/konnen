@@ -62,7 +62,7 @@
                 </tr>
                 {% endif %}
             </table>
-            <div class="content">{{ location.content|markdown }}</div>
+            <div class="content">{% if location.content %}{{ location.content|markdown }}{% endif %}</div>
         </div>
     </div>
     <div id="water-quality-chart-container"></div>
