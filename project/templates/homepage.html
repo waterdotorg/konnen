@@ -49,20 +49,24 @@
                 {% endfor %}
             </div>
             <div class="map-filter-item">
-                <p class="map-filter-title">Community</p>
-                {% for community in communities %}
-                    <p class="checkbox-wrapper">
-                        <input class="community-checkbox" type="checkbox" name="community_{{ community.id }}" id="community_{{ community.id }}"> {{ community.title|title|truncate_characters:18 }}
-                    </p>
-                {% endfor %}
+                <p class="map-filter-title"><a class="map-filter-control" href="#">+ Community</a></p>
+                <div class="map-filter-control-items">
+                    {% for community in communities %}
+                        <p class="checkbox-wrapper">
+                            <input class="community-checkbox" type="checkbox" name="community_{{ community.id }}" id="community_{{ community.id }}"> {{ community.title|title|truncate_characters:18 }}
+                        </p>
+                    {% endfor %}
+                </div>
             </div>
             <div class="map-filter-item">
-                <p class="map-filter-title">{% trans "Provider" %}</p>
-                {% for provider in providers %}
-                    <p class="checkbox-wrapper">
-                        <input class="provider-checkbox" type="checkbox" name="provider_{{ provider.id }}" id="provider_{{ provider.id }}"> {{ provider.title|title|truncate_characters:18 }}
-                    </p>
-                {% endfor %}
+                <p class="map-filter-title"><a class="map-filter-control" href="#">+ {% trans "Provider" %}</a></p>
+                <div class="map-filter-control-items">
+                    {% for provider in providers %}
+                        <p class="checkbox-wrapper">
+                            <input class="provider-checkbox" type="checkbox" name="provider_{{ provider.id }}" id="provider_{{ provider.id }}"> {{ provider.title|title|truncate_characters:18 }}
+                        </p>
+                    {% endfor %}
+                </div>
             </div>
         </form>
     </div>
@@ -114,6 +118,11 @@
                 //);
                 //kmlLayer.setMap(gmap);
                 kmlParser.parse("{% url homepage_kml %}?killcache=" + (new Date()).getTime() + "&auth={{ request.user.is_authenticated }}&ruid={{ request.user.id }}&" + map_filters);
+            });
+
+            $(".map-filter-control").click(function(event) {
+                event.preventDefault();
+                $(this).parent(".map-filter-title").next(".map-filter-control-items").slideToggle();
             });
         });
     </script>
