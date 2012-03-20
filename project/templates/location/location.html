@@ -61,6 +61,18 @@
                     <td class="value">{{ latest_water_quality_location_post.published_date|date:"Y.m.d" }}</td>
                 </tr>
                 {% endif %}
+                {% if location.latitude %}
+                    <tr>
+                        <td class="label">{% trans "Latitude:" %}</td>
+                        <td class="value">{{ location.latitude|floatformat:6 }}</td>
+                    </tr>
+                {% endif %}
+                {% if location.longitude %}
+                    <tr>
+                        <td class="label">{% trans "Longitude:" %}</td>
+                        <td class="value">{{ location.longitude|floatformat:6 }}</td>
+                    </tr>
+                {% endif %}
             </table>
             <div class="content">{% if location.content %}{{ location.content|markdown }}{% endif %}</div>
         </div>
