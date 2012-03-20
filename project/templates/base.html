@@ -55,15 +55,16 @@
                 <div class="col3">
                     {% block header_col3 %}
                         <ul id="menu-nav">
-                            <li><a class="{% active_nav request 'homepage' %}" href="{% url homepage %}">Home</a></li>
+                            <li><a class="{% active_nav request 'homepage' %}" href="{% url homepage %}">{% trans "Home" %}</a></li>
                             {% if request.user.is_authenticated %}
-                                <li><a class="{% active_nav request 'settings' %}" href="{% url settings %}">Settings</a></li>
+                                <li><a class="{% active_nav request 'location_browse' %}" href="{% url location_browse %}">{% trans "Subscriptions" %}</a></li>
+                                <li><a class="{% active_nav request 'settings' %}" href="{% url settings %}">{% trans "Settings" %}</a></li>
                             {% else %}
-                                <li><a class="{% active_nav request 'auth_login' %}" href="{% url auth_login %}">Log In</a></li>
-                                <li><a class="{% active_nav request 'registration_register' %}" href="{% url registration_register %}">Join</a></li>
+                                <li><a class="{% active_nav request 'auth_login' %}" href="{% url auth_login %}">{% trans "Log In" %}</a></li>
+                                <li><a class="{% active_nav request 'registration_register' %}" href="{% url registration_register %}">{% trans "Join" %}</a></li>
                             {% endif %}
                             {% if request.user.is_authenticated %}
-                                <li><a class="{% active_nav request 'auth_logout' %}" href="{% url auth_logout %}">Log Out</a></li>
+                                <li><a class="{% active_nav request 'auth_logout' %}" href="{% url auth_logout %}">{% trans "Log Out" %}</a></li>
                             {% endif %}
                         </ul>
                     {% endblock %}
