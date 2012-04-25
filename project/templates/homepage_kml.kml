@@ -5,35 +5,35 @@
         <Style id="chlorineLevelNone">
             <IconStyle>
                 <Icon>
-                    <href>http://{{ current_site.domain }}{{ STATIC_URL }}image/map-marker-icons/drinking-water-none.png</href>
+                    <href>http://www.google.com/mapfiles/ms/micons/pink.png</href>
                 </Icon>
             </IconStyle>
         </Style>
         <Style id="chlorineLevelZero">
             <IconStyle>
                 <Icon>
-                    <href>http://{{ current_site.domain }}{{ STATIC_URL }}image/map-marker-icons/drinking-water-zero.png</href>
+                    <href>http://www.google.com/mapfiles/ms/micons/red-dot.png</href>
                 </Icon>
             </IconStyle>
         </Style>
         <Style id="chlorineLevelLow">
             <IconStyle>
                 <Icon>
-                    <href>http://{{ current_site.domain }}{{ STATIC_URL }}image/map-marker-icons/drinking-water-low.png</href>
+                    <href>http://www.google.com/mapfiles/ms/micons/yellow-dot.png</href>
                 </Icon>
             </IconStyle>
         </Style>
         <Style id="chlorineLevelPass">
             <IconStyle>
                 <Icon>
-                    <href>http://{{ current_site.domain }}{{ STATIC_URL }}image/map-marker-icons/drinking-water-pass.png</href>
+                    <href>http://www.google.com/mapfiles/ms/micons/blue-dot.png</href>
                 </Icon>
             </IconStyle>
         </Style>
         <Style id="chlorineLevelHigh">
             <IconStyle>
                 <Icon>
-                    <href>http://{{ current_site.domain }}{{ STATIC_URL }}image/map-marker-icons/drinking-water-high.png</href>
+                    <href>http://www.google.com/mapfiles/ms/micons/orange-dot.png</href>
                 </Icon>
             </IconStyle>
         </Style>
