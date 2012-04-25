@@ -156,6 +156,7 @@ INSTALLED_APPS = (
     'custom_user',
     'registration',
     'django_sorting',
+    'sms',
 )
 
 AUTHENTICATION_BACKENDS = (
@@ -204,6 +205,11 @@ LOGGING = {
     },
     'loggers': {
         'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+        'sms.management.commands': {
             'handlers': ['mail_admins'],
             'level': 'ERROR',
             'propagate': True,
