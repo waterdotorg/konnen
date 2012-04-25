@@ -2,14 +2,16 @@ update site domain and site name via admin
 
 update pip freeze requirements file
 
+Favicon
+
+- supervisord/konnen_daemon_get_messages_digicel.conf
+    - change autorestart to true
+
 Media Needed
 =============
 Location default
     <img src="{{ STATIC_URL }}image/location-default.png" /></div>
     355x200
-
-Favicon
-
 
 Internationalization translation
 ================================

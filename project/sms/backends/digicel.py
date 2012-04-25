@@ -114,8 +114,8 @@ class SmsBackend(BaseSmsBackend):
         """
         Send messages.
 
-        :param list messages: List of SmsMessage instences.
-        :returns: number of messages seded succesful.
+        :param list messages: List of SmsMessage instances.
+        :returns: number of messages sent successful.
         :rtype: int
         """
         counter = 0
