@@ -417,6 +417,7 @@ td.button a:hover { background-color:#78bde7; }
 a.donate-button { background-color:#adb836; -moz-border-radius:8px; -webkit-border-radius:8px; -opera-border-radius:8px; -khtml-border-radius:8px; border-radius:8px; border: 1px solid #77811e; color:#FFFFFF; font-size: 1.4em; font-weight:bold; padding:6px 10px 6px 10px; text-transform: uppercase; }
 a.donate-button:hover { background-color: #9ca73f; }
 .reflist { font-size: 0.9em; }
+.section-label { border-bottom: 5px solid #E2E2E2; color: #8B8B8B; font-size: 22px; font-weight: bold; padding-bottom: 5px; }
 
 /* ==|== non-semantic helper classes ========================================
    Please define your styles before this section.
