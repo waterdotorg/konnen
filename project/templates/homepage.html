@@ -16,40 +16,47 @@
 
 {% block main_col1 %}
     <div id="map_filter">
+        <p class="section-label">{% trans "Filters" %}</p>
         <form action="." method="GET">
             {% if request.user.is_authenticated %}
                 <div class="map-filter-item">
-                    <p class="map-filter-title">Subscription</p>
-                    <p class="checkbox-wrapper">
-                        <input class="subscription-checkbox" type="checkbox" name="my_subscribed_locations" id="my_subscribed_locations"> {% trans "Mine" %}
-                    </p>
+                    <p class="map-filter-title"><a class="map-filter-control" href="#">+ {% trans "Subscription" %}</a></p>
+                    <div class="map-filter-control-items">
+                        <p class="checkbox-wrapper">
+                            <input class="subscription-checkbox" type="checkbox" name="my_subscribed_locations" id="my_subscribed_locations"> {% trans "Mine" %}
+                        </p>
+                    </div>
                 </div>
             {% endif %}
             <div class="map-filter-item">
-                <p class="map-filter-title">{% trans "Chlorine Levels" %}</p>
-                <p class="checkbox-wrapper">
-                    <input class="chlorine-level-checkbox" type="checkbox" name="chlorine_level_zero" id="chlorine_level_none"> <span>0.0%</span>
-                </p>
-                <p class="checkbox-wrapper">
-                    <input class="chlorine-level-checkbox"  type="checkbox" name="chlorine_level_low" id="chlorine_level_low"> <span>&gt; 0.0% &lt; 0.5%</span>
-                </p>
-                <p class="checkbox-wrapper">
-                    <input class="chlorine-level-checkbox"  type="checkbox" name="chlorine_level_pass" id="chlorine_level_pass"> <span>&ge; 0.5% &le; 1.9%</span>
-                </p>
-                <p class="checkbox-wrapper">
-                    <input class="chlorine-level-checkbox"  type="checkbox" name="chlorine_level_high" id="chlorine_level_high"> <span>&ge; 2.0%</span>
-                </p>
-            </div>
-            <div class="map-filter-item">
-                <p class="map-filter-title">{% trans "Source Type" %}</p>
-                {% for water_source_type in water_source_types %}
-                    <p class=checkbox-wrapper>
-                        <input class="source-type-checkbox" type="checkbox" name="water_source_type_{{ water_source_type.id }}" id="water_source_type_{{ water_source_type.id }}"> {{ water_source_type.title|truncate_characters:18 }}
+                <p class="map-filter-title"><a class="map-filter-control" href="#">+ {% trans "Chlorine Levels" %}</a></p>
+                <div class="map-filter-control-items">
+                    <p class="checkbox-wrapper">
+                        <input class="chlorine-level-checkbox" type="checkbox" name="chlorine_level_zero" id="chlorine_level_none"> <span>0.0%</span>
                     </p>
-                {% endfor %}
+                    <p class="checkbox-wrapper">
+                        <input class="chlorine-level-checkbox"  type="checkbox" name="chlorine_level_low" id="chlorine_level_low"> <span>&gt; 0.0% &lt; 0.5%</span>
+                    </p>
+                    <p class="checkbox-wrapper">
+                        <input class="chlorine-level-checkbox"  type="checkbox" name="chlorine_level_pass" id="chlorine_level_pass"> <span>&ge; 0.5% &le; 1.9%</span>
+                    </p>
+                    <p class="checkbox-wrapper">
+                        <input class="chlorine-level-checkbox"  type="checkbox" name="chlorine_level_high" id="chlorine_level_high"> <span>&ge; 2.0%</span>
+                    </p>
+                </div>
             </div>
             <div class="map-filter-item">
-                <p class="map-filter-title"><a class="map-filter-control" href="#">+ Community</a></p>
+                <p class="map-filter-title"><a class="map-filter-control" href="#">+ {% trans "Source Type" %}</a></p>
+                <div class="map-filter-control-items">
+                    {% for water_source_type in water_source_types %}
+                        <p class=checkbox-wrapper>
+                            <input class="source-type-checkbox" type="checkbox" name="water_source_type_{{ water_source_type.id }}" id="water_source_type_{{ water_source_type.id }}"> {{ water_source_type.title|truncate_characters:18 }}
+                        </p>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="map-filter-item">
+                <p class="map-filter-title"><a class="map-filter-control" href="#">+ {% trans "Community" %}</a></p>
                 <div class="map-filter-control-items">
                     {% for community in communities %}
                         <p class="checkbox-wrapper">
