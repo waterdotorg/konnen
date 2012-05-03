@@ -7,7 +7,7 @@ Configuration example.
 Modify your settings.py::
 
     SMS_BACKEND = 'sms.backends.digicel.SmsBackend'
-    SMS_USER = 'foo'
+    SMS_USERNAME = 'foo'
     SMS_PASSWORD = 'bar'
     INSTALLED_APPS += ['sms']
 
@@ -22,9 +22,11 @@ Usage::
     message.send()
 """
 
+import datetime
 import requests
 
-from xml.etree import ElementTree
+from urllib import urlencode
+from xml.dom import minidom
 
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
@@ -32,6 +34,7 @@ from django.utils.encoding import force_unicode
 from django.utils.translation import ugettext_lazy as _
 
 from sms.backends.base import BaseSmsBackend
+from sms.models import Sms
 
 DIGICEL_API_URL = 'https://smsenlot.digicelhaiti.com:8443/bulksms/BulkSMSHTTP'
 DIGICEL_RESPONSE_STATUS_CODES = {
@@ -60,20 +63,6 @@ class SmsBackend(BaseSmsBackend):
     def get_api_url(self):
         return DIGICEL_API_URL
 
-    def _parse_response(self, response):
-        """
-        Parse response into python dictionary object.
-
-        :param str response: http response
-        :returns: response dict
-        :rtype: dict
-        """
-        response_dict = {}
-        elements = ElementTree.XML(response.content)
-        for element in elements:
-            response_dict[element.tag] = element.text
-        return response_dict
-
     def _send(self, message):
         """
         Private method to send one message.
@@ -94,14 +83,14 @@ class SmsBackend(BaseSmsBackend):
 
         if response.status_code != 200:
             if not self.fail_silently:
-                raise Exception("Digicel send sms response header returned status code of %d" % response.status_code)
+                raise Exception("Digicel Send sms response header returned status code of %d" % response.status_code)
             else:
                 return False
 
         response_dict = self._parse_response(response.content)
         if int(response_dict['status']) != 0:
             if not self.fail_silently:
-                raise Exception("Digicel response status code error %d: %s" % (int(response_dict['status']),
+                raise Exception("Digicel Send response status code error %d: %s" % (int(response_dict['status']),
                     DIGICEL_RESPONSE_STATUS_CODES[int(response_dict['status'])]))
             else:
                 return False
@@ -130,6 +119,42 @@ class SmsBackend(BaseSmsBackend):
         #TODO method=fail, id, username, password required
         return
 
-    def get_inbox(self):
-        #TODO method=inbox, username, password, first, max
-        return
+    def get_inbox(self, first=None, max=None):
+        params = {'method':'inbox','username':self.get_username(),'password':self.get_password()}
+
+        #TODO if we aren't given a first keyword arg, let's get this from the db
+        if first:
+            params.update({'first': int(first)})
+
+        if max:
+            params.update({'max': int(max)})
+
+        params = urlencode(params)
+        response = requests.get(self.get_api_url(), params=params, verify=False)
+
+        if response.status_code != 200:
+            if not self.fail_silently:
+                raise Exception("Digicel send sms response header returned status code of %d" % response.status_code)
+            else:
+                return False
+
+        response_dom = minidom.parseString(response.content)
+        response_status_code = int(response_dom.getElementsByTagName('status')[0].firstChild.data)
+        if response_status_code != 0:
+            if not self.fail_silently:
+                raise Exception("Digicel Inbox response status code error %d: %s" % (response_status_code,
+                    DIGICEL_RESPONSE_STATUS_CODES[response_status_code]))
+            else:
+                return False
+        else:
+            records = t_dom.getElementsByTagName('record')
+            for record in records:
+                sms = Sms(
+                    from_number=record.getElementsByTagName('tel')[0].firstChild.data,
+                    to_number=settings.SMS_USERNAME,
+                    message=record.getElementsByTagName('message')[0].firstChild.data,
+                    sent_date=datetime.datetime.strptime(
+                        record.getElementsByTagName('datetime')[0].firstChild.data,
+                        '%d-%m-%Y %H:%M'),
+                )
+                sms.save()
