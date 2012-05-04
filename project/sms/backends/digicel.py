@@ -147,7 +147,7 @@ class SmsBackend(BaseSmsBackend):
             else:
                 return False
         else:
-            records = t_dom.getElementsByTagName('record')
+            records = response_dom.getElementsByTagName('record')
             for record in records:
                 sms = Sms(
                     from_number=record.getElementsByTagName('tel')[0].firstChild.data,
