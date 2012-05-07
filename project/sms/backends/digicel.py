@@ -23,7 +23,9 @@ Usage::
 """
 
 import datetime
+import hashlib
 import requests
+import time
 
 from urllib import urlencode
 from xml.dom import minidom
@@ -63,68 +65,75 @@ class SmsBackend(BaseSmsBackend):
     def get_api_url(self):
         return DIGICEL_API_URL
 
-    def _send(self, message):
+    def send_message(self, message, recipient_list, from_phone=None, id=None):
         """
-        Private method to send one message.
-
-        :param SmsMessage message: SmsMessage class instance.
-        :returns: True if message is sent else False
-        :rtype: bool
+        Send message to recipient list.
+        :returns: True on success, False otherwise
+        :rtype: Boolean
         """
-
-        payload = {
+        params = {
+            'method': 'send',
             'username': self.get_username(),
             'password': self.get_password(),
-            'from_phone': message.from_phone,
-            'destination': ",".join(message.recipient_list),
-            'message': message.message,
+            'message': message,
+            'dest': ','.join(map(str, recipient_list)),
         }
-        response = requests.post(self.get_api_url(), payload, verify=False)
+        if id:
+            params.update({'id': int(id)})
 
-        if response.status_code != 200:
+        params = urlencode(params)
+        response = requests.get(self.get_api_url(), params=params, verify=False)
+
+        if not response.ok:
             if not self.fail_silently:
                 raise Exception("Digicel Send sms response header returned status code of %d" % response.status_code)
             else:
                 return False
 
-        response_dict = self._parse_response(response.content)
-        if int(response_dict['status']) != 0:
+        response_dom = minidom.parseString(response.content)
+        response_status_code = int(response_dom.getElementsByTagName('status')[0].firstChild.data)
+        if response_status_code != 0:
             if not self.fail_silently:
-                raise Exception("Digicel Send response status code error %d: %s" % (int(response_dict['status']),
-                    DIGICEL_RESPONSE_STATUS_CODES[int(response_dict['status'])]))
+                raise Exception("Digicel Send response status code error %d: %s" % (response_status_code,
+                    DIGICEL_RESPONSE_STATUS_CODES[response_status_code]))
+            else:
+                return False
+        else:
+            return True
+
+    def get_failed_messages(self, id):
+        params = {
+            'method': 'fail',
+            'username': self.get_username(),
+            'password': self.get_password(),
+            'id': id,
+        }
+        params = urlencode(params)
+        response = requests.get(self.get_api_url(), params=params, verify=False)
+
+        if not response.ok:
+            if not self.fail_silently:
+                raise Exception("Digicel Failed Messages sms response header returned status code of %d" % response.status_code)
             else:
                 return False
 
+        response_dom = minidom.parseString(response.content)
+        response_status_code = int(response_dom.getElementsByTagName('status')[0].firstChild.data)
+        if response_status_code != 0:
+            if not self.fail_silently:
+                raise Exception("Digicel Failed Messages response status code error %d: %s" % (response_status_code,
+                    DIGICEL_RESPONSE_STATUS_CODES[response_status_code]))
+            else:
+                return False
         else:
-            return True
-        return False
+            return response_dom #TODO need to parse response_dom to failed phone number list
 
-    def send_messages(self, messages):
-        """
-        Send messages.
-
-        :param list messages: List of SmsMessage instances.
-        :returns: number of messages sent successful.
-        :rtype: int
-        """
-        counter = 0
-        for message in messages:
-            res = self._send(message)
-            if res:
-                counter += 1
-
-        return counter
-
-    def get_failed_messages(self):
-        #TODO method=fail, id, username, password required
-        return
-
-    def get_inbox(self, first=None, max=None):
+    def get_inbox(self, start=None, max=None):
         params = {'method':'inbox','username':self.get_username(),'password':self.get_password()}
 
         #TODO if we aren't given a first keyword arg, let's get this from the db
-        if first:
-            params.update({'first': int(first)})
+        if start:
+            params.update({'first': int(start)})
 
         if max:
             params.update({'max': int(max)})
@@ -132,9 +141,9 @@ class SmsBackend(BaseSmsBackend):
         params = urlencode(params)
         response = requests.get(self.get_api_url(), params=params, verify=False)
 
-        if response.status_code != 200:
+        if not response.ok:
             if not self.fail_silently:
-                raise Exception("Digicel send sms response header returned status code of %d" % response.status_code)
+                raise Exception("Digicel get inbox sms response header returned status code of %d" % response.status_code)
             else:
                 return False
 
@@ -158,3 +167,4 @@ class SmsBackend(BaseSmsBackend):
                         '%d-%m-%Y %H:%M'),
                 )
                 sms.save()
+            return True
