@@ -5,7 +5,7 @@ Backend for test environment.
 import sms
 from sms.backends.base import BaseSmsBackend
 
-class SmsBackend(BaseEmailBackend):
+class SmsBackend(BaseSmsBackend):
     """
     Backend for use during test sessions.
 
