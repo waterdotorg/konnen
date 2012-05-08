@@ -23,9 +23,7 @@ Usage::
 """
 
 import datetime
-import hashlib
 import requests
-import time
 
 from urllib import urlencode
 from xml.dom import minidom
@@ -128,7 +126,7 @@ class SmsBackend(BaseSmsBackend):
         else:
             return response_dom #TODO need to parse response_dom to failed phone number list
 
-    def get_inbox(self, start=None, max=None):
+    def get_messages(self, start=None, max=None):
         params = {'method':'inbox','username':self.get_username(),'password':self.get_password()}
 
         #TODO if we aren't given a first keyword arg, let's get this from the db
