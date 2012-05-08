@@ -4,8 +4,11 @@ update pip freeze requirements file
 
 Favicon
 
-- supervisord/konnen_daemon_get_messages_digicel.conf
+- supervisord/konnen_daemon_sms_get_messages.conf
     - change autorestart to true
+
+- sms/backends/digicel.py
+    - Code and test get_failed_messages() function
 
 Media Needed
 =============
