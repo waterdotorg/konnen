@@ -24,7 +24,7 @@ def get_connection(backend=None, fail_silently=False, **kwargs):
                                     '"%s" class' % (mod_name, klass_name)))
     return klass(fail_silently=fail_silently, **kwargs)
 
-def get_inbox(start=None, max=None, fail_silently=False, auth_user=None, auth_password=None, connection=None):
+def get_messages(start=None, max=None, fail_silently=False, auth_user=None, auth_password=None, connection=None):
     """
     Sms api to acquire messages from an inbox
 
@@ -36,7 +36,7 @@ def get_inbox(start=None, max=None, fail_silently=False, auth_user=None, auth_pa
         password=auth_password,
         fail_silently=fail_silently,
     )
-    connection.get_inbox(start=start, max=max)
+    connection.get_messages(start=start, max=max)
 
 def send_message(message, recipient_list, fail_silently=False, from_phone=None, id=None,
              auth_user=None, auth_password=None, connection=None):
