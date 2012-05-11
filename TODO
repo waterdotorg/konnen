@@ -10,6 +10,13 @@ Favicon
 - sms/backends/digicel.py
     - Code and test get_failed_messages() function
 
+- auto reply loop message detection
+    - if 2 auto-reply systems start talking we're gonna hit a huge bill
+    - log and don't send replies after 10 messages in an hour???
+
+- pip install -U supervisor
+    - verify new supervisor works across all sites on apus
+
 Media Needed
 =============
 Location default
