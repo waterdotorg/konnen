@@ -1,0 +1,22 @@
+from django.contrib import admin
+
+from sms_control.models import SmsControl, SmsControlLocale, SmsControlTrans
+
+class SmsControlAdmin(admin.ModelAdmin):
+    list_display = ('phrase', 'help_text', 'updated_date')
+    search_fields = ('phrase', 'help_text',)
+    ordering = ('phrase',)
+
+class SmsControlLocaleAdmin(admin.ModelAdmin):
+    list_display = ('name', 'language_code')
+    search_fields = ('name', 'language_code')
+    ordering = ('name',)
+
+class SmsControlTransAdmin(admin.ModelAdmin):
+    list_display = ('phrase_trans', 'help_text_trans', 'updated_date')
+    search_fields = ('phrase_trans', 'help_text_trans',)
+    ordering = ('phrase_trans',)
+
+admin.site.register(SmsControl, SmsControlAdmin)
+admin.site.register(SmsControlLocale, SmsControlLocaleAdmin)
+admin.site.register(SmsControlTrans, SmsControlTransAdmin)

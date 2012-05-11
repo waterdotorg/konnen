@@ -157,6 +157,7 @@ INSTALLED_APPS = (
     'registration',
     'django_sorting',
     'sms',
+    'sms_control',
 )
 
 AUTHENTICATION_BACKENDS = (
