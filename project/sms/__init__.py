@@ -53,7 +53,29 @@ def send_message(message, recipient_list, fail_silently=False, from_phone=None, 
         password = auth_password,
         fail_silently = fail_silently
     )
-    return connection.send_message(message, recipient_list, from_phone=from_phone, id=id)
+
+    # Split message to comply with 160 sms limit
+    message_list = []
+    words = message.split()
+    current_message_text = ''
+    for word in words:
+        # Drop space for first word
+        if not len(current_message_text):
+            current_message_text += word
+        elif len(current_message_text) <= (155 - (len(word) + 1)):
+            current_message_text += ' ' + word
+        else:
+            message_list.append(current_message_text)
+            current_message_text = word
+    if current_message_text:
+        message_list.append(current_message_text)
+
+    sms_result = False
+    for message_text in message_list:
+        sms_result = connection.send_message(message_text, recipient_list, from_phone=from_phone, id=id)
+        if not sms_result:
+            break
+    return sms_result
 
 def get_failed_messages(id, fail_silently=False, auth_user=None, auth_password=None, connection=None):
     """

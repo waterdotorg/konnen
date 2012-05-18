@@ -1,0 +1,3 @@
+{% extends "sms_control/reply/base.txt" %}{% load i18n %}{% block message %}{% trans "Available options:" %}{% for sms_control_option in sms_control_options %}
+{% if language == 'en' %}{{ sms_control_option.phrase|capfirst }}{% else %}{{ sms_control_option.phrase_trans|capfirst }}{% endif %}{% endfor %}
+{% trans "Send an option followed by 'help' for more information." %}{% endblock %}

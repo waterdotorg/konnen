@@ -1,0 +1,1 @@
+{% extends "sms_control/reply/base.txt" %}{% load i18n %}{% block message %}{% trans "Type 'status' for your subscribed location ID's." %}{% endblock %}

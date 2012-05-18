@@ -1,0 +1,1 @@
+{% extends "sms_control/reply/base.txt" %}{% load i18n %}{% block message %}{% trans "Successfully subscribed to the following location ID's:" %} {% for location in subscribed_locations %}{{ location.uid }}{% if subscribed_locations|length > 1 and not forloop.last %}, {% endif %}{% endfor %}{% endblock %}
