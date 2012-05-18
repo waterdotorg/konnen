@@ -8,13 +8,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-12 19:29+0000\n"
+"POT-Creation-Date: 2012-05-15 18:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: settings_default.py:234
+msgid "English"
+msgstr ""
+
+#: settings_default.py:235
+msgid "Haitian Creole"
+msgstr ""
 
 #: custom/forms.py:21
 msgid "Invalid request. You can only update your subscriptions."
@@ -36,51 +44,51 @@ msgid ""
 "alerts."
 msgstr ""
 
-#: custom/models.py:17
+#: custom/models.py:18
 msgid "communities"
 msgstr ""
 
-#: custom/models.py:37 custom/models.py:147
+#: custom/models.py:38 custom/models.py:157 sms/models.py:14
 msgid "Pending"
 msgstr ""
 
-#: custom/models.py:38 custom/models.py:148
+#: custom/models.py:39 custom/models.py:158
 msgid "Active"
 msgstr ""
 
-#: custom/models.py:39 custom/models.py:149
+#: custom/models.py:40 custom/models.py:159
 msgid "Complete"
 msgstr ""
 
-#: custom/models.py:40 custom/models.py:150
+#: custom/models.py:41 custom/models.py:160 sms/models.py:16
 msgid "Cancelled"
 msgstr ""
 
-#: custom/models.py:41 custom/models.py:151
+#: custom/models.py:42 custom/models.py:161
 msgid "Hidden"
 msgstr ""
 
-#: custom/models.py:97 templates/location/browse.html:39
+#: custom/models.py:107 templates/location/browse.html:39
 #: templates/location/location.html:33
 msgid "None"
 msgstr ""
 
-#: custom/models.py:98 templates/location/browse.html:40
+#: custom/models.py:108 templates/location/browse.html:40
 #: templates/location/location.html:34
 msgid "Immediate"
 msgstr "Imedyat"
 
-#: custom/models.py:99 templates/location/browse.html:41
-#: templates/location/location.html:35 templates/location/location.html:277
+#: custom/models.py:109 templates/location/browse.html:41
+#: templates/location/location.html:35 templates/location/location.html:289
 msgid "Daily"
 msgstr ""
 
-#: custom/models.py:100 templates/location/browse.html:42
+#: custom/models.py:110 templates/location/browse.html:42
 #: templates/location/location.html:36
 msgid "Weekly"
 msgstr ""
 
-#: custom/models.py:157
+#: custom/models.py:167
 msgid "Water Quality"
 msgstr ""
 
@@ -147,39 +155,47 @@ msgstr ""
 msgid "Account settings have been updated."
 msgstr ""
 
-#: sms/backends/digicel.py:38
-msgid "Message submitted successfully"
+#: sms/models.py:15
+msgid "Completed"
 msgstr ""
 
-#: sms/backends/digicel.py:39
-msgid "System Error"
-msgstr ""
-
-#: sms/backends/digicel.py:40
-msgid "Authentication Error"
+#: sms/models.py:29
+msgid "Sms messages"
 msgstr ""
 
 #: sms/backends/digicel.py:41
-msgid "Message is too long (must be <= 160 characters)"
+msgid "Message submitted successfully"
 msgstr ""
 
 #: sms/backends/digicel.py:42
-msgid "Phone number validation error"
+msgid "System Error"
 msgstr ""
 
 #: sms/backends/digicel.py:43
-msgid "Message is null or empty"
+msgid "Authentication Error"
 msgstr ""
 
 #: sms/backends/digicel.py:44
-msgid "Exceeded the maximum amount of destination numbers"
+msgid "Message is too long (must be <= 160 characters)"
 msgstr ""
 
 #: sms/backends/digicel.py:45
-msgid "Schedule is set before current time"
+msgid "Phone number validation error"
 msgstr ""
 
 #: sms/backends/digicel.py:46
+msgid "Message is null or empty"
+msgstr ""
+
+#: sms/backends/digicel.py:47
+msgid "Exceeded the maximum amount of destination numbers"
+msgstr ""
+
+#: sms/backends/digicel.py:48
+msgid "Schedule is set before current time"
+msgstr ""
+
+#: sms/backends/digicel.py:49
 msgid "Schedule is set for out-of-services hours"
 msgstr ""
 
@@ -187,27 +203,77 @@ msgstr ""
 msgid "Page Not Found"
 msgstr ""
 
-#: templates/base.html:31
+#: templates/base.html:32
 msgid "Full Site"
 msgstr ""
 
-#: templates/base.html:31
+#: templates/base.html:32
 msgid "Lite Site"
 msgstr ""
 
+#: templates/base.html:58
+msgid "Home"
+msgstr ""
+
+#: templates/base.html:60
+#, fuzzy
+msgid "Subscriptions"
+msgstr "Abònman"
+
+#: templates/base.html:61
+msgid "Settings"
+msgstr ""
+
+#: templates/base.html:63
+msgid "Log In"
+msgstr ""
+
+#: templates/base.html:64 templates/registration/login.html:10
+#: templates/registration/registration_form.html:4
+#: templates/registration/registration_form.html:9
+#: templates/registration/registration_form.html:17
+msgid "Join"
+msgstr ""
+
+#: templates/base.html:67
+msgid "Log Out"
+msgstr ""
+
+#: templates/homepage.html:11
+msgid ""
+"The Konnen Project aims to fully automate the data management, distribution, "
+"and reporting of timely water\n"
+"        quality information while also making this information "
+"instantaneously accessible to citizens for their daily\n"
+"        household water needs."
+msgstr ""
+
+#: templates/homepage.html:19
+msgid "Filters"
+msgstr ""
+
 #: templates/homepage.html:23
+#, fuzzy
+msgid "Subscription"
+msgstr "Abònman"
+
+#: templates/homepage.html:26
 msgid "Mine"
 msgstr ""
 
-#: templates/homepage.html:28 templates/location/location.html:217
+#: templates/homepage.html:32 templates/location/location.html:229
 msgid "Chlorine Levels"
 msgstr ""
 
-#: templates/homepage.html:43
+#: templates/homepage.html:49
 msgid "Source Type"
 msgstr ""
 
 #: templates/homepage.html:59
+msgid "Community"
+msgstr ""
+
+#: templates/homepage.html:69
 msgid "Provider"
 msgstr ""
 
@@ -224,9 +290,9 @@ msgid "SMS Alert"
 msgstr ""
 
 #: templates/location/browse.html:51 templates/location/location.html:25
-#: templates/location/location.html:138 templates/location/location.html:139
-#: templates/location/location.html:174 templates/location/location.html:176
-#: templates/location/location.html:191
+#: templates/location/location.html:150 templates/location/location.html:151
+#: templates/location/location.html:186 templates/location/location.html:188
+#: templates/location/location.html:203
 msgid "Unsubscribe"
 msgstr ""
 
@@ -234,7 +300,7 @@ msgstr ""
 msgid "Location settings updated successfully."
 msgstr ""
 
-#: templates/location/location.html:25 templates/location/location.html:141
+#: templates/location/location.html:25 templates/location/location.html:153
 msgid "Subscribe"
 msgstr "Abònman"
 
@@ -258,47 +324,55 @@ msgstr ""
 msgid "Test Date:"
 msgstr ""
 
-#: templates/location/location.html:73 templates/member/profile.html:20
+#: templates/location/location.html:66
+msgid "Latitude:"
+msgstr ""
+
+#: templates/location/location.html:72
+msgid "Longitude:"
+msgstr ""
+
+#: templates/location/location.html:85 templates/member/profile.html:20
 msgid "Updates"
 msgstr ""
 
-#: templates/location/location.html:82 templates/member/profile.html:32
+#: templates/location/location.html:94 templates/member/profile.html:32
 msgid "Chlorine level:"
 msgstr ""
 
-#: templates/location/location.html:85 templates/member/profile.html:36
+#: templates/location/location.html:97 templates/member/profile.html:36
 msgid "ago"
 msgstr ""
 
-#: templates/location/location.html:94
+#: templates/location/location.html:106
 msgid "Subscribers"
 msgstr ""
 
-#: templates/location/location.html:94
+#: templates/location/location.html:106
 msgid "Digest"
 msgstr ""
 
-#: templates/location/location.html:152 templates/location/location.html:162
+#: templates/location/location.html:164 templates/location/location.html:174
 msgid "Error"
 msgstr ""
 
-#: templates/location/location.html:194
+#: templates/location/location.html:206
 msgid "Please select Email and/or SMS alerts."
 msgstr ""
 
-#: templates/location/location.html:213
+#: templates/location/location.html:225
 msgid "Water Quality Report"
 msgstr ""
 
-#: templates/location/location.html:227
+#: templates/location/location.html:239
 msgid "Date"
 msgstr ""
 
-#: templates/location/location.html:232
+#: templates/location/location.html:244
 msgid "Chlorine Level (%)"
 msgstr ""
 
-#: templates/location/location.html:289
+#: templates/location/location.html:301
 msgid "Global Avg."
 msgstr ""
 
@@ -329,19 +403,24 @@ msgstr ""
 msgid "Log in"
 msgstr ""
 
+#: templates/registration/activation_email.txt:3
+#, python-format
+msgid ""
+"\n"
+"Thanks for joining %(site_domain)s. Please click on the link below\n"
+"(or copy and paste it into your browser) to activate your account:\n"
+msgstr ""
+
+#: templates/registration/activation_email_subject.txt:3
+msgid "Your account activation"
+msgstr ""
+
 #: templates/registration/login.html:9 templates/registration/login.html:17
 msgid "Sign In"
 msgstr ""
 
 #: templates/registration/login.html:10
 msgid "Need an account?"
-msgstr ""
-
-#: templates/registration/login.html:10
-#: templates/registration/registration_form.html:4
-#: templates/registration/registration_form.html:9
-#: templates/registration/registration_form.html:17
-msgid "Join"
 msgstr ""
 
 #: templates/registration/login.html:21
@@ -502,3 +581,11 @@ msgstr ""
 #: templates/settings/account.html:49
 msgid "Delete image"
 msgstr ""
+
+#: templates/sms_control/reply/invalid_request.txt:1
+msgid "Invalid request. Available options:"
+msgstr "Envalid demann. Chwa ki disponib:"
+
+#: templates/sms_control/reply/null_message.txt:1
+msgid "No text received. Available options:"
+msgstr "Pa gen teks resevwa. Chwa ki disponib:"

@@ -1,0 +1,47 @@
+[
+    {
+        "model": "sms_control.smscontrol",
+        "pk": 1,
+        "fields": {
+            "phrase": "help",
+            "created_date": "2012-05-11 13:59:33",
+            "updated_date": "2012-05-11 13:59:33"
+        }
+    },
+    {
+        "model": "sms_control.smscontrol",
+        "pk": 2,
+        "fields": {
+            "phrase": "subscribe",
+            "created_date": "2012-05-11 13:59:33",
+            "updated_date": "2012-05-11 13:59:33"
+        }
+    },
+    {
+        "model": "sms_control.smscontrol",
+        "pk": 3,
+        "fields": {
+            "phrase": "unsubscribe",
+            "created_date": "2012-05-11 13:59:33",
+            "updated_date": "2012-05-11 13:59:33"
+        }
+    },
+    {
+        "model": "sms_control.smscontrol",
+        "pk": 4,
+        "fields": {
+            "phrase": "report",
+            "created_date": "2012-05-11 13:59:33",
+            "updated_date": "2012-05-11 13:59:33"
+        }
+    },
+    {
+        "model": "sms_control.smscontrol",
+        "pk": 5,
+        "fields": {
+            "phrase": "status",
+            "created_date": "2012-05-11 13:59:33",
+            "updated_date": "2012-05-11 13:59:33"
+        }
+    }
+]

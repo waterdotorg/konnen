@@ -21,3 +21,8 @@ Whoosh crontab to update index
     $ python project/manage.py syncdb
 
     $ python project/manage.py migrate
+
+Load sms control codes
+    $ manage.py loaddata sms_control
+
+    - After codes loaded, configure translations via Sms_control admin section

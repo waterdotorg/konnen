@@ -1,0 +1,3 @@
+{% extends "sms_control/reply/base.txt" %}{% load i18n %}{% block message %}{% trans "No text received. Available options:" %}{% for sms_control_trans in sms_control_translations %}
+{{ sms_control_trans.phrase_trans|capfirst }}
+{% endfor %}{% endblock %}

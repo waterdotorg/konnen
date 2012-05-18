@@ -1,0 +1,1 @@
+{% extends "sms_control/reply/base.txt" %}{% load i18n %}{% block message %}{% trans "Type 'unsubscribe 12345' or 'unsubscribe all' to stop reports. For multiple locations separate each ID with a comma or space: 'unsubscribe 12345 98763'" %}{% endblock %}

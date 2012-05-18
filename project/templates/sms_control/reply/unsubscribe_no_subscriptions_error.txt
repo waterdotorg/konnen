@@ -1,0 +1,1 @@
+{% extends "sms_control/reply/base.txt" %}{% load i18n %}{% block message %}{% trans "Error unsubscribing. You are not subscribed to any locations." %}{% endblock %}
