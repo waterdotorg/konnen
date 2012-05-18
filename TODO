@@ -1,5 +1,7 @@
 update site domain and site name via admin
 
+add SMS control word mappings - /admin/sms_control/
+
 update pip freeze requirements file
 
 Favicon
@@ -28,9 +30,14 @@ Internationalization translation
     - locale/ht/LC_MESSAGES/django.po
 
     - make or update message file
-        - django-admin.py makemessages ( from within /project/ directory)
+        - django-admin.py makemessages --all --extensions=.html,.txt ( from within /project/ directory)
 
-    get ht.po translated
+    - get django.po translated
+        - MAKE SURE SMS REPLY MESSAGES ARE <= 160
 
     - compile message file
         - django-admin.py compilemessages
+
+    restart gunicorn
+
+    restart supervisorctl message daemons

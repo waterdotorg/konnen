@@ -1,0 +1,1 @@
+{% extends "sms_control/reply/base.txt" %}{% load i18n %}{% block message %}{% trans "Invalid location ID received. Type 'report 12345' for a specific location or 'report 12345 98763' for multiple locations." %}{% endblock %}
