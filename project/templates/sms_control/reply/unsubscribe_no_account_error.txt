@@ -1,0 +1,1 @@
+{% extends "sms_control/reply/base.txt" %}{% load i18n %}{% block message %}{% trans "Invalid request. No account available for mobile number " %}{{ sms.from_number }}{% endblock %}

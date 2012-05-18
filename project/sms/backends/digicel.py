@@ -129,7 +129,6 @@ class SmsBackend(BaseSmsBackend):
     def get_messages(self, start=None, max=None):
         params = {'method':'inbox','username':self.get_username(),'password':self.get_password()}
 
-        #TODO if we aren't given a first keyword arg, let's get this from the db
         if start:
             params.update({'first': int(start)})
 
@@ -155,14 +154,26 @@ class SmsBackend(BaseSmsBackend):
                 return False
         else:
             records = response_dom.getElementsByTagName('record')
+            records.reverse()
             for record in records:
-                sms = Sms(
-                    from_number=record.getElementsByTagName('tel')[0].firstChild.data,
-                    to_number=settings.SMS_USERNAME,
-                    message=record.getElementsByTagName('message')[0].firstChild.data,
-                    sent_date=datetime.datetime.strptime(
-                        record.getElementsByTagName('datetime')[0].firstChild.data,
-                        '%d-%m-%Y %H:%M'),
-                )
-                sms.save()
+                try:
+                    Sms.objects.get(
+                        from_number=record.getElementsByTagName('tel')[0].firstChild.data,
+                        to_number=settings.SMS_USERNAME,
+                        message=record.getElementsByTagName('message')[0].firstChild.data,
+                        sent_date=datetime.datetime.strptime(
+                            record.getElementsByTagName('datetime')[0].firstChild.data,
+                            '%d-%m-%Y %H:%M'),
+                    )
+                    break
+                except Sms.DoesNotExist:
+                    sms = Sms(
+                        from_number=record.getElementsByTagName('tel')[0].firstChild.data,
+                        to_number=settings.SMS_USERNAME,
+                        message=record.getElementsByTagName('message')[0].firstChild.data,
+                        sent_date=datetime.datetime.strptime(
+                            record.getElementsByTagName('datetime')[0].firstChild.data,
+                            '%d-%m-%Y %H:%M'),
+                    )
+                    sms.save()
             return True

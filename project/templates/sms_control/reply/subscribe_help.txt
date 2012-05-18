@@ -1,0 +1,1 @@
+{% extends "sms_control/reply/base.txt" %}{% load i18n %}{% block message %}{% trans "Type 'subscribe 12345' to get location reports. Subscribe to multiple locations by separating each location ID with a comma or space: 'subscribe 12345 98763'" %}{% endblock %}
