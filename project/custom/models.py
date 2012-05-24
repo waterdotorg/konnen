@@ -169,6 +169,11 @@ class LocationPost(models.Model):
         (WATER_QUALITY_TYPE, _('Water Quality')),
     )
 
+    FOLLOWER_NOTIFICATION_STATUS_CHOICES = (
+        (PENDING_STATUS, _('Pending')),
+        (COMPLETE_STATUS, _('Complete')),
+    )
+
     user = models.ForeignKey(User)
     location = models.ForeignKey(Location)
     type = models.CharField(max_length=100, choices=TYPE_CHOICES, default=WATER_QUALITY_TYPE)
@@ -179,6 +184,8 @@ class LocationPost(models.Model):
     chlorine_level = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     status = models.SmallIntegerField(choices=STATUS_CHOICES, default=ACTIVE_STATUS)
     published_date = models.DateTimeField(default=datetime.datetime.now())
+    follower_notification_status = models.SmallIntegerField(choices=FOLLOWER_NOTIFICATION_STATUS_CHOICES, default=PENDING_STATUS)
+    follower_notification_semaphore_processing = models.BooleanField(default=False)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 
