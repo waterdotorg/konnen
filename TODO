@@ -33,7 +33,6 @@ Internationalization translation
         - django-admin.py makemessages --all --extensions=.html,.txt ( from within /project/ directory)
 
     - get django.po translated
-        - MAKE SURE SMS REPLY MESSAGES ARE <= 160
 
     - compile message file
         - django-admin.py compilemessages

@@ -1,0 +1,1 @@
+{% extends "sms_control/reply/base.txt" %}{% load i18n %}{% block message %}{% trans "Invalid chlorine level received. Please try again." %}{% endblock %}
