@@ -43,5 +43,14 @@
             "created_date": "2012-05-11 13:59:33",
             "updated_date": "2012-05-11 13:59:33"
         }
+    },
+    {
+        "model": "sms_control.smscontrol",
+        "pk": 6,
+        "fields": {
+            "phrase": "update",
+            "created_date": "2012-05-11 13:59:33",
+            "updated_date": "2012-05-11 13:59:33"
+        }
     }
 ]

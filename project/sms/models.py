@@ -4,6 +4,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from sms_control.models import SmsControl, SmsControlTrans
+from custom_user.models import Profile
 
 class Sms(models.Model):
     PENDING_STATUS = 0
@@ -81,6 +82,20 @@ class Sms(models.Model):
         except:
             return None
 
+    def get_control_word_group_name_from_sms(self):
+        control_word =  self.get_control_word_from_sms()
+        if control_word:
+            try:
+                s = SmsControl.objects.select_related().get(phrase__iexact=control_word)
+                return s.group.name
+            except SmsControl.DoesNotExist:
+                s = SmsControlTrans.objects.select_related().get(phrase_trans__iexact=control_word)
+                return s.sms_control.group.name
+            except:
+                return None
+        else:
+            return None
+
     def get_action_word_from_sms(self):
         if not self.message:
             return None
@@ -91,4 +106,16 @@ class Sms(models.Model):
         except:
             return None
 
+    def user_in_sys_reporter_group(self):
+        try:
+            profile = Profile.objects.select_related().get(mobile=self.from_number)
+            return profile.user.groups.filter(name='sys_reporter')
+        except:
+            return False
 
+    def user_in_sys_admin_group(self):
+        try:
+            profile = Profile.objects.select_related().get(mobile=self.from_number)
+            return profile.user.groups.filter(name='sys_admin')
+        except:
+            return False

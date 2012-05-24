@@ -1,0 +1,1 @@
+{% extends "sms_control/reply/base.txt" %}{% load i18n %}{% block message %}Successfully updated {{ location_post.location.title }} - {{ location_post.location.uid }}{% endblock %}

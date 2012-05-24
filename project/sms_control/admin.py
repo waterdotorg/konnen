@@ -3,8 +3,8 @@ from django.contrib import admin
 from sms_control.models import SmsControl, SmsControlLocale, SmsControlTrans
 
 class SmsControlAdmin(admin.ModelAdmin):
-    list_display = ('phrase', 'updated_date')
-    search_fields = ('phrase',)
+    list_display = ('phrase', 'group', 'updated_date')
+    search_fields = ('phrase', 'group')
     ordering = ('phrase',)
 
 class SmsControlLocaleAdmin(admin.ModelAdmin):
