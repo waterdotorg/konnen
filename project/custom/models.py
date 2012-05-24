@@ -124,6 +124,7 @@ class LocationSubscription(models.Model):
 
 class WaterSourceType(models.Model):
     title = models.CharField(max_length=100)
+    mobile_shorthand_code = models.CharField(max_length=3, blank=True, null=True)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 
@@ -132,6 +133,7 @@ class WaterSourceType(models.Model):
 
 class Provider(models.Model):
     title = models.CharField(max_length=100)
+    mobile_shorthand_code = models.CharField(max_length=10, blank=True, null=True)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 
@@ -185,3 +187,12 @@ class LocationPost(models.Model):
 
     def __unicode__(self):
         return u'%s' % self.title
+
+class LocationPostReporterRemarks(models.Model):
+    code = models.IntegerField(unique=True)
+    text = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return u'%d %s' % (self.code, self.text)
