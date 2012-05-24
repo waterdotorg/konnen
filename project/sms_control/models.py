@@ -1,8 +1,10 @@
+from django.contrib.auth.models import Group
 from django.core.validators import MaxLengthValidator
 from django.db import models
 
 class SmsControl(models.Model):
     phrase = models.CharField(max_length=160, unique=True)
+    group = models.ForeignKey(Group)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 

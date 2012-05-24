@@ -1,0 +1,1 @@
+{% extends "sms_control/reply/base.txt" %}{% load i18n %}{% block message %}{% trans "Type 'update 12345 g 15 gd 2' to send in an update for location 12345." %}{% endblock %}

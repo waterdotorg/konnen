@@ -10,14 +10,15 @@ import time
 from decimal import Decimal
 
 from django import db
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.core.mail import mail_admins
 from django.core.management.base import BaseCommand, CommandError
 from django.template.loader import render_to_string
 from django.utils import translation
 from django.utils.encoding import smart_str
 
-from custom.models import Location, LocationSubscription, LocationPost
+from custom.models import Location, LocationSubscription, LocationPost, WaterSourceType, Provider, \
+    LocationPostReporterRemarks
 from custom_user.models import Profile
 from sms import send_message
 from sms.models import Sms
@@ -36,7 +37,7 @@ class Command(BaseCommand):
         self.num_processes = multiprocessing.cpu_count()
         self.work_queue = multiprocessing.Queue()
 
-    def process_sms(self, sms):
+    def process_sms(self, sms, user_group='sys_public'):
         language = sms.get_language_from_sms()
         control_word = sms.get_control_word_from_sms()
         action_word = sms.get_action_word_from_sms()
@@ -44,11 +45,20 @@ class Command(BaseCommand):
             translation.activate(language)
 
             if language == 'en':
-                sms_control_translations = SmsControl.objects.all()
+                if user_group == 'sys_admin' or user_group == 'sys_reporter':
+                    sms_control_translations = SmsControl.objects.all()
+                else:
+                    sms_control_translations = SmsControl.objects.filter(group__name='sys_public')
             else:
-                sms_control_translations = SmsControlTrans.objects.select_related().filter(
-                    sms_control_locale__language_code__iexact=language,
-                )
+                if user_group == 'sys_admin' or user_group == 'sys_reporter':
+                    sms_control_translations = SmsControlTrans.objects.select_related().filter(
+                        sms_control_locale__language_code__iexact=language,
+                    )
+                else:
+                    sms_control_translations = SmsControlTrans.objects.select_related().filter(
+                        sms_control_locale__language_code__iexact=language,
+                        sms_control__group__name='sys_public',
+                    )
 
             # No message text received
             if not sms.message:
@@ -291,6 +301,82 @@ class Command(BaseCommand):
                 reply_message = render_to_string('sms_control/reply/status.txt',
                     {'location_subscriptions': ls, 'language': language})
                 return send_message(smart_str(reply_message), [sms.from_number])
+
+            ### Reporter Class ##
+            # Update
+            if control_word == 'update':
+                """
+                Example of update sent from a reporter "131009 g 15 gd 0"
+                    131009 - location uid
+                    g - shorthand for source type
+                    15 - 1.5 chlorine %
+                    gd - organization code
+                    0 - shorthand remarks
+                """
+                if user_group == 'sys_admin' or user_group == 'sys_reporter':
+                    ss = shlex.shlex(smart_str(sms.message))
+                    update_args = list(ss)[1:]
+                    try:
+                        profile = Profile.objects.select_related().get(mobile=sms.from_number)
+                        user = profile.user
+                    except:
+                        reply_message = render_to_string('sms_control/reply/update_unknown_user_error.txt',
+                            {'language': language,})
+                        return send_message(smart_str(reply_message), [sms.from_number])
+
+                    try:
+                        location = Location.objects.get(uid=update_args[0])
+                    except:
+                        reply_message = render_to_string('sms_control/reply/update_location_error.txt',
+                            {'language': language,})
+                        return send_message(smart_str(reply_message), [sms.from_number])
+                    try:
+                        water_source_type = WaterSourceType.objects.get(mobile_shorthand_code__iexact=update_args[1])
+                    except:
+                        water_source_type = None
+                    try:
+                        chlorine_level_list = list(update_args[2])
+                        chlorine_level = Decimal(str(chlorine_level_list[0]) + str('.') + str(''.join(chlorine_level_list[1:])))
+                    except:
+                        reply_message = render_to_string('sms_control/reply/update_chlorine_level_error.txt',
+                            {'language': language,})
+                        return send_message(smart_str(reply_message), [sms.from_number])
+                    try:
+                        provider = Provider.objects.get(mobile_shorthand_code__iexact=update_args[3])
+                    except:
+                        provider = None
+                    try:
+                        reporter_remark_code = int(update_args[4])
+                        reporter_remark = LocationPostReporterRemarks.objects.get(code=reporter_remark_code)
+                        remark = reporter_remark.text
+                    except:
+                        try:
+                            remark = update_args[4]
+                        except:
+                            remark = ''
+                    try:
+                        location_post = LocationPost(
+                            user=user,
+                            location=location,
+                            type=LocationPost.WATER_QUALITY_TYPE,
+                            content=remark,
+                            water_source_type=water_source_type,
+                            provider=provider,
+                            chlorine_level=chlorine_level,
+                            status=LocationPost.PENDING_STATUS,
+                            published_date=sms.sent_date,
+                        )
+                        location_post.save()
+                        reply_message = render_to_string('sms_control/reply/update.txt', {'language': language,
+                            'location_post': location_post,})
+                        return send_message(smart_str(reply_message), [sms.from_number])
+                    except:
+                        reply_message = render_to_string('sms_control/reply/update_failed.txt', {'language': language,})
+                        return send_message(smart_str(reply_message), [sms.from_number])
+                else:
+                    reply_message = render_to_string('sms_control/reply/invalid_request.txt',
+                        {'sms_control_options': sms_control_translations, 'language': language,})
+                    return send_message(smart_str(reply_message), [sms.from_number])
             return True
         except Exception, e:
             logger.error("Error processing sms id: %d. Error is %s", (sms.id, e))
@@ -310,7 +396,12 @@ class Command(BaseCommand):
                 continue
 
             try:
-                processing = self.process_sms(sms)
+                user_group = 'sys_public'
+                if sms.user_in_sys_reporter_group():
+                   user_group = 'sys_reporter'
+                if sms.user_in_sys_admin_group():
+                    user_group = 'sys_admin'
+                processing = self.process_sms(sms, user_group=user_group)
                 if processing:
                     sms.status_processing=Sms.COMPLETED_STATUS
                     sms.save()
