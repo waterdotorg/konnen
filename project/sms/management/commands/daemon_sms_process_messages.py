@@ -13,6 +13,7 @@ from django import db
 from django.contrib.auth.models import User, Group
 from django.core.mail import mail_admins
 from django.core.management.base import BaseCommand, CommandError
+from django.db.models import Q
 from django.template.loader import render_to_string
 from django.utils import translation
 from django.utils.encoding import smart_str
@@ -45,13 +46,20 @@ class Command(BaseCommand):
             translation.activate(language)
 
             if language == 'en':
-                if user_group == 'sys_admin' or user_group == 'sys_reporter':
+                if user_group == 'sys_admin':
                     sms_control_translations = SmsControl.objects.all()
+                elif user_group == 'sys_reporter':
+                    sms_control_translations = SmsControl.objects.filter(Q(group__name='sys_public') | Q(group__name='sys_reporter'))
                 else:
                     sms_control_translations = SmsControl.objects.filter(group__name='sys_public')
             else:
-                if user_group == 'sys_admin' or user_group == 'sys_reporter':
+                if user_group == 'sys_admin':
                     sms_control_translations = SmsControlTrans.objects.select_related().filter(
+                        sms_control_locale__language_code__iexact=language,
+                    )
+                elif user_group == 'sys_reporter':
+                    sms_control_translations = SmsControlTrans.objects.select_related().filter(
+                        Q(sms_control__group__name='sys_public') | Q(sms_control__group__name='sys_reporter'),
                         sms_control_locale__language_code__iexact=language,
                     )
                 else:
@@ -302,7 +310,7 @@ class Command(BaseCommand):
                     {'location_subscriptions': ls, 'language': language})
                 return send_message(smart_str(reply_message), [sms.from_number])
 
-            ### Reporter Class ##
+            ### Reporter Class ###
             # Update
             if control_word == 'update':
                 """
@@ -377,6 +385,28 @@ class Command(BaseCommand):
                     reply_message = render_to_string('sms_control/reply/invalid_request.txt',
                         {'sms_control_options': sms_control_translations, 'language': language,})
                     return send_message(smart_str(reply_message), [sms.from_number])
+
+            ### Admin Class ###
+            # Stats
+            if control_word == 'stats':
+                if user_group != 'sys_admin':
+                    reply_message = render_to_string('sms_control/reply/invalid_request.txt',
+                        {'sms_control_options': sms_control_translations, 'language': language,})
+                    return send_message(smart_str(reply_message), [sms.from_number])
+                location_posts = LocationPost.active_objects.filter(
+                    type=LocationPost.WATER_QUALITY_TYPE,
+                    published_date__gte=(datetime.datetime.now() - datetime.timedelta(days=1)),
+                )
+                users = User.objects.filter(is_active=True, groups__name='sys_public')
+                locations = Location.active_objects.all()
+                reply_message = render_to_string('sms_control/reply/stats.txt', {
+                    'locations_posts_count': location_posts.count(),
+                    'users_count': users.count(),
+                    'locations_count': locations.count(),
+                    'language': language,}
+                )
+                return send_message(smart_str(reply_message), [sms.from_number])
+
             return True
         except Exception, e:
             logger.error("Error processing sms id: %d. Error is %s", (sms.id, e))
