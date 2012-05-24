@@ -1,0 +1,3 @@
+{% extends "sms_control/reply/base.txt" %}{% load i18n %}{% block message %}{{ locations_posts_count }} {% trans "reports received in last 24 hours" %}
+{% trans "Followers:" %} {{ users_count }}
+{% trans "Locations:" %} {{ locations_count }}{% endblock %}
