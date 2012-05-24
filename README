@@ -26,3 +26,6 @@ Load sms control codes
     $ manage.py loaddata sms_control
 
     - After codes loaded, configure translations via Sms_control admin section
+
+Add in Location Post Reporter Remarks instances
+    - admin url: /admin/custom/locationpostreporterremarks/

@@ -1,1 +1,1 @@
-{% extends "sms_control/reply/base.txt" %}{% load i18n %}{% block message %}Update failed. Please try again.{% endblock %}
+{% extends "sms_control/reply/base.txt" %}{% load i18n %}{% block message %}{% trans "Update failed. Please try again." %}{% endblock %}
