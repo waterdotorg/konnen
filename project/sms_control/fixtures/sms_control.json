@@ -4,6 +4,7 @@
         "pk": 1,
         "fields": {
             "phrase": "help",
+            "group": 1,
             "created_date": "2012-05-11 13:59:33",
             "updated_date": "2012-05-11 13:59:33"
         }
@@ -13,6 +14,7 @@
         "pk": 2,
         "fields": {
             "phrase": "subscribe",
+            "group": 1,
             "created_date": "2012-05-11 13:59:33",
             "updated_date": "2012-05-11 13:59:33"
         }
@@ -22,6 +24,7 @@
         "pk": 3,
         "fields": {
             "phrase": "unsubscribe",
+            "group": 1,
             "created_date": "2012-05-11 13:59:33",
             "updated_date": "2012-05-11 13:59:33"
         }
@@ -31,6 +34,7 @@
         "pk": 4,
         "fields": {
             "phrase": "report",
+            "group": 1,
             "created_date": "2012-05-11 13:59:33",
             "updated_date": "2012-05-11 13:59:33"
         }
@@ -40,6 +44,7 @@
         "pk": 5,
         "fields": {
             "phrase": "status",
+            "group": 1,
             "created_date": "2012-05-11 13:59:33",
             "updated_date": "2012-05-11 13:59:33"
         }
@@ -49,6 +54,7 @@
         "pk": 6,
         "fields": {
             "phrase": "update",
+            "group": 2,
             "created_date": "2012-05-11 13:59:33",
             "updated_date": "2012-05-11 13:59:33"
         }
