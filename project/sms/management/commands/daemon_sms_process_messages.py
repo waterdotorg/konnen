@@ -441,7 +441,6 @@ class Command(BaseCommand):
             finally:
                 sms.semaphore_processing = False
                 sms.save()
-            time.sleep(5)
 
     def handle(self, *args, **options):
         for i in range(self.num_processes):
