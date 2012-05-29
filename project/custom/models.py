@@ -169,9 +169,10 @@ class LocationPost(models.Model):
         (WATER_QUALITY_TYPE, _('Water Quality')),
     )
 
-    FOLLOWER_NOTIFICATION_STATUS_CHOICES = (
+    WATER_QUALITY_NOTIFICATION_STATUS_CHOICES = (
         (PENDING_STATUS, _('Pending')),
         (COMPLETE_STATUS, _('Complete')),
+        (CANCELLED_STATUS, _('Cancelled')),
     )
 
     user = models.ForeignKey(User)
@@ -184,8 +185,18 @@ class LocationPost(models.Model):
     chlorine_level = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     status = models.SmallIntegerField(choices=STATUS_CHOICES, default=ACTIVE_STATUS)
     published_date = models.DateTimeField(default=datetime.datetime.now())
-    follower_notification_status = models.SmallIntegerField(choices=FOLLOWER_NOTIFICATION_STATUS_CHOICES, default=PENDING_STATUS)
-    follower_notification_semaphore_processing = models.BooleanField(default=False)
+    water_quality_notification_email_daily_status = models.SmallIntegerField(
+        choices=WATER_QUALITY_NOTIFICATION_STATUS_CHOICES, default=PENDING_STATUS)
+    water_quality_notification_email_daily_semaphore = models.BooleanField(default=False)
+    water_quality_notification_email_immediate_status = models.SmallIntegerField(
+        choices=WATER_QUALITY_NOTIFICATION_STATUS_CHOICES, default=PENDING_STATUS)
+    water_quality_notification_email_immediate_semaphore = models.BooleanField(default=False)
+    water_quality_notification_email_weekly_status = models.SmallIntegerField(
+        choices=WATER_QUALITY_NOTIFICATION_STATUS_CHOICES, default=PENDING_STATUS)
+    water_quality_notification_email_weekly_semaphore = models.BooleanField(default=False)
+    water_quality_notification_mobile_status = models.SmallIntegerField(
+        choices=WATER_QUALITY_NOTIFICATION_STATUS_CHOICES, default=PENDING_STATUS)
+    water_quality_notification_mobile_semaphore = models.BooleanField(default=False)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 
