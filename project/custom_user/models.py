@@ -15,7 +15,7 @@ def get_profile_image_path(instance, filename):
 
 class Profile(models.Model):
     user = models.ForeignKey(User)
-    mobile = models.CharField(max_length=20, blank=True, null=True)
+    mobile = models.CharField(max_length=20, blank=True)
     image = models.ImageField(upload_to=get_profile_image_path, max_length=256, blank=True, null=True)
     content = models.TextField(blank=True, null=True)
     created_date = models.DateTimeField(auto_now_add=True)
