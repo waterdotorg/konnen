@@ -54,16 +54,9 @@ Whoosh crontab to update index
 
 - Virtualenv (optional)
 
-- Supervisor (optional)
-    - gunicorn.conf
-    - celerybeat.conf
-    - celeryd.conf
-
-- Celery needs a broker
-    - Hello RabbitMQ
-    - rabbitmqctl add_user username password
-    - rabbitmqctl add_vhost vhostname
-    - rabbitmqctl set_permissions -p vhostname username ".*" ".*" ".*"
+- Supervisor
+    - konnen_gunicorn.conf
+    - daemon processes - konnen_***.conf
 
 
 ##############################

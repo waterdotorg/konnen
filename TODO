@@ -6,7 +6,7 @@ update pip freeze requirements file
 
 Favicon
 
-- supervisord/konnen_daemon_sms_get_messages.conf
+- supervisord/***.conf
     - change autorestart to true
 
 - sms/backends/digicel.py

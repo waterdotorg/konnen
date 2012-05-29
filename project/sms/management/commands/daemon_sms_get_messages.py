@@ -8,6 +8,7 @@ from django.core.management.base import BaseCommand, CommandError
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
+# TODO need logging, both normal and concurrent
 
 class Command(BaseCommand):
     help = 'Sms Message Polling'
