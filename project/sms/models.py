@@ -119,3 +119,13 @@ class Sms(models.Model):
             return profile.user.groups.filter(name='sys_admin')
         except:
             return False
+
+    def set_user_language_preference(self, language=None):
+        try:
+            profile = Profile.objects.get(mobile=self.from_number)
+            if not language:
+                language = self.get_language_from_sms()
+            profile.language = language
+            profile.save()
+        except:
+            pass
