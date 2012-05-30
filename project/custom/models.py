@@ -214,3 +214,25 @@ class LocationPostReporterRemarks(models.Model):
 
     def __unicode__(self):
         return u'%d %s' % (self.code, self.text)
+
+class LocationPostNotificationLog(models.Model):
+    MOBILE = 0
+    EMAIL_IMMEDIATE = 1
+    EMAIL_DAILY = 2
+    EMAIL_WEEKLY = 3
+
+    TYPE_CHOICES = (
+        (MOBILE, _('Mobile')),
+        (EMAIL_IMMEDIATE, _('Email Immediate')),
+        (EMAIL_DAILY, _('Email Daily')),
+        (EMAIL_WEEKLY, _('Email Weekly')),
+    )
+
+    user = models.ForeignKey(User)
+    location_post = models.ForeignKey(LocationPost)
+    notification_type = models.SmallIntegerField(choices=TYPE_CHOICES)
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return u'%s %s' % (self.user, self.location_post)
