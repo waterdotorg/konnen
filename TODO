@@ -8,6 +8,7 @@ Favicon
 
 - supervisord/***.conf
     - change autorestart to true
+    - Reload or Restart supervisord to kick off new daemons
 
 - sms/backends/digicel.py
     - Code and test get_failed_messages() function
