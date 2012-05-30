@@ -204,7 +204,7 @@ class LocationPost(models.Model):
     active_objects = LocationPostActiveManager()
 
     def __unicode__(self):
-        return u'%s' % self.title
+        return u'%d : %s' % (self.id, self.title)
 
 class LocationPostReporterRemarks(models.Model):
     code = models.IntegerField(unique=True)
