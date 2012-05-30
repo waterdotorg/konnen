@@ -40,6 +40,8 @@ class Command(BaseCommand):
 
     def process_sms(self, sms, user_group='sys_public'):
         language = sms.get_language_from_sms()
+        # Set user language preference
+        sms.set_user_language_preference(language=language)
         control_word = sms.get_control_word_from_sms()
         action_word = sms.get_action_word_from_sms()
         try:
