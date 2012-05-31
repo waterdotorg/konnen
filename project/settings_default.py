@@ -198,11 +198,39 @@ THUMBNAIL_SUBDIR = 'thumbs'
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
     'handlers': {
         'mail_admins': {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler'
-        }
+        },
+        'mail_admins_info': {
+            'level': 'INFO',
+            'class': 'django.utils.log.AdminEmailHandler'
+        },
+        'custom_commands_concurrent_rotating_file': {
+            'level':'INFO',
+            'class':'cloghandler.ConcurrentRotatingFileHandler',
+            'filename': '/srv/python-environments/konnen/log/custom/management.log',
+            'maxBytes': 1024*1024*5, # 5 MB
+            'backupCount': 5,
+            'formatter':'verbose',
+        },
+        'sms_commands_concurrent_rotating_file': {
+            'level':'INFO',
+            'class':'cloghandler.ConcurrentRotatingFileHandler',
+            'filename': '/srv/python-environments/konnen/log/sms/management.log',
+            'maxBytes': 1024*1024*5, # 5 MB
+            'backupCount': 5,
+            'formatter':'verbose',
+        },
     },
     'loggers': {
         'django.request': {
@@ -210,9 +238,14 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
+        'custom.management.commands': {
+            'handlers': ['custom_commands_concurrent_rotating_file', 'mail_admins'],
+            'level': 'INFO',
+            'propagate': True,
+        },
         'sms.management.commands': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',
+            'handlers': ['sms_commands_concurrent_rotating_file', 'mail_admins'],
+            'level': 'INFO',
             'propagate': True,
         },
     }
