@@ -122,6 +122,24 @@ class LocationSubscription(models.Model):
     def __unicode__(self):
         return u'%s : %s' % (self.user.get_full_name(), self.location)
 
+class LocationSubscriptionNotificationLog(models.Model):
+    EMAIL_DAILY = 0
+    EMAIL_WEEKLY = 1
+
+    TYPE_CHOICES = (
+        (EMAIL_DAILY, _('Email Daily')),
+        (EMAIL_WEEKLY, _('Email Weekly')),
+    )
+    
+    user = models.ForeignKey(User)
+    location_subscription = models.ForeignKey(LocationSubscription)
+    notification_type = models.SmallIntegerField(choices=TYPE_CHOICES)
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return u'%s %s' % (self.user, self.location_subscription)
+
 class WaterSourceType(models.Model):
     title = models.CharField(max_length=100)
     mobile_shorthand_code = models.CharField(max_length=3, blank=True, null=True)
