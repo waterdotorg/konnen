@@ -4,6 +4,8 @@ from decimal import Decimal
 
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
 
@@ -114,6 +116,8 @@ class LocationSubscription(models.Model):
     location = models.ForeignKey(Location)
     email_subscription = models.CharField(max_length=20, choices=EMAIL_FREQ_CHOICES, default=EMAIL_DAILY_FREQ)
     phone_subscription = models.BooleanField(default=True)
+    last_email_daily_date = models.DateTimeField(blank=True, null=True)
+    last_email_weekly_date = models.DateTimeField(blank=True, null=True)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 
@@ -254,3 +258,17 @@ class LocationPostNotificationLog(models.Model):
 
     def __unicode__(self):
         return u'%s %s' % (self.user, self.location_post)
+
+### Signals ###
+@receiver(post_save, sender=LocationSubscriptionNotificationLog)
+def location_subscription_notification_log_post_save(sender, **kwargs):
+    if kwargs['created']:
+        location_subscription = kwargs['instance'].location_subscription
+
+        if kwargs['instance'].notification_type == LocationSubscriptionNotificationLog.EMAIL_DAILY:
+            location_subscription.last_email_daily_date = datetime.datetime.now()
+
+        if kwargs['instance'].notification_type == LocationSubscriptionNotificationLog.EMAIL_WEEKLY:
+            location_subscription.last_email_weekly_date = datetime.datetime.now()
+
+        location_subscription.save()
