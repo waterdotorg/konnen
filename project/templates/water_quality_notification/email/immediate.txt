@@ -1,4 +1,4 @@
-{% extends "water_quality_notification/sms/base.txt" %}{% load i18n %}{% block message %}
+{% extends "water_quality_notification/email/base.txt" %}{% load i18n %}{% block message %}
 {{ location.title }} {% trans "was last tested on" %} {% if location_post.published_date %}{{ location_post.published_date|date:"Y.m.d" }}{% else %}N/A{% endif %} {% trans "with a result of:" %} {% if location_post %}{% if safe_water %}{% trans "PASS" %}{% else %}{% trans "FAIL" %}{% endif %}{% else %}{% trans "N/A" %}{% endif %}
 
 {% trans "View location:" %} http://{{ current_site.domain }}{{ location.get_absolute_url }}{% endblock %}
