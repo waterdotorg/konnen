@@ -1,1 +1,1 @@
-{% extends "water_quality_notification/sms/base.txt" %}{% load i18n %}{% block message %}{{ location.title }} {% trans "Update" %}{% endblock %}
+{% extends "water_quality_notification/daily/base.txt" %}{% load i18n %}{% block message %}{{ location.title }} {% trans "Update" %}{% endblock %}
