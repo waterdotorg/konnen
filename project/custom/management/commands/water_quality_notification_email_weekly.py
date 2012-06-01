@@ -24,7 +24,7 @@ from custom.models import Location, LocationPost, LocationSubscription, Location
 logger = logging.getLogger(__name__)
 
 class Command(BaseCommand):
-    help = 'Push new water quality updates to location followers via daily email'
+    help = 'Push new water quality updates to location followers via weekly email'
     args = ''
 
     def __init__(self):
@@ -38,7 +38,7 @@ class Command(BaseCommand):
             try:
                 location_subscription_id = self.work_queue.get_nowait()
                 location_subscription = LocationSubscription.objects.get(id=location_subscription_id)
-                logger.info("Starting water_quality_notification_email_daily processing for LocationSubscription id: %d" % location_subscription.id)
+                logger.info("Starting water_quality_notification_email_weekly processing for LocationSubscription id: %d" % location_subscription.id)
             except Exception, e:
                 time.sleep(20)
                 continue
@@ -48,19 +48,19 @@ class Command(BaseCommand):
                 existing_log = LocationSubscriptionNotificationLog.objects.filter(
                     user=location_subscription.user,
                     location_subscription=location_subscription,
-                    notification_type=LocationSubscriptionNotificationLog.EMAIL_DAILY,
-                    created_date__gte=(datetime.datetime.now() - datetime.timedelta(days=1)),
+                    notification_type=LocationSubscriptionNotificationLog.EMAIL_WEEKLY,
+                    created_date__gte=(datetime.datetime.now() - datetime.timedelta(days=7)),
                 )
                 if existing_log.count():
-                    raise Exception("Already sent daily email notification to %s for LocationSubscription id %d" % (location_subscription.user, location_subscription.id))
+                    raise Exception("Already sent weekly email notification to %s for LocationSubscription id %d" % (location_subscription.user, location_subscription.id))
 
                 location_posts = LocationPost.active_objects.filter(
                     location=location_subscription.location,
                     type=LocationPost.WATER_QUALITY_TYPE,
-                    published_date__gte=(datetime.datetime.now() - datetime.timedelta(days=1))
+                    published_date__gte=(datetime.datetime.now() - datetime.timedelta(days=7))
                 )
 
-                logger.info("Found %d LocationPosts for daily email subscription" % location_posts.count())
+                logger.info("Found %d LocationPosts for weekly email subscription" % location_posts.count())
 
                 if location_posts.count():
                     profile = location_subscription.user.get_profile()
@@ -75,11 +75,11 @@ class Command(BaseCommand):
                             location_post.safe_water = False
                         location_posts_processed.append(location_post)
 
-                    email_subject = render_to_string('water_quality_notification/email/daily-subject.txt', {
+                    email_subject = render_to_string('water_quality_notification/email/weekly-subject.txt', {
                         'location': location_subscription.location, 'language': language
                     })
 
-                    email_body = render_to_string('water_quality_notification/email/daily.txt', {
+                    email_body = render_to_string('water_quality_notification/email/weekly.txt', {
                         'location': location_subscription.location, 'location_posts': location_posts_processed,
                         'language': language, 'current_site': self.current_site})
 
@@ -94,16 +94,16 @@ class Command(BaseCommand):
                         location_subscription_notification_log = LocationSubscriptionNotificationLog(
                             user=location_subscription.user,
                             location_subscription=location_subscription,
-                            notification_type=LocationSubscriptionNotificationLog.EMAIL_DAILY,
+                            notification_type=LocationSubscriptionNotificationLog.EMAIL_WEEKLY,
                         )
                         location_subscription_notification_log.save()
-                        logger.info("Successfully sent daily email notification for LocationSubscription id %d to %s" % (location_subscription.id, location_subscription.user))
+                        logger.info("Successfully sent weekly email notification for LocationSubscription id %d to %s" % (location_subscription.id, location_subscription.user))
                     translation.deactivate()
             except Exception, e:
-                logger.error("Error processing water_quality_notification_email_daily for LocationSubscription id %d: %s" % (location_subscription.id, e))
+                logger.error("Error processing water_quality_notification_email_weekly for LocationSubscription id %d: %s" % (location_subscription.id, e))
             finally:
                 translation.deactivate()
-                location_subscription.water_quality_notification_email_daily_semaphore = False
+                location_subscription.water_quality_notification_email_weekly_semaphore = False
                 location_subscription.save()
 
     def handle(self, *args, **options):
@@ -117,10 +117,10 @@ class Command(BaseCommand):
 
         while True:
             location_subscriptions = LocationSubscription.objects.filter(
-                Q(last_email_daily_date__lte=(datetime.datetime.now() - datetime.timedelta(days=1))) |
-                Q(last_email_daily_date__isnull=True),
-                email_subscription=LocationSubscription.EMAIL_DAILY_FREQ,
-                water_quality_notification_email_daily_semaphore=False,
+                Q(last_email_weekly_date__lte=(datetime.datetime.now() - datetime.timedelta(days=7))) |
+                Q(last_email_weekly_date__isnull=True),
+                email_subscription=LocationSubscription.EMAIL_WEEKLY_FREQ,
+                water_quality_notification_email_weekly_semaphore=False,
                 user__is_active=True,
                 location__status=Location.ACTIVE_STATUS,
                 location__published_date__lte=datetime.datetime.now(),
@@ -128,14 +128,14 @@ class Command(BaseCommand):
 
             for location_subscription in location_subscriptions:
                 try:
-                    location_subscription.water_quality_notification_email_daily_semaphore = True
+                    location_subscription.water_quality_notification_email_weekly_semaphore = True
                     location_subscription.save()
                     self.work_queue.put(location_subscription.id)
-                    logger.info("Added LocationSubscription id %d to water_quality_notification_email_daily processing queue" % location_subscription.id)
+                    logger.info("Added LocationSubscription id %d to water_quality_notification_email_weekly processing queue" % location_subscription.id)
                 except:
-                    logger.error("Error adding LocationSubscription id %d to water_quality_notification_email_daily processing queue" % location_subscription.id)
-                    location_subscription.water_quality_notification_email_daily_semaphore = False
+                    logger.error("Error adding LocationSubscription id %d to water_quality_notification_email_weekly processing queue" % location_subscription.id)
+                    location_subscription.water_quality_notification_email_weekly_semaphore = False
                     location_subscription.save()
             # TODO: test memory leakage with DEBUG=False. Uncomment reset_queries() if memory leakage present.
             #db.reset_queries()
-            time.sleep(300)
+            time.sleep(600)
