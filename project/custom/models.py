@@ -118,6 +118,8 @@ class LocationSubscription(models.Model):
     phone_subscription = models.BooleanField(default=True)
     last_email_daily_date = models.DateTimeField(blank=True, null=True)
     last_email_weekly_date = models.DateTimeField(blank=True, null=True)
+    water_quality_notification_email_daily_semaphore = models.BooleanField(default=False)
+    water_quality_notification_email_weekly_semaphore = models.BooleanField(default=False)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 
@@ -207,15 +209,9 @@ class LocationPost(models.Model):
     chlorine_level = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     status = models.SmallIntegerField(choices=STATUS_CHOICES, default=ACTIVE_STATUS)
     published_date = models.DateTimeField(default=datetime.datetime.now())
-    water_quality_notification_email_daily_status = models.SmallIntegerField(
-        choices=WATER_QUALITY_NOTIFICATION_STATUS_CHOICES, default=PENDING_STATUS)
-    water_quality_notification_email_daily_semaphore = models.BooleanField(default=False)
     water_quality_notification_email_immediate_status = models.SmallIntegerField(
         choices=WATER_QUALITY_NOTIFICATION_STATUS_CHOICES, default=PENDING_STATUS)
     water_quality_notification_email_immediate_semaphore = models.BooleanField(default=False)
-    water_quality_notification_email_weekly_status = models.SmallIntegerField(
-        choices=WATER_QUALITY_NOTIFICATION_STATUS_CHOICES, default=PENDING_STATUS)
-    water_quality_notification_email_weekly_semaphore = models.BooleanField(default=False)
     water_quality_notification_mobile_status = models.SmallIntegerField(
         choices=WATER_QUALITY_NOTIFICATION_STATUS_CHOICES, default=PENDING_STATUS)
     water_quality_notification_mobile_semaphore = models.BooleanField(default=False)
