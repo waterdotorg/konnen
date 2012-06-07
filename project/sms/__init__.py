@@ -36,7 +36,7 @@ def get_messages(start=None, max=None, fail_silently=False, auth_user=None, auth
         password=auth_password,
         fail_silently=fail_silently,
     )
-    connection.get_messages(start=start, max=max)
+    return connection.get_messages(start=start, max=max)
 
 def send_message(message, recipient_list, fail_silently=False, from_phone=None, id=None,
              auth_user=None, auth_password=None, connection=None):

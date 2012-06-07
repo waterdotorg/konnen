@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-15 18:39+0000\n"
+"POT-Creation-Date: 2012-06-06 14:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,11 +16,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: settings_default.py:234
+#: settings_default.py:267
 msgid "English"
 msgstr ""
 
-#: settings_default.py:235
+#: settings_default.py:268
 msgid "Haitian Creole"
 msgstr ""
 
@@ -44,53 +44,73 @@ msgid ""
 "alerts."
 msgstr ""
 
-#: custom/models.py:18
+#: custom/models.py:20
 msgid "communities"
 msgstr ""
 
-#: custom/models.py:38 custom/models.py:157 sms/models.py:14
+#: custom/models.py:40 custom/models.py:183 custom/models.py:197
+#: sms/models.py:15
 msgid "Pending"
 msgstr ""
 
-#: custom/models.py:39 custom/models.py:158
+#: custom/models.py:41 custom/models.py:184
 msgid "Active"
 msgstr ""
 
-#: custom/models.py:40 custom/models.py:159
+#: custom/models.py:42 custom/models.py:185 custom/models.py:198
 msgid "Complete"
 msgstr ""
 
-#: custom/models.py:41 custom/models.py:160 sms/models.py:16
+#: custom/models.py:43 custom/models.py:186 custom/models.py:199
+#: sms/models.py:17
 msgid "Cancelled"
 msgstr ""
 
-#: custom/models.py:42 custom/models.py:161
+#: custom/models.py:44 custom/models.py:187
 msgid "Hidden"
 msgstr ""
 
-#: custom/models.py:107 templates/location/browse.html:39
+#: custom/models.py:109 templates/location/browse.html:39
 #: templates/location/location.html:33
 msgid "None"
 msgstr ""
 
-#: custom/models.py:108 templates/location/browse.html:40
+#: custom/models.py:110 templates/location/browse.html:40
 #: templates/location/location.html:34
 msgid "Immediate"
 msgstr "Imedyat"
 
-#: custom/models.py:109 templates/location/browse.html:41
+#: custom/models.py:111 templates/location/browse.html:41
 #: templates/location/location.html:35 templates/location/location.html:289
 msgid "Daily"
 msgstr ""
 
-#: custom/models.py:110 templates/location/browse.html:42
+#: custom/models.py:112 templates/location/browse.html:42
 #: templates/location/location.html:36
 msgid "Weekly"
 msgstr ""
 
-#: custom/models.py:167
+#: custom/models.py:136 custom/models.py:245
+msgid "Email Daily"
+msgstr ""
+
+#: custom/models.py:137 custom/models.py:246
+msgid "Email Weekly"
+msgstr ""
+
+#: custom/models.py:193
 msgid "Water Quality"
 msgstr ""
+
+#: custom/models.py:243 templates/location/browse.html:19
+#: templates/settings/account.html:34
+msgid "Mobile"
+msgstr ""
+
+#: custom/models.py:244
+#, fuzzy
+msgid "Email Immediate"
+msgstr "Imedyat"
 
 #: custom/templatetags/custom_filters.py:17
 #, python-format
@@ -155,11 +175,11 @@ msgstr ""
 msgid "Account settings have been updated."
 msgstr ""
 
-#: sms/models.py:15
+#: sms/models.py:16
 msgid "Completed"
 msgstr ""
 
-#: sms/models.py:29
+#: sms/models.py:30
 msgid "Sms messages"
 msgstr ""
 
@@ -279,10 +299,6 @@ msgstr ""
 
 #: templates/location/browse.html:18 templates/settings/account.html:29
 msgid "Email"
-msgstr ""
-
-#: templates/location/browse.html:19 templates/settings/account.html:34
-msgid "Mobile"
 msgstr ""
 
 #: templates/location/browse.html:47 templates/location/location.html:40
@@ -582,6 +598,16 @@ msgstr ""
 msgid "Delete image"
 msgstr ""
 
+#: templates/sms_control/reply/help.txt:1
+#, fuzzy
+msgid "Available options:"
+msgstr "Envalid demann. Chwa ki disponib:"
+
+#: templates/sms_control/reply/help.txt:3
+#: templates/sms_control/reply/invalid_request.txt:3
+msgid "Send an option followed by 'help' for more information."
+msgstr ""
+
 #: templates/sms_control/reply/invalid_request.txt:1
 msgid "Invalid request. Available options:"
 msgstr "Envalid demann. Chwa ki disponib:"
@@ -589,3 +615,169 @@ msgstr "Envalid demann. Chwa ki disponib:"
 #: templates/sms_control/reply/null_message.txt:1
 msgid "No text received. Available options:"
 msgstr "Pa gen teks resevwa. Chwa ki disponib:"
+
+#: templates/sms_control/reply/report.txt:1
+#: templates/water_quality_notification/email/immediate.txt:2
+#: templates/water_quality_notification/sms/mobile.txt:1
+msgid "was last tested on"
+msgstr ""
+
+#: templates/sms_control/reply/report.txt:1
+#: templates/water_quality_notification/email/daily.txt:2
+#: templates/water_quality_notification/email/immediate.txt:2
+#: templates/water_quality_notification/email/weekly.txt:2
+#: templates/water_quality_notification/sms/mobile.txt:1
+msgid "with a result of:"
+msgstr ""
+
+#: templates/sms_control/reply/report.txt:1
+#: templates/water_quality_notification/email/daily.txt:2
+#: templates/water_quality_notification/email/immediate.txt:2
+#: templates/water_quality_notification/email/weekly.txt:2
+#: templates/water_quality_notification/sms/mobile.txt:1
+msgid "PASS"
+msgstr ""
+
+#: templates/sms_control/reply/report.txt:1
+#: templates/water_quality_notification/email/daily.txt:2
+#: templates/water_quality_notification/email/immediate.txt:2
+#: templates/water_quality_notification/email/weekly.txt:2
+#: templates/water_quality_notification/sms/mobile.txt:1
+msgid "FAIL"
+msgstr ""
+
+#: templates/sms_control/reply/report.txt:1
+#: templates/water_quality_notification/email/daily.txt:2
+#: templates/water_quality_notification/email/immediate.txt:2
+#: templates/water_quality_notification/email/weekly.txt:2
+#: templates/water_quality_notification/sms/mobile.txt:1
+msgid "N/A"
+msgstr ""
+
+#: templates/sms_control/reply/report_help.txt:1
+msgid ""
+"Type 'report' for your latest location report. Type 'report 12345' for a "
+"specific location or 'report 12345 98763' for multiple locations."
+msgstr ""
+
+#: templates/sms_control/reply/report_location_error.txt:1
+msgid ""
+"No subscriptions available. Please subscribe to a location or type 'report "
+"12345' for a specific location or 'report 12345 98763' for multiple "
+"locations."
+msgstr ""
+
+#: templates/sms_control/reply/report_location_error_anonymous.txt:1
+msgid ""
+"Invalid location ID received. Type 'report 12345' for a specific location or "
+"'report 12345 98763' for multiple locations."
+msgstr ""
+
+#: templates/sms_control/reply/stats.txt:1
+msgid "reports received in last 24 hours"
+msgstr ""
+
+#: templates/sms_control/reply/stats.txt:2
+msgid "Followers:"
+msgstr ""
+
+#: templates/sms_control/reply/stats.txt:3
+msgid "Locations:"
+msgstr ""
+
+#: templates/sms_control/reply/status.txt:1
+msgid "You are currently subscribed to:"
+msgstr ""
+
+#: templates/sms_control/reply/status.txt:1
+msgid ""
+"No subscriptions available. Type 'subscribe help' for subscription help "
+"information."
+msgstr ""
+
+#: templates/sms_control/reply/status_help.txt:1
+msgid "Type 'status' for your subscribed location ID's."
+msgstr ""
+
+#: templates/sms_control/reply/subscribe_help.txt:1
+msgid ""
+"Type 'subscribe 12345' to get location reports. Subscribe to multiple "
+"locations by separating each location ID with a comma or space: 'subscribe "
+"12345 98763'"
+msgstr ""
+
+#: templates/sms_control/reply/subscribe_location_error.txt:1
+#: templates/sms_control/reply/update_location_error.txt:1
+msgid "Invalid location ID received. Please try again."
+msgstr ""
+
+#: templates/sms_control/reply/subscribe_success.txt:1
+msgid "Successfully subscribed to the following location ID's:"
+msgstr ""
+
+#: templates/sms_control/reply/unsubscribe_help.txt:1
+msgid ""
+"Type 'unsubscribe 12345' or 'unsubscribe all' to stop reports. For multiple "
+"locations separate each ID with a comma or space: 'unsubscribe 12345 98763'"
+msgstr ""
+
+#: templates/sms_control/reply/unsubscribe_location_error.txt:1
+msgid ""
+"Invalid location ID received. Type 'unsubscribe help' for help information."
+msgstr ""
+
+#: templates/sms_control/reply/unsubscribe_no_account_error.txt:1
+#, fuzzy
+msgid "Invalid request. No account available for mobile number "
+msgstr "Envalid demann. Chwa ki disponib:"
+
+#: templates/sms_control/reply/unsubscribe_no_subscriptions_error.txt:1
+msgid "Error unsubscribing. You are not subscribed to any locations."
+msgstr ""
+
+#: templates/sms_control/reply/unsubscribe_success.txt:1
+msgid "Successfully unsubscribed from the following location ID's:"
+msgstr ""
+
+#: templates/sms_control/reply/update.txt:1
+msgid "Successfully updated"
+msgstr ""
+
+#: templates/sms_control/reply/update_chlorine_level_error.txt:1
+msgid "Invalid chlorine level received. Please try again."
+msgstr ""
+
+#: templates/sms_control/reply/update_failed.txt:1
+msgid "Update failed. Please try again."
+msgstr ""
+
+#: templates/sms_control/reply/update_help.txt:1
+msgid "Type 'update 12345 g 15 gd 2' to send in an update for location 12345."
+msgstr ""
+
+#: templates/sms_control/reply/update_unknown_user_error.txt:1
+msgid "No user record available for this number."
+msgstr ""
+
+#: templates/water_quality_notification/email/daily-subject.txt:1
+msgid "Daily Update"
+msgstr ""
+
+#: templates/water_quality_notification/email/daily.txt:2
+#: templates/water_quality_notification/email/weekly.txt:2
+msgid "was tested on"
+msgstr ""
+
+#: templates/water_quality_notification/email/daily.txt:7
+#: templates/water_quality_notification/email/immediate.txt:4
+#: templates/water_quality_notification/email/weekly.txt:7
+msgid "View location:"
+msgstr ""
+
+#: templates/water_quality_notification/email/immediate-subject.txt:1
+msgid "Update"
+msgstr ""
+
+#: templates/water_quality_notification/email/weekly-subject.txt:1
+msgid "Weekly Update"
+msgstr ""
