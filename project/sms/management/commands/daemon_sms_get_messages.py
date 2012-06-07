@@ -17,7 +17,9 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         while True:
             try:
+                logger.info("Starting sms get messages")
                 s = sms.get_messages()
+                logger.info("Ending sms get messages: %s" % s)
             except Exception, e:
                 logger.error("Error importing sms messages: %s" % e)
             # TODO: test memory leakage with DEBUG=False. Uncomment reset_queries() if memory leakage present.
