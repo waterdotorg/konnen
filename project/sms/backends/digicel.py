@@ -23,6 +23,7 @@ Usage::
 """
 
 import datetime
+import pytz
 import requests
 
 from urllib import urlencode
@@ -153,17 +154,19 @@ class SmsBackend(BaseSmsBackend):
             else:
                 return False
         else:
+            eastern = pytz.timezone('US/Eastern')
             records = response_dom.getElementsByTagName('record')
             records.reverse()
             for record in records:
+                sent_date = datetime.datetime.strptime(
+                    record.getElementsByTagName('datetime')[0].firstChild.data, '%d-%m-%Y %H:%M')
+                loc_dt = eastern.localize(sent_date)
                 try:
                     Sms.objects.get(
                         from_number=record.getElementsByTagName('tel')[0].firstChild.data,
                         to_number=settings.SMS_USERNAME,
                         message=record.getElementsByTagName('message')[0].firstChild.data,
-                        sent_date=datetime.datetime.strptime(
-                            record.getElementsByTagName('datetime')[0].firstChild.data,
-                            '%d-%m-%Y %H:%M'),
+                        sent_date=loc_dt,
                     )
                     break
                 except Sms.DoesNotExist:
@@ -171,9 +174,7 @@ class SmsBackend(BaseSmsBackend):
                         from_number=record.getElementsByTagName('tel')[0].firstChild.data,
                         to_number=settings.SMS_USERNAME,
                         message=record.getElementsByTagName('message')[0].firstChild.data,
-                        sent_date=datetime.datetime.strptime(
-                            record.getElementsByTagName('datetime')[0].firstChild.data,
-                            '%d-%m-%Y %H:%M'),
+                        sent_date=loc_dt,
                     )
                     sms.save()
             return True
