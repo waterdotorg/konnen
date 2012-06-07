@@ -31,7 +31,7 @@ Internationalization translation
     - locale/ht/LC_MESSAGES/django.po
 
     - make or update message file
-        - django-admin.py makemessages --all --extensions=.html,.txt ( from within /project/ directory)
+        - django-admin.py makemessages --all --extension=.html,.txt ( from within /project/ directory)
 
     - get django.po translated
 
