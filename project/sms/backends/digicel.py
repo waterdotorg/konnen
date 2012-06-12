@@ -24,6 +24,7 @@ Usage::
 
 import datetime
 import pytz
+import re
 import requests
 
 from urllib import urlencode
@@ -64,6 +65,9 @@ class SmsBackend(BaseSmsBackend):
     def get_api_url(self):
         return DIGICEL_API_URL
 
+    def phone_num_cleanse(self, phone_num):
+        return str(re.sub("\D", "", phone_num))
+
     def send_message(self, message, recipient_list, from_phone=None, id=None):
         """
         Send message to recipient list.
@@ -75,7 +79,7 @@ class SmsBackend(BaseSmsBackend):
             'username': self.get_username(),
             'password': self.get_password(),
             'message': message,
-            'dest': ','.join(map(str, recipient_list)),
+            'dest': ','.join(map(self.phone_num_cleanse, recipient_list)),
         }
         if id:
             params.update({'id': int(id)})

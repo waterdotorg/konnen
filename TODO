@@ -20,6 +20,9 @@ Favicon
 - pip install -U supervisor
     - verify new supervisor works across all sites on apus
 
+- if we attempt to send to an invalid number x times with digicel throwing 51 code we need to bail
+    - mark number as suspect and put user in pending or something
+
 Media Needed
 =============
 Location default
