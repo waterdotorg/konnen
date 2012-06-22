@@ -18,62 +18,62 @@ msgstr ""
 
 #: settings_default.py:267
 msgid "English"
-msgstr ""
+msgstr "Anglè"
 
 #: settings_default.py:268
 msgid "Haitian Creole"
-msgstr ""
+msgstr "Kreyòl Ayisyen"
 
 #: custom/forms.py:21
 msgid "Invalid request. You can only update your subscriptions."
-msgstr "Envalid demann. Ou kapab sèlman mete ajou abonnements ou."
+msgstr "Aplikasyon pa valab. Ou kapab Sèlman mete ajou enskripsyon ou."
 
 #: custom/forms.py:28
 msgid "Invalid location submitted."
-msgstr ""
+msgstr "Adrès ou te mete a pa valab"
 
 #: custom/forms.py:33
 msgid ""
 "Please add your email address on the settings page before subscribing to "
 "alerts."
-msgstr ""
+msgstr "Tanpri ajoute adrès imel ou nan reglaj paj sa avan ou aktive mete ajou yo"
 
 #: custom/forms.py:39
 msgid ""
 "Please add your mobile number on the settings page before subscribing to SMS "
 "alerts."
-msgstr ""
+msgstr "Tanpri ajoute nimewo selilè ou nan  reglaj paj sa avan ou aktive SMS mete ajou yo."
 
 #: custom/models.py:20
 msgid "communities"
-msgstr ""
+msgstr "kominote yo"
 
 #: custom/models.py:40 custom/models.py:183 custom/models.py:197
 #: sms/models.py:15
 msgid "Pending"
-msgstr ""
+msgstr "Annatant"
 
 #: custom/models.py:41 custom/models.py:184
 msgid "Active"
-msgstr ""
+msgstr "Aktif"
 
 #: custom/models.py:42 custom/models.py:185 custom/models.py:198
 msgid "Complete"
-msgstr ""
+msgstr "Fini"
 
 #: custom/models.py:43 custom/models.py:186 custom/models.py:199
 #: sms/models.py:17
 msgid "Cancelled"
-msgstr ""
+msgstr "Elimine"
 
 #: custom/models.py:44 custom/models.py:187
 msgid "Hidden"
-msgstr ""
+msgstr "Kache"
 
 #: custom/models.py:109 templates/location/browse.html:39
 #: templates/location/location.html:33
 msgid "None"
-msgstr ""
+msgstr "Anyen"
 
 #: custom/models.py:110 templates/location/browse.html:40
 #: templates/location/location.html:34
@@ -83,181 +83,181 @@ msgstr "Imedyat"
 #: custom/models.py:111 templates/location/browse.html:41
 #: templates/location/location.html:35 templates/location/location.html:289
 msgid "Daily"
-msgstr ""
+msgstr "Chak jou"
 
 #: custom/models.py:112 templates/location/browse.html:42
 #: templates/location/location.html:36
 msgid "Weekly"
-msgstr ""
+msgstr "Chak semèn"
 
 #: custom/models.py:136 custom/models.py:245
 msgid "Email Daily"
-msgstr ""
+msgstr "Imel chak jou"
 
 #: custom/models.py:137 custom/models.py:246
 msgid "Email Weekly"
-msgstr ""
+msgstr "Imel chak semèn"
 
 #: custom/models.py:193
 msgid "Water Quality"
-msgstr ""
+msgstr "Kalite dlo"
 
 #: custom/models.py:243 templates/location/browse.html:19
 #: templates/settings/account.html:34
 msgid "Mobile"
-msgstr ""
+msgstr "selilè"
 
 #: custom/models.py:244
 #, fuzzy
 msgid "Email Immediate"
-msgstr "Imedyat"
+msgstr "Imel imedyat"
 
 #: custom/templatetags/custom_filters.py:17
 #, python-format
 msgid "%d year"
 msgid_plural "%d years"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d ane"
+msgstr[1] "%d anpil ane"
 
 #: custom/templatetags/custom_filters.py:21
 #, python-format
 msgid "%d week"
 msgid_plural "%d weeks"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d semèn"
+msgstr[1] "%d anpil semèn"
 
 #: custom/templatetags/custom_filters.py:24
 #, python-format
 msgid "%d day"
 msgid_plural "%d days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d jou"
+msgstr[1] "%d anpil jou"
 
 #: custom/templatetags/custom_filters.py:28
 #, python-format
 msgid "%d hour"
 msgid_plural "%d hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d èdtan"
+msgstr[1] "%d anpil èdtan"
 
 #: custom/templatetags/custom_filters.py:32
 #, python-format
 msgid "%d minute"
 msgid_plural "%d minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d minit"
+msgstr[1] "%d anpil minit"
 
 #: custom/templatetags/custom_filters.py:34
 msgid "a few seconds"
-msgstr ""
+msgstr "kèk segond"
 
 #: custom_user/forms.py:23
 #, python-format
 msgid "The username %s is already registered."
-msgstr ""
+msgstr "Non itilizatè %s deja enskri"
 
 #: custom_user/forms.py:26
 msgid ""
 "Username field may only contain alpha-numeric characters, hypens or "
 "underscores."
-msgstr ""
+msgstr "Non ilizatè kapab genyen Sèlman lèt, chif, tirè oubyen souliye"
 
 #: custom_user/forms.py:32
 #, python-format
 msgid "The email %s is already registered."
-msgstr ""
+msgstr "Imel sa a %s deja enskri nan sistèm nan"
 
 #: custom_user/forms.py:39
 msgid "Image file size is over the allowed maximum."
-msgstr ""
+msgstr "Gwosè foto depase kapasite maksimòm."
 
 #: custom_user/views.py:34
 msgid "Account settings have been updated."
-msgstr ""
+msgstr "Kont mete ajou"
 
 #: sms/models.py:16
 msgid "Completed"
-msgstr ""
+msgstr "Fini"
 
 #: sms/models.py:30
 msgid "Sms messages"
-msgstr ""
+msgstr "Mesaj SMS"
 
 #: sms/backends/digicel.py:41
 msgid "Message submitted successfully"
-msgstr ""
+msgstr "Mesaj ale avèk siksè"
 
 #: sms/backends/digicel.py:42
 msgid "System Error"
-msgstr ""
+msgstr "Pwoblèm rezo"
 
 #: sms/backends/digicel.py:43
 msgid "Authentication Error"
-msgstr ""
+msgstr "Pa valab"
 
 #: sms/backends/digicel.py:44
 msgid "Message is too long (must be <= 160 characters)"
-msgstr ""
+msgstr "Mesaj twò long (mesaj pa kapab depase 160 karaktè)"
 
 #: sms/backends/digicel.py:45
 msgid "Phone number validation error"
-msgstr ""
+msgstr "Nimewo telefòn pa valab"
 
 #: sms/backends/digicel.py:46
 msgid "Message is null or empty"
-msgstr ""
+msgstr "Mesaj vid"
 
 #: sms/backends/digicel.py:47
 msgid "Exceeded the maximum amount of destination numbers"
-msgstr ""
+msgstr "depase kantite nimewo"
 
 #: sms/backends/digicel.py:48
 msgid "Schedule is set before current time"
-msgstr ""
+msgstr "Randevou pran anvan lè"
 
 #: sms/backends/digicel.py:49
 msgid "Schedule is set for out-of-services hours"
-msgstr ""
+msgstr "Randevou pran pou lè pa gen sèvis"
 
 #: templates/404.html:4 templates/404.html.py:9
 msgid "Page Not Found"
-msgstr ""
+msgstr "Paj pa kapab ouvri"
 
 #: templates/base.html:32
 msgid "Full Site"
-msgstr ""
+msgstr "Tout sit wèb"
 
 #: templates/base.html:32
 msgid "Lite Site"
-msgstr ""
+msgstr "Sit wèb ki sanble"
 
 #: templates/base.html:58
 msgid "Home"
-msgstr ""
+msgstr "Paj dakèy"
 
 #: templates/base.html:60
 #, fuzzy
 msgid "Subscriptions"
-msgstr "Abònman"
+msgstr "Enskripsyon"
 
 #: templates/base.html:61
 msgid "Settings"
-msgstr ""
+msgstr "reglaj"
 
 #: templates/base.html:63
 msgid "Log In"
-msgstr ""
+msgstr "konekte"
 
 #: templates/base.html:64 templates/registration/login.html:10
 #: templates/registration/registration_form.html:4
 #: templates/registration/registration_form.html:9
 #: templates/registration/registration_form.html:17
 msgid "Join"
-msgstr ""
+msgstr "patisipe"
 
 #: templates/base.html:67
 msgid "Log Out"
-msgstr ""
+msgstr "Dekonekte"
 
 #: templates/homepage.html:11
 msgid ""
@@ -266,158 +266,157 @@ msgid ""
 "        quality information while also making this information "
 "instantaneously accessible to citizens for their daily\n"
 "        household water needs."
-msgstr ""
-
+msgstr "Projè 'Konnen' vize otomatize jesyon done epi  bay ak rapòte enfòmasyon sou kalite dlo alè pandan nap pèmèt sitwayen yo jwenn enfòmasyon tanzantan sou dlo nan sèvis lakay yo "
 #: templates/homepage.html:19
 msgid "Filters"
-msgstr ""
+msgstr "Filtè"
 
 #: templates/homepage.html:23
 #, fuzzy
 msgid "Subscription"
-msgstr "Abònman"
+msgstr "Enskripsyon"
 
 #: templates/homepage.html:26
 msgid "Mine"
-msgstr ""
+msgstr "Min"
 
 #: templates/homepage.html:32 templates/location/location.html:229
 msgid "Chlorine Levels"
-msgstr ""
+msgstr "kantite klò"
 
 #: templates/homepage.html:49
 msgid "Source Type"
-msgstr ""
+msgstr "Kalite Rezèvwa"
 
 #: templates/homepage.html:59
 msgid "Community"
-msgstr ""
+msgstr "Kominote"
 
 #: templates/homepage.html:69
 msgid "Provider"
-msgstr ""
+msgstr "Founisè"
 
 #: templates/location/browse.html:18 templates/settings/account.html:29
 msgid "Email"
-msgstr ""
+msgstr "Imel"
 
 #: templates/location/browse.html:47 templates/location/location.html:40
 msgid "SMS Alert"
-msgstr ""
+msgstr "SMS sou nouvote"
 
 #: templates/location/browse.html:51 templates/location/location.html:25
 #: templates/location/location.html:150 templates/location/location.html:151
 #: templates/location/location.html:186 templates/location/location.html:188
 #: templates/location/location.html:203
 msgid "Unsubscribe"
-msgstr ""
+msgstr "Dezaktive"
 
 #: templates/location/browse.html:78
 msgid "Location settings updated successfully."
-msgstr ""
+msgstr "Reglaj mete ajou ajiste avèk siksè"
 
 #: templates/location/location.html:25 templates/location/location.html:153
 msgid "Subscribe"
-msgstr "Abònman"
+msgstr "Enskri"
 
 #: templates/location/location.html:31
 msgid "Email:"
-msgstr ""
+msgstr "Imel"
 
 #: templates/location/location.html:43 templates/settings/account.html:53
 msgid "Submit"
-msgstr ""
+msgstr "Voye"
 
 #: templates/location/location.html:51
 msgid "ID:"
-msgstr ""
+msgstr "Idantifikasyon"
 
 #: templates/location/location.html:56
 msgid "Chlorine Level:"
-msgstr ""
+msgstr "Kantite klò"
 
 #: templates/location/location.html:60
 msgid "Test Date:"
-msgstr ""
+msgstr "Dat li teste"
 
 #: templates/location/location.html:66
 msgid "Latitude:"
-msgstr ""
+msgstr "Latitid "
 
 #: templates/location/location.html:72
 msgid "Longitude:"
-msgstr ""
+msgstr "Lonjitid"
 
 #: templates/location/location.html:85 templates/member/profile.html:20
 msgid "Updates"
-msgstr ""
+msgstr "Mete ajou"
 
 #: templates/location/location.html:94 templates/member/profile.html:32
 msgid "Chlorine level:"
-msgstr ""
+msgstr "Kantite klò"
 
 #: templates/location/location.html:97 templates/member/profile.html:36
 msgid "ago"
-msgstr ""
+msgstr "depi"
 
 #: templates/location/location.html:106
 msgid "Subscribers"
-msgstr ""
+msgstr "Manm"
 
 #: templates/location/location.html:106
 msgid "Digest"
-msgstr ""
+msgstr "Rezime"
 
 #: templates/location/location.html:164 templates/location/location.html:174
 msgid "Error"
-msgstr ""
+msgstr "Erè"
 
 #: templates/location/location.html:206
 msgid "Please select Email and/or SMS alerts."
-msgstr ""
+msgstr "Tanpri chwazi kalite imel ou byen SMS"
 
 #: templates/location/location.html:225
 msgid "Water Quality Report"
-msgstr ""
+msgstr "Bilan sou kalite dlo"
 
 #: templates/location/location.html:239
 msgid "Date"
-msgstr ""
+msgstr "Dat"
 
 #: templates/location/location.html:244
 msgid "Chlorine Level (%)"
-msgstr ""
+msgstr "Nivo Klò (%)"
 
 #: templates/location/location.html:301
 msgid "Global Avg."
-msgstr ""
+msgstr "Mwayèn jeneral"
 
 #: templates/member/profile.html:46
 msgid "Locations Served"
-msgstr ""
+msgstr "Zòn ki sèvi"
 
 #: templates/registration/activate.html:5
 msgid "Activation failed"
-msgstr ""
+msgstr "Aktivasyon echwe"
 
 #: templates/registration/activate.html:6
 msgid "Account activation failed for key"
-msgstr ""
+msgstr "Aktivasyon kont echwe akòz kle"
 
 #: templates/registration/activation_complete.html:5
 msgid "Account Activation Completed!"
-msgstr ""
+msgstr "Aktivasyon kont reyisi"
 
 #: templates/registration/activation_complete.html:6
 msgid "Your account is now active."
-msgstr ""
+msgstr "Kounye a kont ou nan sèvis "
 
 #: templates/registration/activation_complete.html:6
 #: templates/registration/login.html:4
 #: templates/registration/password_reset_complete.html:9
 #: templates/registration/registration_form.html:10
 msgid "Log in"
-msgstr ""
+msgstr "Konekte"
 
 #: templates/registration/activation_email.txt:3
 #, python-format
@@ -425,88 +424,92 @@ msgid ""
 "\n"
 "Thanks for joining %(site_domain)s. Please click on the link below\n"
 "(or copy and paste it into your browser) to activate your account:\n"
-msgstr ""
+msgstr "\nMèsi paske ou patisipe %(site_domain)s. Tanpri klike sou lyen anba\n (oubyen copye l nan navigatè ou) pou ou aktive kont ou:\n"
 
 #: templates/registration/activation_email_subject.txt:3
 msgid "Your account activation"
-msgstr ""
+msgstr "Aktivasyon kont ou"
 
 #: templates/registration/login.html:9 templates/registration/login.html:17
 msgid "Sign In"
-msgstr ""
+msgstr "Konekte"
 
 #: templates/registration/login.html:10
 msgid "Need an account?"
-msgstr ""
+msgstr "Bezwen yon kont?"
 
 #: templates/registration/login.html:21
 msgid "Forgot your password?"
-msgstr ""
+msgstr "Bliye modpas ou?"
 
 #: templates/registration/logout.html:5
 msgid "Successfully logged out."
-msgstr ""
+msgstr "Dekonekte avèk siksè."
 
 #: templates/registration/logout.html:6
 msgid "Thanks for spending some quality time with the website today."
-msgstr ""
+msgstr "Mèsi paske ou te pase yon bon moman sou sit wèb la jodi a."
 
 #: templates/registration/password_reset_complete.html:4
 #: templates/registration/password_reset_complete.html:7
 msgid "Password reset complete"
-msgstr ""
+msgstr "Modpas reyajiste"
 
 #: templates/registration/password_reset_complete.html:8
 msgid "Your password has been set.  You may go ahead and log in now."
-msgstr ""
+msgstr "Modpas ou ajiste. Ou kapab konekte kounye a."
 
 #: templates/registration/password_reset_confirm.html:4
 #: templates/registration/password_reset_form.html:4
 msgid "Password reset"
-msgstr ""
+msgstr "Modpas reyajiste"
 
 #: templates/registration/password_reset_confirm.html:8
 msgid "Enter new password"
-msgstr ""
+msgstr "Tape nouvo modpas"
 
 #: templates/registration/password_reset_confirm.html:9
 msgid ""
 "Please enter your new password twice so we can verify you typed it in "
 "correctly."
-msgstr ""
+msgstr "Tanpri tape nouvo modpas ou defwa pou nou kapab verifye si ou te tape l korèk."
 
 #: templates/registration/password_reset_confirm.html:12
 msgid "New password:"
-msgstr ""
+msgstr "Nouvo modpas:"
 
 #: templates/registration/password_reset_confirm.html:14
 msgid "Confirm password:"
-msgstr ""
+msgstr "Konfime modpas:"
 
 #: templates/registration/password_reset_confirm.html:15
 msgid "Change my password"
-msgstr ""
+msgstr "Chanje modpas mwen"
 
 #: templates/registration/password_reset_confirm.html:18
 msgid "Password reset unsuccessful"
-msgstr ""
+msgstr "Modpas pa reyajiste avèk siksè"
 
 #: templates/registration/password_reset_confirm.html:19
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
 "used. Please request a new password reset."
 msgstr ""
+"Modpas reyajisteman pa valab, li te pwobableman deja itilize. "
+"Tanpri chwazi you nouvo modpas."
 
 #: templates/registration/password_reset_done.html:4
 #: templates/registration/password_reset_done.html:6
 msgid "Password reset successful"
-msgstr ""
+msgstr "Modpas chanje avèk siksè"
 
 #: templates/registration/password_reset_done.html:7
 msgid ""
 "We've e-mailed you instructions for setting your password to the e-mail "
 "address you submitted. You should be receiving it shortly."
 msgstr ""
+"Nou voye tout enstriksyon ba ou pou ou ajiste modpas ou nan adres imel "
+"ou te voye a. Ou sipoze jwenn li nan yon ti tan."
 
 #: templates/registration/password_reset_email.html:2
 #, python-format
@@ -514,113 +517,115 @@ msgid ""
 "You're receiving this e-mail because you requested a password reset for your "
 "user account at %(site_name)s."
 msgstr ""
+"Ou resevwa imel sa paske ou te mande reyajisteman modpas pou kont "
+"itilizatè ou nan %(site_name)s."
 
 #: templates/registration/password_reset_email.html:4
 msgid "Please go to the following page and choose a new password:"
-msgstr ""
+msgstr "Tanpri ale nan paj sa epi chwazi yon nouvo modpas:"
 
 #: templates/registration/password_reset_email.html:8
 msgid "Your username, in case you've forgotten:"
-msgstr ""
+msgstr "Non itilizatè ou, pou si ou te bliye l:"
 
 #: templates/registration/password_reset_email.html:10
 msgid "Thanks for using our site!"
-msgstr ""
+msgstr "Mèsi paske ou te itilize sit wèb nou!"
 
 #: templates/registration/password_reset_email.html:12
 #, python-format
 msgid "The %(site_name)s team"
-msgstr ""
+msgstr "Non gwoup %(site_name)s la"
 
 #: templates/registration/password_reset_form.html:8
 msgid ""
 "Forgotten your password? Enter your e-mail address below, and we'll e-mail "
 "instructions for setting a new one."
-msgstr ""
+msgstr "Bliye modpas? Tape adrès imel ou anba, pou nou ka voye enstriksyon ba ou pou kreye you lòt modpas,"
 
 #: templates/registration/password_reset_form.html:12
 msgid "E-mail address:"
-msgstr ""
+msgstr "Adrès imel"
 
 #: templates/registration/password_reset_form.html:12
 msgid "Reset my password"
-msgstr ""
+msgstr "Chanje modpas"
 
 #: templates/registration/registration_closed.html:5
 msgid "Registration Closed"
-msgstr ""
+msgstr "enskripsyon fèmen"
 
 #: templates/registration/registration_closed.html:6
 msgid "Registration is currently closed."
-msgstr ""
+msgstr "Aktyèlman enskripsyon fèmen"
 
 #: templates/registration/registration_complete.html:5
 msgid "Thanks, for signing up!"
-msgstr ""
+msgstr "Mèsi paske ou enskri"
 
 #: templates/registration/registration_complete.html:6
 msgid "We're sending you an email with instructions to activate your account."
-msgstr ""
+msgstr "Nou ap voye yon imel ba ou ki gen entrisksyon ki pral ede ou active kont ou."
 
 #: templates/registration/registration_form.html:10
 msgid "Already registered?"
-msgstr ""
+msgstr "Deja enskri?"
 
 #: templates/settings/account.html:5
 msgid "Settings - Account"
-msgstr ""
+msgstr "Reglaj- Kont"
 
 #: templates/settings/account.html:14
 msgid "Username"
-msgstr ""
+msgstr "Non itilizatè"
 
 #: templates/settings/account.html:19
 msgid "First Name"
-msgstr ""
+msgstr "Non"
 
 #: templates/settings/account.html:24
 msgid "Last Name"
-msgstr ""
+msgstr "Siyati"
 
 #: templates/settings/account.html:39
 msgid "About"
-msgstr ""
+msgstr "Konsènan"
 
 #: templates/settings/account.html:44
 msgid "Image"
-msgstr ""
+msgstr "Foto"
 
 #: templates/settings/account.html:46
 msgid "Maximum size of 4mb."
-msgstr ""
+msgstr "Kapasite maksimòm 4mb"
 
 #: templates/settings/account.html:49
 msgid "Delete image"
-msgstr ""
+msgstr "Efase foto"
 
 #: templates/sms_control/reply/help.txt:1
 #, fuzzy
 msgid "Available options:"
-msgstr "Envalid demann. Chwa ki disponib:"
+msgstr "Chwa disponib:"
 
 #: templates/sms_control/reply/help.txt:3
 #: templates/sms_control/reply/invalid_request.txt:3
 msgid "Send an option followed by 'help' for more information."
-msgstr ""
+msgstr "Voye yon chwa avèk mo 'ede' pou plis enfòmasyon."
 
 #: templates/sms_control/reply/invalid_request.txt:1
 msgid "Invalid request. Available options:"
-msgstr "Envalid demann. Chwa ki disponib:"
+msgstr "Aplikasyon pa valab: Chwa disponib:"
 
 #: templates/sms_control/reply/null_message.txt:1
 msgid "No text received. Available options:"
-msgstr "Pa gen teks resevwa. Chwa ki disponib:"
+msgstr "Pa resevwa okenn mesaj: Chwa disponib:"
 
 #: templates/sms_control/reply/report.txt:1
 #: templates/water_quality_notification/email/immediate.txt:2
 #: templates/water_quality_notification/sms/mobile.txt:1
 msgid "was last tested on"
-msgstr ""
+msgstr "te teste dènye fwa sou"
 
 #: templates/sms_control/reply/report.txt:1
 #: templates/water_quality_notification/email/daily.txt:2
@@ -628,7 +633,7 @@ msgstr ""
 #: templates/water_quality_notification/email/weekly.txt:2
 #: templates/water_quality_notification/sms/mobile.txt:1
 msgid "with a result of:"
-msgstr ""
+msgstr "wvèk yon rezilta ki"
 
 #: templates/sms_control/reply/report.txt:1
 #: templates/water_quality_notification/email/daily.txt:2
@@ -636,7 +641,7 @@ msgstr ""
 #: templates/water_quality_notification/email/weekly.txt:2
 #: templates/water_quality_notification/sms/mobile.txt:1
 msgid "PASS"
-msgstr ""
+msgstr "PASE"
 
 #: templates/sms_control/reply/report.txt:1
 #: templates/water_quality_notification/email/daily.txt:2
@@ -644,7 +649,7 @@ msgstr ""
 #: templates/water_quality_notification/email/weekly.txt:2
 #: templates/water_quality_notification/sms/mobile.txt:1
 msgid "FAIL"
-msgstr ""
+msgstr "ECHWE"
 
 #: templates/sms_control/reply/report.txt:1
 #: templates/water_quality_notification/email/daily.txt:2
@@ -652,132 +657,132 @@ msgstr ""
 #: templates/water_quality_notification/email/weekly.txt:2
 #: templates/water_quality_notification/sms/mobile.txt:1
 msgid "N/A"
-msgstr ""
+msgstr "Pa disponib"
 
 #: templates/sms_control/reply/report_help.txt:1
 msgid ""
 "Type 'report' for your latest location report. Type 'report 12345' for a "
 "specific location or 'report 12345 98763' for multiple locations."
-msgstr ""
+msgstr "Tape 'rapo' pou dènye rapò zòn ou. Tape 'rapo 12345' pou yon zòn espesyal ou byen 'rapo 1234598763' pou plizyè zòn"
 
 #: templates/sms_control/reply/report_location_error.txt:1
 msgid ""
 "No subscriptions available. Please subscribe to a location or type 'report "
 "12345' for a specific location or 'report 12345 98763' for multiple "
 "locations."
-msgstr ""
+msgstr "Pa gen enskripsyon disponib. Tanpri enskri nan yon adrès ou byen 'rapò12345' pou you zòn espesyal oubyen 'rapò 12345 98763 pou plizye zòn"
 
-#: templates/sms_control/reply/report_location_error_anonymous.txt:1
+#: templates/sms_control/reply/report_location_erro r_anonymous.txt:1
 msgid ""
 "Invalid location ID received. Type 'report 12345' for a specific location or "
 "'report 12345 98763' for multiple locations."
-msgstr ""
+msgstr "Adrès didantifikasyon pa valab. Tape 'rapo 12345' pou yon zòn espesyal ou byen 'rapo 12345 98763' pou plizyè zòn"
 
 #: templates/sms_control/reply/stats.txt:1
 msgid "reports received in last 24 hours"
-msgstr ""
+msgstr "rapò yo te resevwa pandan 24 dènye èdtan yo"
 
 #: templates/sms_control/reply/stats.txt:2
 msgid "Followers:"
-msgstr ""
+msgstr "Patizan:"
 
 #: templates/sms_control/reply/stats.txt:3
 msgid "Locations:"
-msgstr ""
+msgstr "Adrès"
 
 #: templates/sms_control/reply/status.txt:1
 msgid "You are currently subscribed to:"
-msgstr ""
+msgstr "Aktyèlman ou enskri nan:"
 
 #: templates/sms_control/reply/status.txt:1
 msgid ""
 "No subscriptions available. Type 'subscribe help' for subscription help "
 "information."
-msgstr ""
+msgstr "Pa gen enskripsyon disponib. Tape 'enskri ede' pou jwenn èd."
 
 #: templates/sms_control/reply/status_help.txt:1
 msgid "Type 'status' for your subscribed location ID's."
-msgstr ""
+msgstr "Tape 'pozisyon' pou idantifye zòn enskripsyon ou."
 
 #: templates/sms_control/reply/subscribe_help.txt:1
 msgid ""
 "Type 'subscribe 12345' to get location reports. Subscribe to multiple "
 "locations by separating each location ID with a comma or space: 'subscribe "
 "12345 98763'"
-msgstr ""
+msgstr "Tape 'enskri 12345' pou jwenn rapò sou yon zòn. Enskri nan plizyè zòn epi separe chak zòn idantifye ak yon vigil ou espas: 'enskri 12345 98763'"
 
 #: templates/sms_control/reply/subscribe_location_error.txt:1
 #: templates/sms_control/reply/update_location_error.txt:1
 msgid "Invalid location ID received. Please try again."
-msgstr ""
+msgstr "Zòn didantifikasyon pa valab. Tanpri eseye ankò."
 
 #: templates/sms_control/reply/subscribe_success.txt:1
 msgid "Successfully subscribed to the following location ID's:"
-msgstr ""
+msgstr "Enskri avèk siksè nan zòn sa:"
 
 #: templates/sms_control/reply/unsubscribe_help.txt:1
 msgid ""
 "Type 'unsubscribe 12345' or 'unsubscribe all' to stop reports. For multiple "
 "locations separate each ID with a comma or space: 'unsubscribe 12345 98763'"
-msgstr ""
+msgstr "Tape 'dezaktive 12345' ou byen dezaktive tout pou pa resevwa rapò. Pou plizyè zòn separe chak idantifikasyon ak yon vigil ou byen espas : 'dezaktive 12345 98763'"
 
 #: templates/sms_control/reply/unsubscribe_location_error.txt:1
 msgid ""
 "Invalid location ID received. Type 'unsubscribe help' for help information."
-msgstr ""
+msgstr "Idantifikasyon zòn pa valab. Tape 'dezaktive ede' pou plis enfòmasyon"
 
 #: templates/sms_control/reply/unsubscribe_no_account_error.txt:1
 #, fuzzy
 msgid "Invalid request. No account available for mobile number "
-msgstr "Envalid demann. Chwa ki disponib:"
+msgstr "Aplikasyon pa valab: pa gen kont disponib pou nimewo selilè "
 
 #: templates/sms_control/reply/unsubscribe_no_subscriptions_error.txt:1
 msgid "Error unsubscribing. You are not subscribed to any locations."
-msgstr ""
+msgstr "Erè dezaktivasyon. Ou pa enskri nan okenn zòn."
 
 #: templates/sms_control/reply/unsubscribe_success.txt:1
 msgid "Successfully unsubscribed from the following location ID's:"
-msgstr ""
+msgstr "Dezaktive avèk siksè nan idantikasyon zòn sa:"
 
 #: templates/sms_control/reply/update.txt:1
 msgid "Successfully updated"
-msgstr ""
+msgstr "Te mete ajou avèk siksè"
 
 #: templates/sms_control/reply/update_chlorine_level_error.txt:1
 msgid "Invalid chlorine level received. Please try again."
-msgstr ""
+msgstr "Kantite klò resevwa pa valab. Tanpri eseye ankò."
 
 #: templates/sms_control/reply/update_failed.txt:1
 msgid "Update failed. Please try again."
-msgstr ""
+msgstr "Mete ajou echwe. Tanpri eseye ankò."
 
 #: templates/sms_control/reply/update_help.txt:1
 msgid "Type 'update 12345 g 15 gd 2' to send in an update for location 12345."
-msgstr ""
+msgstr "Tape 'ajou 12345 g 15 gd 2' pou voye yon mete ajou pou zòn 12345."
 
 #: templates/sms_control/reply/update_unknown_user_error.txt:1
 msgid "No user record available for this number."
-msgstr ""
+msgstr "Pa gen rapò disponib pou nimewo sa a."
 
 #: templates/water_quality_notification/email/daily-subject.txt:1
 msgid "Daily Update"
-msgstr ""
+msgstr "Mete ajou chak jou"
 
-#: templates/water_quality_notification/email/daily.txt:2
+#: templates/wat er_quality_notification/email/daily.txt:2
 #: templates/water_quality_notification/email/weekly.txt:2
 msgid "was tested on"
-msgstr ""
+msgstr "Te teste sou"
 
 #: templates/water_quality_notification/email/daily.txt:7
 #: templates/water_quality_notification/email/immediate.txt:4
 #: templates/water_quality_notification/email/weekly.txt:7
 msgid "View location:"
-msgstr ""
+msgstr "Aspè zòn:"
 
 #: templates/water_quality_notification/email/immediate-subject.txt:1
 msgid "Update"
-msgstr ""
+msgstr "Mete ajou"
 
 #: templates/water_quality_notification/email/weekly-subject.txt:1
 msgid "Weekly Update"
-msgstr ""
+msgstr "Mete ajou chak semen"

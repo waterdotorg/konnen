@@ -1,3 +1,10 @@
+SMS Translations
+    - How do we account for control word + action
+        - Ex. subscribe help maps to enskri ede
+        - ede needs to be mapped to help somehow??
+    - What about the general 'Help' control word
+    - Also 'Unsubscribe all'
+
 update site domain and site name via admin
 
 add SMS control word mappings - /admin/sms_control/
