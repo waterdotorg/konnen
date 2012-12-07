@@ -6,7 +6,7 @@ Configuration example.
 
 Modify your settings.py::
 
-    SMS_BACKEND = 'sms.backends.twilio.SmsBackend'
+    SMS_BACKEND = 'sms.backends.twilio_b.SmsBackend'
     SMS_ACCOUNT_SID = 'foo'
     SMS_ACCOUNT_TOKEN = 'bar'
     SMS_PHONE_NUMBER = '+13215439876'
@@ -41,7 +41,7 @@ class SmsBackend(BaseSmsBackend):
         self.phone_number = getattr(settings, 'SMS_PHONE_NUMBER', None)
         self.connection = TwilioRestClient(self.account_sid, self.account_token)
 
-    def send_messages(self, message, recipient_list, from_phone=None):
+    def send_message(self, message, recipient_list, from_phone=None, **kwargs):
         if not from_phone:
             from_phone = self.phone_number
         for recipient in recipient_list:
