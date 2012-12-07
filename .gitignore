@@ -6,6 +6,7 @@ lib/
 public/media/
 src/
 .idea/
+project/sms/backends/digicel.py
 settings_production_private.py
 settings_dev_private.py
 settings_current.py
