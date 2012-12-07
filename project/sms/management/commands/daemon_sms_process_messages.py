@@ -30,7 +30,7 @@ logger = logging.getLogger(__name__)
 # TODO need logging, both normal and concurrent
 
 class Command(BaseCommand):
-    help = 'Process Digicel Inbox Messages'
+    help = 'Process Inbox Messages'
     args = ''
 
     def __init__(self):
