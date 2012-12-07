@@ -4,7 +4,7 @@ from django.utils.importlib import import_module
 
 def get_connection(backend=None, fail_silently=False, **kwargs):
     """
-    Load an e-mail backend and return an instance of it.
+    Load SMS backend and return an instance of it.
 
     If backend is None (default) settings.SMS_BACKEND is used.
 

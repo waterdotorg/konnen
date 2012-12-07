@@ -373,7 +373,7 @@ class Command(BaseCommand):
                             water_source_type=water_source_type,
                             provider=provider,
                             chlorine_level=chlorine_level,
-                            status=LocationPost.PENDING_STATUS,
+                            status=LocationPost.ACTIVE_STATUS,
                             published_date=sms.sent_date,
                         )
                         location_post.save()
