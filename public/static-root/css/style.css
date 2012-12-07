@@ -256,7 +256,7 @@ form .optional { color: #888888; text-transform: none; }
 #header-upper-wrap .container-inner { padding: 0 6px 0 6px; }
 #header-wrap #header-inner { height: 85px; }
 #header-wrap .col1 { float: left; position: relative; z-index: 1000; }
-#header-wrap .col1 h1#logo { font-size: 0; margin: 0; width: 330px; }
+#header-wrap .col1 h1#logo { font-size: 0; margin: 0; width: 504px; }
 #header-wrap .col1 h1#logo a { display: block; padding: 0; position: relative; z-index: 1000; }
 #header-wrap .col1 h1#logo a span {
     background-image: url("../image/logo.png");
@@ -264,13 +264,13 @@ form .optional { color: #888888; text-transform: none; }
     background-repeat: no-repeat;
     display: block;
     height: 123px;
-    left: -100px; 
+    left: -20px;
     overflow: hidden;
-    position: absolute;
+    position: relative;
     text-align: left;
     text-indent: -9999px;
     vertical-align: middle;
-    width: 330px;
+    width: 504px;
     z-index: 1000;
 }
 #header-wrap .col2 { float: left; left: 250px; position: relative; top: 20px; }
@@ -363,7 +363,7 @@ ul.tabs li.active a { background-color:#FFFFFF; border-color: #E5E5E5; border-st
 
 /* Location */
 .location .location-col1 { float: left; }
-.location .location-col2 { padding-left: 365px; }
+.location .location-col2 { padding-left: 385px; }
 .location .location-image-wrapper {
     background-color: #F8F8F8;
     -moz-border-radius:2px; -webkit-border-radius:2px; -opera-border-radius:2px; -khtml-border-radius:2px; border-radius:2px;
@@ -406,6 +406,8 @@ ul.tabs li.active a { background-color:#FFFFFF; border-color: #E5E5E5; border-st
 #location-browse-table td img {
     -moz-border-radius:2px; -webkit-border-radius:2px; -opera-border-radius:2px; -khtml-border-radius:2px; border-radius:2px;
 }
+#location-browse-table .location-title { width: 330px; }
+#location-browse-table .location-phone-subscribe { white-space: nowrap; }
 
 /* Misc */
 .tooltip_target { display:none; }
@@ -415,6 +417,7 @@ td.button a:hover { background-color:#78bde7; }
 a.donate-button { background-color:#adb836; -moz-border-radius:8px; -webkit-border-radius:8px; -opera-border-radius:8px; -khtml-border-radius:8px; border-radius:8px; border: 1px solid #77811e; color:#FFFFFF; font-size: 1.4em; font-weight:bold; padding:6px 10px 6px 10px; text-transform: uppercase; }
 a.donate-button:hover { background-color: #9ca73f; }
 .reflist { font-size: 0.9em; }
+.section-label { border-bottom: 5px solid #E2E2E2; color: #8B8B8B; font-size: 22px; font-weight: bold; padding-bottom: 5px; }
 
 /* ==|== non-semantic helper classes ========================================
    Please define your styles before this section.
