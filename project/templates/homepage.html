@@ -15,12 +15,16 @@
 {% endblock %}    
 
 {% block main_col1 %}
+    <div id="map_filter_control"><a href="#">Filters</a></div>
     <div id="map_filter">
-        <p class="section-label">{% trans "Filters" %}</p>
         <form action="." method="GET">
+            <div class="map-filter-item">
+                <p class="map-filter-title"><a id="hide-map-filter" class="map-filter-control" href="#">{% trans "Hide" %} &raquo;</a></p>
+            </div>
+        
             {% if request.user.is_authenticated %}
                 <div class="map-filter-item">
-                    <p class="map-filter-title"><a class="map-filter-control" href="#">+ {% trans "Subscription" %}</a></p>
+                    <p class="map-filter-title"><a class="map-filter-control" href="#">{% trans "Subscription" %}</a></p>
                     <div class="map-filter-control-items">
                         <p class="checkbox-wrapper">
                             <input class="subscription-checkbox" type="checkbox" name="my_subscribed_locations" id="my_subscribed_locations"> {% trans "Mine" %}
@@ -29,7 +33,7 @@
                 </div>
             {% endif %}
             <div class="map-filter-item">
-                <p class="map-filter-title"><a class="map-filter-control" href="#">+ {% trans "Chlorine Levels" %}</a></p>
+                <p class="map-filter-title"><a class="map-filter-control" href="#">{% trans "Chlorine Levels" %}</a></p>
                 <div class="map-filter-control-items">
                     <p class="checkbox-wrapper">
                         <input class="chlorine-level-checkbox" type="checkbox" name="chlorine_level_zero" id="chlorine_level_none"> <span>0.0%</span>
@@ -46,7 +50,7 @@
                 </div>
             </div>
             <div class="map-filter-item">
-                <p class="map-filter-title"><a class="map-filter-control" href="#">+ {% trans "Source Type" %}</a></p>
+                <p class="map-filter-title"><a class="map-filter-control" href="#">{% trans "Source Type" %}</a></p>
                 <div class="map-filter-control-items">
                     {% for water_source_type in water_source_types %}
                         <p class=checkbox-wrapper>
@@ -56,7 +60,7 @@
                 </div>
             </div>
             <div class="map-filter-item">
-                <p class="map-filter-title"><a class="map-filter-control" href="#">+ {% trans "Community" %}</a></p>
+                <p class="map-filter-title"><a class="map-filter-control" href="#">{% trans "Community" %}</a></p>
                 <div class="map-filter-control-items">
                     {% for community in communities %}
                         <p class="checkbox-wrapper">
@@ -66,7 +70,7 @@
                 </div>
             </div>
             <div class="map-filter-item">
-                <p class="map-filter-title"><a class="map-filter-control" href="#">+ {% trans "Provider" %}</a></p>
+                <p class="map-filter-title"><a class="map-filter-control" href="#">{% trans "Provider" %}</a></p>
                 <div class="map-filter-control-items">
                     {% for provider in providers %}
                         <p class="checkbox-wrapper">
@@ -89,7 +93,8 @@
             var myOptions = {
                 center: new google.maps.LatLng(18.585607, -72.305665),
                 zoom: 12,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                mapTypeControl: false
             };
             var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
             return map;
@@ -130,6 +135,15 @@
             $(".map-filter-control").click(function(event) {
                 event.preventDefault();
                 $(this).parent(".map-filter-title").next(".map-filter-control-items").slideToggle();
+            });
+
+            $("#hide-map-filter").click(function(event) {
+                $("#map_filter").hide();
+            });
+
+            $("#map_filter_control a").click(function(event) {
+                event.preventDefault();
+                $("#map_filter").toggle();
             });
         });
     </script>
