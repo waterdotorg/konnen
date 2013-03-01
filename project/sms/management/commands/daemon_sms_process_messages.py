@@ -102,7 +102,7 @@ class Command(BaseCommand):
                 location_objects = []
                 for location_uid in location_uid_args:
                     try:
-                        location = Location.objects.get(uid=location_uid)
+                        location = Location.objects.get(uid__iexact=location_uid)
                         location_objects.append(location)
                     except:
                         pass
@@ -183,7 +183,7 @@ class Command(BaseCommand):
                 else:
                     for location_uid in location_uid_args:
                         try:
-                            location = Location.objects.get(uid=location_uid)
+                            location = Location.objects.get(uid__iexact=location_uid)
                             location_objects.append(location)
                         except:
                             pass
@@ -239,7 +239,7 @@ class Command(BaseCommand):
                 location_objects = []
                 for location_uid in location_uid_args:
                     try:
-                        location = Location.objects.get(uid=location_uid)
+                        location = Location.objects.get(uid__iexact=location_uid)
                         location_objects.append(location)
                     except:
                         pass
@@ -335,7 +335,7 @@ class Command(BaseCommand):
                         return send_message(smart_str(reply_message), [sms.from_number])
 
                     try:
-                        location = Location.objects.get(uid=update_args[0])
+                        location = Location.objects.get(uid__iexact=update_args[0])
                     except:
                         reply_message = render_to_string('sms_control/reply/update_location_error.txt',
                             {'language': language,})
