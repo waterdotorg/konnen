@@ -1,3 +1,7 @@
+ABOUT
+-----
+The Konnen Project aims to fully automate the data management, distribution, and reporting of timely water quality information while also making this information instantaneously accessible to citizens for their daily household water needs. While Konnen includes a web-based interface, the vast majority of users are expected to interact with the application in real-time on entry-level (text-based) mobile handsets using a set of control words.
+
 INSTALL
 -------
 See install doc for complete instructions
