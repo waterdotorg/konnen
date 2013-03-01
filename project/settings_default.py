@@ -268,7 +268,7 @@ LANGUAGES = (
     ('ht', gettext_noop('Haitian Creole')),
 )
 
-LANGUAGE_CODE = 'ht'
+LANGUAGE_CODE = 'en'
 
 #################
 # Demo Settings #
