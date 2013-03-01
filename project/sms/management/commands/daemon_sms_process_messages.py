@@ -10,6 +10,7 @@ import time
 from decimal import Decimal
 
 from django import db
+from django.conf import settings
 from django.contrib.auth.models import User, Group
 from django.core.mail import mail_admins
 from django.core.management.base import BaseCommand, CommandError
@@ -106,6 +107,16 @@ class Command(BaseCommand):
                         location_objects.append(location)
                     except:
                         pass
+                # DEMO Default Location UID subscription #
+                if not location_uid_args:
+                    default_location_uid = getattr(settings, 'DEFAULT_LOCATION_UID', None)
+                    if default_location_uid:
+                        try:
+                            location = Location.objects.get(uid__iexact=location_uid)
+                            location_objects.append(location)
+                        except:
+                            pass
+                # End DEMO #
 
                 if not location_objects:
                     # No valid locations received

@@ -269,3 +269,8 @@ LANGUAGES = (
 )
 
 LANGUAGE_CODE = 'ht'
+
+#################
+# Demo Settings #
+#################
+DEFAULT_LOCATION_UID = 'sxsw' # Default location uid to subscribe users
