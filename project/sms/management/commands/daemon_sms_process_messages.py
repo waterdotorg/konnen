@@ -112,7 +112,7 @@ class Command(BaseCommand):
                     default_location_uid = getattr(settings, 'DEFAULT_LOCATION_UID', None)
                     if default_location_uid:
                         try:
-                            location = Location.objects.get(uid__iexact=location_uid)
+                            location = Location.objects.get(uid__iexact=default_location_uid)
                             location_objects.append(location)
                         except:
                             pass
