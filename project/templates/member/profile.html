@@ -9,7 +9,6 @@
 {% block main_upper %}
     <h1 class="title">
         {% if user.get_full_name %}{{ user.get_full_name }}{% else %}{{ user.username }}{% endif %}
-        {{ profile.mobile }}
     </h1>
     <div class="image"><img src="{% thumbnail profile.image 355x200 crop='smart' %}" /></div>
     <div class="content">{{ profile.content|markdown }}</div>

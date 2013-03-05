@@ -88,7 +88,7 @@
                 {% for location_post in location_posts %}
                     <tr class="post {% cycle 'odd' 'even' %}">
                         <td>
-                            <a href="{{ location_post.user.get_profile.get_absolute_url }}">{{ location_post.user.get_profile.mobile }}</a><br />
+                            <a href="{{ location_post.user.get_profile.get_absolute_url }}">******{{ location_post.user.get_profile.mobile|slice:"-4:" }}</a><br />
                             {{ location_post.content|markdown }}
                             {% if location_post.chlorine_level %}
                                 <div class="chlorine-level">{% trans "Chlorine level:" %} {{ location_post.chlorine_level }}%</div>
@@ -117,7 +117,7 @@
                     </td>
                     <td>
                         {% if location_subscription.phone_subscription %}
-                            +{{ location_subscription.user.get_profile.mobile|phone2numeric }}
+                            ******{{ location_subscription.user.get_profile.mobile|slice:"-4:" }}
                         {% else %}
                             {% if location_subscription.email_subscription %}
                                 {{ location_subscription.user.email }}
